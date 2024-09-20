@@ -6,9 +6,11 @@ import i18n from "./i18n.js";
 
 //PrimeVue
 import PrimeVue from 'primevue/config';
+import Aura from '@primevue/themes/aura';
 
 //PrimeFlex
 import 'primeflex/primeflex.css';
+
 
 // PrimeIcons
 import 'primeicons/primeicons.css';
@@ -39,10 +41,11 @@ import Toolbar from "primevue/toolbar";
 
 
 import Toast from "primevue/toast";
-import SelectButton from "primevue/selectbutton";
+
 
 //importado de manera local de "router/index.js" creado y ubicado en src
 import router from "./router/index.js";
+import SelectButton from "primevue/selectbutton";
 
 
 
