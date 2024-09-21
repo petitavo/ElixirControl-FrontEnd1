@@ -2,10 +2,11 @@
 
 import ToolbarContent from "./public/component/toolbar-content.component.vue";
 import DataManager from "./shared/components/data-manager.component.vue";
+import PageNotFound from "./public/pages/page-not-found.component.vue";
 
 export default {
   name: "app",
-  components: {DataManager, ToolbarContent},
+  components: {PageNotFound, DataManager, ToolbarContent},
 
 
 
@@ -18,9 +19,10 @@ export default {
 
 <template>
 
-  <toolbar-content></toolbar-content>
+  <page-not-found></page-not-found>
 
-  <data-manager title="" items=""></data-manager>
+
+
 </template>
 
 
