@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "mi-componente"
+  name: "production-history-create-and-edit.component"
 }
 </script>
 
