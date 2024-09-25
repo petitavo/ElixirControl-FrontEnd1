@@ -2,11 +2,11 @@
 export class Aging {
 
     constructor( {
-                     aging_id = '', batch_id='', barrel_type='',
+                     id = '', batch_id='', barrel_type='',
                      start_date='', end_date='', aging_duration_months='',
                      inspections_performed='', inspection_result=''
     }) {
-        this.aging_id = aging_id;
+        this.id = id;
         this.batch_id = batch_id;
         this.barrel_type = barrel_type;
         this.start_date = start_date;

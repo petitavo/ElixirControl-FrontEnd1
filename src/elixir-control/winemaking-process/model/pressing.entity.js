@@ -1,9 +1,9 @@
 
 export class Pressing {
-    constructor({pressing_id='', batch_id='', pressing_date='', must_volume='',
+    constructor({id='', batch_id='', pressing_date='', must_volume='',
                     press_type='', applied_pressure=''
     }) {
-        this.pressing_id = pressing_id;
+        this.id = id;
         this.batch_id = batch_id;
         this.pressing_date = pressing_date;
         this.must_volume = must_volume;

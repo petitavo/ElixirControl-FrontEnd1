@@ -67,11 +67,16 @@ export default {
     },
 
     onSaveRequested(item) {
+      this.submitted = true;
+
       if (this.isEdit) {
         this.updateBatch(item);
       } else {
         this.createBatch(item);
       }
+
+      this.createAndEditDialogIsVisible = false;
+      this.isEdit = false;
     },
     //#endregion
 
@@ -87,10 +92,9 @@ export default {
     },
 
     updateBatch() {
-      this.batchApiService.update(this.batch.batch_id, this.batch).then(response => {
-        let updatedBatch = new Batch(response.data);
-        let index = this.findIndexById(updatedBatch.batch_id);
-        this.batches[index] = updatedBatch;
+      this.batchApiService.update(this.batch.id, this.batch).then(response => {
+       let index = this.findIndexById(this.batch.id);
+        this.batches[index] = new Batch(response.data);
         this.notifySuccessfulAction('Batch updated successfully');
       }).catch(error => {
         console.error("Error updating a batch",error);
@@ -98,12 +102,10 @@ export default {
     },
 
     deleteBatch() {
-      this.batchApiService.delete(this.batch.batch_id).then(() => {
-       let index = this.findIndexById(this.batch.batch_id);
+      this.batchApiService.delete(this.batch.id).then(() => {
+       let index = this.findIndexById(this.batch.id);
         this.batches.splice(index, 1);
-
         this.notifySuccessfulAction('Batch deleted successfully');
-        console.log("Batch deleted successfully");
       }).catch(error => {
         console.error("Error deleting a batch",error);
       });
@@ -111,8 +113,8 @@ export default {
 
     deleteSelectedBatches() {
       this.selectedBatches.forEach((variable) => {
-        this.batchApiService.delete(variable.batch_id).then(() => {
-          this.batches = this.batches.filter((b) => b.batch_id !== variable.batch_id);
+        this.batchApiService.delete(variable.id).then(() => {
+          this.batches = this.batches.filter((b) => b.id !== variable.id);
         }).catch(error => {
           console.error("Error deleting a batch", error);
         });
@@ -160,22 +162,23 @@ export default {
                   v-on:delete-selected-items-requested-manager="onDeleteSelectedItems($event)">
 
       <template #custom-columns-manager >
-        <pv-column :sortable="true" field="batch_id"           header="Id" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="id"           header="Id" style="min-width: 6rem"/>
         <pv-column :sortable="true" field="grape_variety"      header="Grape variety" style="min-width: 12rem"/>
         <pv-column :sortable="true" field="harvest_date"       header="Harvest date" style="min-width: 12rem"/>
         <pv-column :sortable="true" field="grape_quantity"     header="Grape quantity" style="min-width: 12rem"/>
         <pv-column :sortable="true" field="vineyard_origin"    header="Vineyard origin" style="min-width: 12rem"/>
         <pv-column :sortable="true" field="current_status"     header="Status" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="process_start_date" header="Process start date" style="min-width: 12rem"/>
+        <pv-column :sortable="true" field="process_start_date" header="Process start date" style="min-width: 14rem"/>
         <pv-column :sortable="true" field="final_volume"       header="Final volume" style="min-width: 12rem"/>
       </template>
     </data-manager>
 
-    <batches-create-and-edit :edit = "isEdit"
-                             :visible="createAndEditDialogIsVisible"
-                             :itemBatch="batch"
-                             @cancel-requested-batches="onCancelRequested"
-                             @save-requested-batches="onSaveRequested($event)">
+    <batches-create-and-edit
+        :edit = "isEdit"
+        :itemBatch="batch"
+        :visible="createAndEditDialogIsVisible"
+        v-on:cancel-requested-batches="onCancelRequested"
+        v-on:save-requested-batches="onSaveRequested($event)">
     </batches-create-and-edit>
   </div>
 

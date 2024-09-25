@@ -1,10 +1,10 @@
 
 export class ProductionHistory {
-    constructor({ history_id='', batch_id='', harvest_date='', fermentation_start_date='',
+    constructor({ id='', batch_id='', harvest_date='', fermentation_start_date='',
                     fermentation_end_date='', pressing_date='', clarification_date='',
                     aging_start_date='', aging_end_date='', bottling_date=''
     }) {
-        this.history_id = history_id;
+        this.id = id;
         this.batch_id = batch_id;
         this.harvest_date = harvest_date;
         this.fermentation_start_date = fermentation_start_date;

@@ -1,11 +1,11 @@
 
 export class Bottling {
 
-    constructor({ bottling_id='', batch_id='', bottling_date='', bottle_size_ml='',
+    constructor({ id='', batch_id='', bottling_date='', bottle_size_ml='',
                     number_of_bottles='', label_type='', cork_type=''
     }) {
 
-        this.bottling_id = bottling_id;
+        this.id = id;
         this.batch_id = batch_id;
         this.bottling_date = bottling_date;
         this.bottle_size_ml = bottle_size_ml;

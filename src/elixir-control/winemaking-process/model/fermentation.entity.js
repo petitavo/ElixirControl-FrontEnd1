@@ -1,10 +1,10 @@
 
 export class Fermentation {
-    constructor({ fermentation_id='', batch_id='', start_date='', end_date='',
+    constructor({ id='', batch_id='', start_date='', end_date='',
                     average_temperature='', initial_density='', final_density='',
                     initial_ph='', final_ph='', residual_sugar=''
     }) {
-        this.fermentation_id = fermentation_id;
+        this.id = id;
         this.batch_id = batch_id;
         this.start_date = start_date;
         this.end_date = end_date;

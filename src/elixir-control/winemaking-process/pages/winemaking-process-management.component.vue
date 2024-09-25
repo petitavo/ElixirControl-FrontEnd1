@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "mipages.component"
+  name: "winemaking-process-management.component"
 }
 </script>
 

@@ -1,11 +1,11 @@
 
 export class Batch {
 
-    constructor({ batch_id='', grape_variety='', harvest_date='',
+    constructor({ id='', grape_variety='', harvest_date='',
                     grape_quantity='', vineyard_origin='', current_status='',
                     process_start_date='', final_volume=''
     }) {
-        this.batch_id = batch_id;
+        this.id = id;
         this.grape_variety = grape_variety;
         this.harvest_date = harvest_date;
         this.grape_quantity = grape_quantity;

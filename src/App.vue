@@ -12,7 +12,8 @@ export default {
     return {
       drawer: false,
       items: [
-        { label: 'Batches', to: '/winemaking/batches'}
+        { label: 'Batches', to: '/winemaking/batches'},
+        { label: 'Fermentation', to: '/winemaking/Fermentation'}
       ]
     }
   },
@@ -42,18 +43,18 @@ export default {
 
       <template #start>
         <pv-button class="p-button-text" icon="pi pi-bars" @click="toggleDrawer"/>
-        <h2>Elixir Control</h2>
+        <img src="../src/assets/img/logo-elixir-control.png" width="80" alt="Logo Elixir Control"/>
       </template>
 
       <template #center>
-        <img src="../src/assets/img/logo-elixir-control.png" width="80" alt="Logo Elixir Control"/>
+
       </template>
 
       <template #end>
 
         <div class="flex-column pl-6 pr-6" >
           <router-link v-for="item in items" :key="item.label" v-slot="{navigate, href}" :to="item.to" custom>
-            <pv-button :href="href" class="p-button-text" @click="navigate">{{ item.label }}</pv-button>
+            <pv-button :href="href" class="p-button-text mr-3" @click="navigate" >{{ item.label }}</pv-button>
           </router-link>
         </div>
 

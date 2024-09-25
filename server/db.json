@@ -1,0 +1,116 @@
+{
+  "batches": [
+    {
+      "id": 1,
+      "grape_variety": "Cabernet Sauvignon",
+      "harvest_date": "2023-08-15",
+      "grape_quantity": "1200",
+      "vineyard_origin": "Viñedos del Sol",
+      "current_status": "Fermentation",
+      "process_start_date": "2023-08-16",
+      "final_volume": "1000"
+    },
+    {
+      "id": 2,
+      "grape_variety": "Chardonnay",
+      "harvest_date": "2023-09-10",
+      "grape_quantity": "1500",
+      "vineyard_origin": "Viña Verde",
+      "current_status": "Aging",
+      "process_start_date": "2023-09-12",
+      "final_volume": 1200
+    },
+    {
+      "id": 3,
+      "grape_variety": "Merlot",
+      "harvest_date": "2023-07-20",
+      "grape_quantity": 1000,
+      "vineyard_origin": "Viñedos del Norte",
+      "current_status": "Bottled",
+      "process_start_date": "2023-07-21",
+      "final_volume": 800
+    },
+    {
+      "id": 4,
+      "grape_variety": "Pinot Noir",
+      "harvest_date": "2023-10-05",
+      "grape_quantity": 1300,
+      "vineyard_origin": "Viña Azul",
+      "current_status": "Fermentation",
+      "process_start_date": "2023-10-06",
+      "final_volume": 950
+    },
+    {
+      "id": 5,
+      "grape_variety": "Syrah",
+      "harvest_date": "2023-09-25",
+      "grape_quantity": 1400,
+      "vineyard_origin": "Viñedos del Sur",
+      "current_status": "Clarification",
+      "process_start_date": "2023-09-26",
+      "final_volume": 1050
+    }
+  ],
+  "fermentation": [
+    {
+      "id": 101,
+      "batch_id": 1,
+      "start_date": "2023-08-16",
+      "end_date": "2023-08-22",
+      "average_temperature": 18.5,
+      "initial_density": 1.09,
+      "final_density": 0.998,
+      "initial_ph": 3.6,
+      "final_ph": "3.5",
+      "residual_sugar": "3.5"
+    },
+    {
+      "id": 102,
+      "batch_id": 2,
+      "start_date": "2023-09-12",
+      "end_date": "2023-09-18",
+      "average_temperature": 17,
+      "initial_density": 1.085,
+      "final_density": 0.995,
+      "initial_ph": 3.5,
+      "final_ph": 3.3,
+      "residual_sugar": "2.8"
+    },
+    {
+      "id": 103,
+      "batch_id": 3,
+      "start_date": "2023-07-21",
+      "end_date": "2023-07-27",
+      "average_temperature": 19,
+      "initial_density": 1.092,
+      "final_density": 0.997,
+      "initial_ph": 3.7,
+      "final_ph": 3.5,
+      "residual_sugar": 3
+    },
+    {
+      "id": 104,
+      "batch_id": 4,
+      "start_date": "2023-10-06",
+      "end_date": "2023-10-12",
+      "average_temperature": 18.2,
+      "initial_density": 1.088,
+      "final_density": 0.996,
+      "initial_ph": 3.6,
+      "final_ph": 3.4,
+      "residual_sugar": 2.1
+    },
+    {
+      "id": 105,
+      "batch_id": 5,
+      "start_date": "2023-09-26",
+      "end_date": "2023-10-02",
+      "average_temperature": 17.8,
+      "initial_density": 1.087,
+      "final_density": 0.994,
+      "initial_ph": 3.5,
+      "final_ph": 3.3,
+      "residual_sugar": 2
+    }
+  ]
+}

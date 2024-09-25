@@ -1,10 +1,10 @@
 
  export class Clarification {
 
-    constructor({clarification_id='', batch_id='', clarification_date='', products_used='',
+    constructor({id='', batch_id='', clarification_date='', products_used='',
                     clarification_method='', filtration_date='', clarity_level=''
     }) {
-        this.clarification_id = clarification_id;
+        this.id = id;
         this.batch_id = batch_id;
         this.clarification_date = clarification_date;
         this.products_used = products_used;
