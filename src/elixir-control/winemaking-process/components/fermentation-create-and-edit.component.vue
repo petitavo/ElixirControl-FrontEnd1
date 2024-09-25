@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "fermentation-create-and-edit.component"
+  name: "fermentation-create-and-edit"
 }
 </script>
 

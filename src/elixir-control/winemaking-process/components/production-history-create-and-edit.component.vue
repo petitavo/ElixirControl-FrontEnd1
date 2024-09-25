@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "production-history-create-and-edit.component"
+  name: "production-history-create-and-edit"
 }
 </script>
 

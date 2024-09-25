@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "pressing-create-and-edit.component"
+  name: "pressing-create-and-edit"
 }
 </script>
 

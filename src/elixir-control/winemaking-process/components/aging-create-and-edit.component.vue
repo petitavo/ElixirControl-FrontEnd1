@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "aging-create-and-edit.component"
+  name: "aging-create-and-edit"
 }
 </script>
 

@@ -1,5 +1,5 @@
 
-export class Batches {
+export class Batch {
 
     constructor({ batch_id='', grape_variety='', harvest_date='',
                     grape_quantity='', vineyard_origin='', current_status='',

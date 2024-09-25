@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "bottling-create-and-edit.component"
+  name: "bottling-create-and-edit"
 }
 </script>
 

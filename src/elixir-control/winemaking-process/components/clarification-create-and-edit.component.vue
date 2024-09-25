@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "clarification-create-and-edit.component"
+  name: "clarification-create-and-edit"
 }
 </script>
 
