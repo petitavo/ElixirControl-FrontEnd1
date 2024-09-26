@@ -14,7 +14,8 @@ export default {
       items: [
         { label: 'Batches', to: '/winemaking-process/batches'},
         { label: 'Fermentation', to: '/winemaking-process/fermentation'},
-        { label: 'Aging', to: '/winemaking-process/aging'}
+        { label: 'Aging', to: '/winemaking-process/aging'},
+        { label: 'Bottling', to: '/winemaking-process/bottling'}
       ]
     }
   },

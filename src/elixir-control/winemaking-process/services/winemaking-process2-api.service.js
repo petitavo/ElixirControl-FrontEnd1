@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const http = axios.create({baseURL: "http://localhost:3000"});
+const http = axios.create({baseURL: "https://my-json-server.typicode.com/SV51-MetaSoft-App-Web/endpoint-winemaking-process2"});
 
-export class winemakingProcessApiService {
+export class winemakingProcessApiService2 {
 
     constructor(_resourceEndpoint) {
         this.resourceEndpoint = _resourceEndpoint;

@@ -1,11 +1,12 @@
 <script>
-import {Aging} from "../model/aging.entity.js";
 import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
+import {Aging} from "../model/aging.entity.js";
+import AgingCreateAndEdit from "../components/aging-create-and-edit.component.vue";
 
 export default {
   name: "aging-management",
-  components: {DataManager},
+  components: {AgingCreateAndEdit, DataManager},
 
   data() {
     return {
@@ -40,6 +41,7 @@ export default {
     },
 
     onEditItem(item) {
+      console.log("Item: ", item);
       this.aging = new Aging(item);
       this.isEdit = true;
       this.submitted = false;
@@ -78,8 +80,8 @@ export default {
 
     createAging() {
       this.agingApiService.create(this.aging).then(response => {
-        let agingObject = new Aging(response.data);
-        this.agingArray.push(agingObject);
+        let newAging = new Aging(response.data);
+        this.agingArray.push(newAging);
         this.notifySuccessfulAction('Aging created successfully');
       }).catch(error => {
             console.error(" Error creating aging data  ", error);
@@ -142,7 +144,7 @@ export default {
 
 <template>
 
-  <div>
+  <div class="w-full">
     <data-manager
         :title="title"
         v-bind:items="agingArray"
@@ -163,7 +165,17 @@ export default {
       </template>
 
     </data-manager>
+
+    <aging-create-and-edit
+        :edit = "isEdit"
+        :item="aging"
+        :visible="createAndEditDialogIsVisible"
+        v-on:cancel-requested-aging="onCancelRequestedManagement"
+        v-on:save-requested-aging="onSaveRequestedManagement($event)">
+    </aging-create-and-edit>
+
   </div>
+
 
 </template>
 

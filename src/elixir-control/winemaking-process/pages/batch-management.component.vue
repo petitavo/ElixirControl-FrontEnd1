@@ -3,12 +3,11 @@ import {Batch} from "../model/batch.entity.js";
 import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import BatchesCreateAndEdit from "../components/batch-create-and-edit.component.vue";
-import LanguageSwitcher from "../../../public/component/language-switcher.component.vue";
 
 
 export default {
   name: "batch-management",
-  components: {LanguageSwitcher, BatchesCreateAndEdit, DataManager},
+  components: { BatchesCreateAndEdit, DataManager},
 
   data() {
     return {
@@ -180,6 +179,7 @@ export default {
         v-on:cancel-requested-batches="onCancelRequested"
         v-on:save-requested-batches="onSaveRequested($event)">
     </batches-create-and-edit>
+
   </div>
 
 </template>

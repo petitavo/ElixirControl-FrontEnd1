@@ -8,7 +8,7 @@
       "vineyard_origin": "Viñedos del Sol",
       "current_status": "Fermentation",
       "process_start_date": "2023-08-16",
-      "final_volume": 900
+      "final_volume": "800"
     },
     {
       "id": 2,
@@ -62,7 +62,7 @@
       "final_density": 0.998,
       "initial_ph": 3.6,
       "final_ph": 3.4,
-      "residual_sugar": 2.5
+      "residual_sugar": "1.5"
     },
     {
       "id": 102,
@@ -252,6 +252,53 @@
       "aging_duration_months": 6,
       "inspections_performed": 5,
       "inspection_result": "Smooth texture with vanilla undertones"
+    }
+  ],
+  "bottling": [
+    {
+      "id": 1,
+      "batch_id": 1,
+      "bottling_date": "2023-05-10",
+      "bottle_size_ml": 750,
+      "number_of_bottles": "1000",
+      "label_type": "Classic",
+      "cork_type": "Natural"
+    },
+    {
+      "id": 2,
+      "batch_id": 2,
+      "bottling_date": "2023-06-15",
+      "bottle_size_ml": 500,
+      "number_of_bottles": 1200,
+      "label_type": "Modern",
+      "cork_type": "Synthetic"
+    },
+    {
+      "id": 3,
+      "batch_id": 3,
+      "bottling_date": "2023-07-20",
+      "bottle_size_ml": 750,
+      "number_of_bottles": 950,
+      "label_type": "Vintage",
+      "cork_type": "Screw Cap"
+    },
+    {
+      "id": 4,
+      "batch_id": 4,
+      "bottling_date": "2023-08-05",
+      "bottle_size_ml": 1000,
+      "number_of_bottles": 800,
+      "label_type": "Artisan",
+      "cork_type": "Cork"
+    },
+    {
+      "id": 5,
+      "batch_id": 5,
+      "bottling_date": "2023-09-12",
+      "bottle_size_ml": 375,
+      "number_of_bottles": 1500,
+      "label_type": "Minimalist",
+      "cork_type": "Synthetic"
     }
   ]
 }
