@@ -12,8 +12,9 @@ export default {
     return {
       drawer: false,
       items: [
-        { label: 'Batches', to: '/winemaking/batches'},
-        { label: 'Fermentation', to: '/winemaking/Fermentation'}
+        { label: 'Batches', to: '/winemaking-process/batches'},
+        { label: 'Fermentation', to: '/winemaking-process/fermentation'},
+        { label: 'Aging', to: '/winemaking-process/aging'}
       ]
     }
   },
@@ -39,7 +40,7 @@ export default {
   <pv-toast/>
 
   <header>
-    <pv-toolbar class="w-full fixed top-0 left-0 pr-6 pl-6" style="background-color:#8B0000; margin-top: 0;">
+    <pv-toolbar class="w-full fixed top-0 left-0 pr-6 pl-6 z-1" style="background-color:#8B0000; margin-top: 0;">
 
       <template #start>
         <pv-button class="p-button-text" icon="pi pi-bars" @click="toggleDrawer"/>
@@ -68,7 +69,7 @@ export default {
     <pv-drawer v-model:visible="drawer"/>
   </header>
 
-  <main style="margin-top: 8%">
+  <main class="z-0" style="margin-top: 8%">
     <router-view/>
   </main>
 

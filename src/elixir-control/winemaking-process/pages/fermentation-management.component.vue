@@ -65,6 +65,7 @@ export default {
 
     onSaveRequestedManagement(item) {
      this.submitted = true;
+
       if (this.isEdit) {
         this.updateFermentation(item);
       } else {
@@ -125,7 +126,7 @@ export default {
     getAllFermentation() {
       this.fermentationApiService = new winemakingProcessApiService('/fermentation');
       this.fermentationApiService.getAllResources().then(response => {
-          this.fermentationArray = response.data.map(fermentation => new Fermentation(fermentation));
+          this.fermentationArray = response.data.map(newFermentation => new Fermentation(newFermentation));
         })
         .catch(error => {
           console.error("Error fetching fermentation data", error);
@@ -154,8 +155,8 @@ export default {
                   v-on:delete-selected-items-requested-manager="onDeleteSelectedItems($event)">
 
       <template #custom-columns-manager>
-        <pv-column :sortable="true" field="batch_id" header="Batch Id" style="min-width: 8rem"/>
         <pv-column :sortable="true" field="id" header="Id" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="batch_id" header="Batch Id" style="min-width: 8rem"/>
         <pv-column :sortable="true" field="start_date" header="Start date" style="min-width: 12rem"/>
         <pv-column :sortable="true" field="end_date" header="End date" style="min-width: 12rem"/>
         <pv-column :sortable="true" field="average_temperature" header="Average temperature" style="min-width: 12rem"/>

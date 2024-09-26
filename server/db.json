@@ -4,21 +4,21 @@
       "id": 1,
       "grape_variety": "Cabernet Sauvignon",
       "harvest_date": "2023-08-15",
-      "grape_quantity": "1200",
+      "grape_quantity": 1200,
       "vineyard_origin": "Viñedos del Sol",
       "current_status": "Fermentation",
       "process_start_date": "2023-08-16",
-      "final_volume": "1000"
+      "final_volume": 900
     },
     {
       "id": 2,
       "grape_variety": "Chardonnay",
       "harvest_date": "2023-09-10",
-      "grape_quantity": "1500",
+      "grape_quantity": 1500,
       "vineyard_origin": "Viña Verde",
       "current_status": "Aging",
       "process_start_date": "2023-09-12",
-      "final_volume": 1200
+      "final_volume": 1100
     },
     {
       "id": 3,
@@ -61,8 +61,8 @@
       "initial_density": 1.09,
       "final_density": 0.998,
       "initial_ph": 3.6,
-      "final_ph": "3.5",
-      "residual_sugar": "3.5"
+      "final_ph": 3.4,
+      "residual_sugar": 2.5
     },
     {
       "id": 102,
@@ -74,7 +74,7 @@
       "final_density": 0.995,
       "initial_ph": 3.5,
       "final_ph": 3.3,
-      "residual_sugar": "2.8"
+      "residual_sugar": 1.8
     },
     {
       "id": 103,
@@ -111,6 +111,147 @@
       "initial_ph": 3.5,
       "final_ph": 3.3,
       "residual_sugar": 2
+    }
+  ],
+  "pressing": [
+    {
+      "id": 201,
+      "batch_id": 1,
+      "pressing_date": "2023-08-15",
+      "must_volume": 850,
+      "press_type": "Mechanical",
+      "applied_pressure": 1.2
+    },
+    {
+      "id": 202,
+      "batch_id": 2,
+      "pressing_date": "2023-09-11",
+      "must_volume": 1200,
+      "press_type": "Pneumatic",
+      "applied_pressure": 1.5
+    },
+    {
+      "id": 203,
+      "batch_id": 3,
+      "pressing_date": "2023-07-20",
+      "must_volume": 950,
+      "press_type": "Manual",
+      "applied_pressure": 0.9
+    },
+    {
+      "id": 204,
+      "batch_id": 4,
+      "pressing_date": "2023-10-04",
+      "must_volume": 1100,
+      "press_type": "Mechanical",
+      "applied_pressure": 1.3
+    },
+    {
+      "id": 205,
+      "batch_id": 5,
+      "pressing_date": "2023-09-24",
+      "must_volume": 1000,
+      "press_type": "Pneumatic",
+      "applied_pressure": 1.4
+    }
+  ],
+  "clarification": [
+    {
+      "id": 301,
+      "batch_id": 1,
+      "clarification_date": "2023-08-20",
+      "products_used": "Bentonite",
+      "clarification_method": "Decantation",
+      "filtration_date": "2023-08-25",
+      "clarity_level": 1.5
+    },
+    {
+      "id": 302,
+      "batch_id": 2,
+      "clarification_date": "2023-09-15",
+      "products_used": "Gelatin",
+      "clarification_method": "Filtration",
+      "filtration_date": "2023-09-20",
+      "clarity_level": 0.8
+    },
+    {
+      "id": 303,
+      "batch_id": 3,
+      "clarification_date": "2023-07-25",
+      "products_used": "Egg whites",
+      "clarification_method": "Centrifugation",
+      "filtration_date": "2023-07-30",
+      "clarity_level": 1.2
+    },
+    {
+      "id": 304,
+      "batch_id": 4,
+      "clarification_date": "2023-10-10",
+      "products_used": "Bentonite",
+      "clarification_method": "Filtration",
+      "filtration_date": "2023-10-15",
+      "clarity_level": 1
+    },
+    {
+      "id": 305,
+      "batch_id": 5,
+      "clarification_date": "2023-09-28",
+      "products_used": "Isinglass",
+      "clarification_method": "Decantation",
+      "filtration_date": "2023-10-03",
+      "clarity_level": 1.3
+    }
+  ],
+  "aging": [
+    {
+      "id": 401,
+      "batch_id": 1,
+      "barrel_type": "French Oak",
+      "start_date": "2023-08-30",
+      "end_date": "2024-02-28",
+      "aging_duration_months": 6,
+      "inspections_performed": 3,
+      "inspection_result": "Balanced aroma and flavor"
+    },
+    {
+      "id": 402,
+      "batch_id": 2,
+      "barrel_type": "American Oak",
+      "start_date": "2023-09-20",
+      "end_date": "2024-03-20",
+      "aging_duration_months": 6,
+      "inspections_performed": 4,
+      "inspection_result": "Strong oak flavor, good structure"
+    },
+    {
+      "id": 403,
+      "batch_id": 3,
+      "barrel_type": "Stainless Steel",
+      "start_date": "2023-07-28",
+      "end_date": "2024-01-28",
+      "aging_duration_months": 6,
+      "inspections_performed": 2,
+      "inspection_result": "Fresh and crisp taste"
+    },
+    {
+      "id": 404,
+      "batch_id": 4,
+      "barrel_type": "Hungarian Oak",
+      "start_date": "2023-10-18",
+      "end_date": "2024-04-18",
+      "aging_duration_months": 6,
+      "inspections_performed": 3,
+      "inspection_result": "Complex aroma with fruity notes"
+    },
+    {
+      "id": 405,
+      "batch_id": 5,
+      "barrel_type": "French Oak",
+      "start_date": "2023-09-30",
+      "end_date": "2024-03-30",
+      "aging_duration_months": 6,
+      "inspections_performed": 5,
+      "inspection_result": "Smooth texture with vanilla undertones"
     }
   ]
 }

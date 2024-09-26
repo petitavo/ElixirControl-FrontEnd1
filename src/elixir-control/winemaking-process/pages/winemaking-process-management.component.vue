@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "winemaking-process-management.component"
+  name: "winemaking-process-management"
 }
 </script>
 
