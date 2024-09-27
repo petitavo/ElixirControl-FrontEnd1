@@ -1,3 +1,11 @@
 {
 
+  "title-Home":       "Inicio",
+  "title-Inventory":  "Inventario",
+  "title-Winemaking": "Elaboración de vinos",
+  "title-My Clients": "Mis clientes",
+  "title-My Orders":  "Mis pedidos",
+  "title-My Products":"Mis productos",
+  "title-Support":    "Soporte"
+
 }

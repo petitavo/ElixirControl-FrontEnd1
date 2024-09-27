@@ -12,13 +12,13 @@ export default {
     return {
       drawer: true,
       items: [
-        {label: 'Home',         to: "/productor/home",                icon: 'pi pi-home' },
-        {label: 'Inventory',    to: "/productor/inventory",           icon: 'pi pi-receipt' },
-        {label: 'Winemaking',   to: '/productor/winemaking-process',  icon: 'pi pi-spinner-dotted' },
-        {label: 'My Clients',   to: '/productor/clients',             icon: 'pi pi-user' },
-        {label: 'My Orders',    to: '/productor/Orders',              icon: 'pi pi-list-check' },
-        {label: 'My Products',  to: '/productor/products',            icon: 'pi pi-tags' },
-        {label: 'Support',      to: '/productor/Support',             icon: 'pi pi-wrench' },
+        { label: 'title-Home', to: "/productor/home", icon: 'pi pi-home' },
+        { label: 'title-Inventory', to: "/productor/inventory", icon: 'pi pi-receipt' },
+        { label: 'title-Winemaking', to: '/productor/winemaking-process', icon: 'pi pi-spinner-dotted' },
+        { label: 'title-My Clients', to: '/productor/clients', icon: 'pi pi-user' },
+        { label: 'title-My Orders', to: '/productor/Orders', icon: 'pi pi-list-check' },
+        { label: 'title-My Products', to: '/productor/products', icon: 'pi pi-tags' },
+        { label: 'title-Support', to: '/productor/Support', icon: 'pi pi-wrench' },
       ]
     }
   },
@@ -59,8 +59,8 @@ export default {
     <pv-card class="h-screen fixed top-0 left-0 pr-8 pl-8 z-1" style="margin-top:80px;
     background-color:#8B0000; height:40px; color:white">
 
-      <template #header>
-        <h3 class="text-white">Elixir Control</h3>
+      <template #title>
+        <p class="pt-1"></p>
       </template>
 
       <template #subtitle>
@@ -70,7 +70,7 @@ export default {
                        :href="href"
                        @click="navigate" >
               <i :class="item.icon" style="font-size: 1.3rem;" />
-              {{ item.label }}
+              {{ $t(item.label) }}
             </pv-button>
           </router-link>
         </div>
