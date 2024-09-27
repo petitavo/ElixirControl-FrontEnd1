@@ -13,7 +13,7 @@ import 'primeflex/primeflex.css';
 
 
 // PrimeIcons
-import 'primeicons/primeicons.css';
+import "primeicons/primeicons.css";
 import ConfirmationService from "primevue/confirmationservice";
 import DialogService from "primevue/dialogservice";
 import ToastService from "primevue/toastservice";
@@ -38,6 +38,7 @@ import Drawer from "primevue/drawer";
 import Tag from "primevue/tag";
 import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
+import Tabs from "primevue/tabs";
 
 
 import Toast from "primevue/toast";
@@ -46,6 +47,10 @@ import Toast from "primevue/toast";
 //importado de manera local de "router/index.js" creado y ubicado en src
 import router from "./router/index.js";
 import SelectButton from "primevue/selectbutton";
+import TabList from "primevue/tablist";
+import Tab from "primevue/tab";
+import TabPanel from "primevue/tabpanel";
+
 
 
 
@@ -92,6 +97,10 @@ app.component('pv-button', Button)
     .component('pv-tag', Tag)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
-    .component('pv-toast', Toast);
+    .component('pv-toast', Toast)
+    .component('pv-tabs', Tabs)
+    .component('pv-tab-list', TabList)
+    .component('pv-tab', Tab)
+    .component('pv-tab-panel', TabPanel);
 
 app.mount('#app')

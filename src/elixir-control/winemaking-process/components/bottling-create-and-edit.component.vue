@@ -7,8 +7,8 @@ export default {
 
   props: {
     item: null,
-    visible: Boolean
-  },
+  visible: Boolean
+},
 
   data() {
     return {

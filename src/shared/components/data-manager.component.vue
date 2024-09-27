@@ -81,10 +81,10 @@ export default {
   <pv-toast/>
   <pv-confirm-dialog/>
 
-  <h3>Manage {{ title.plural }}</h3>
+  <h3 >Manage {{ title.plural }}</h3>
 
   <!-- Toolbar section -->
-  <pv-toolbar class="mb-4">
+  <pv-toolbar class="mb-4 mt-4">
 
     <template #start>
       <pv-button class="mr-2" icon="pi pi-plus" label="New" severity="success" @click="newItem"/>
@@ -104,7 +104,7 @@ export default {
       v-model:selection="selectedItems"
       :filters="filters"
       :paginator="true"
-      :rows="10"
+      :rows="5"
       :rows-per-page-options="[5, 10, 15]"
       :value="items"
       current-page-report-template="Showing {first} to {last} of {totalRecords} ${{title.plural}}"

@@ -3,11 +3,12 @@ import {Batch} from "../model/batch.entity.js";
 import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import BatchesCreateAndEdit from "../components/batch-create-and-edit.component.vue";
+import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
 
 
 export default {
   name: "batch-management",
-  components: { BatchesCreateAndEdit, DataManager},
+  components: {WinemakingProcessManagement, BatchesCreateAndEdit, DataManager},
 
   data() {
     return {
@@ -66,12 +67,14 @@ export default {
     },
 
     onSaveRequested(item) {
+
+      console.log('onSaveRequestedManagement', item);
       this.submitted = true;
 
-      if (this.isEdit) {
-        this.updateBatch(item);
+      if (item.id) {
+        this.updateBatch();
       } else {
-        this.createBatch(item);
+        this.createBatch();
       }
 
       this.createAndEditDialogIsVisible = false;
@@ -124,7 +127,6 @@ export default {
     //#endregion
 
     getAllBatches() {
-      this.batchApiService = new winemakingProcessApiService('/batches');
 
       this.batchApiService.getAllResources().then(response => {
         this.batches = response.data.map(batch => new Batch(batch));
@@ -140,6 +142,8 @@ export default {
 
   //#region Lifecycle Hooks
   created() {
+    this.batchApiService = new winemakingProcessApiService('/batches');
+
     this.getAllBatches();
     console.log('Batch Management component created');
   }
@@ -150,8 +154,9 @@ export default {
 
 <template>
 
+  <winemaking-process-management></winemaking-process-management>
 
-  <div class="w-full">
+  <div>
 
     <data-manager :title="title"
                   v-bind:items="batches"

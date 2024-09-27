@@ -3,10 +3,12 @@ import {winemakingProcessApiService} from "../services/winemaking-process-api.se
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import {Aging} from "../model/aging.entity.js";
 import AgingCreateAndEdit from "../components/aging-create-and-edit.component.vue";
+import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
+
 
 export default {
   name: "aging-management",
-  components: {AgingCreateAndEdit, DataManager},
+  components: {WinemakingProcessManagement, AgingCreateAndEdit, DataManager},
 
   data() {
     return {
@@ -65,12 +67,17 @@ export default {
     },
 
     onSaveRequestedManagement(item) {
+      console.log('onSaveRequestedManagement', item);
       this.submitted = true
-      if (this.isEdit) {
-        this.updateAging(item);
+
+      if (item.id) {
+        this.updateAging();
       } else {
-        this.createAging(item);
+        this.createAging();
       }
+
+      this.createAndEditDialogIsVisible = false;
+      this.isEdit = false;
     },
 
     //#endregion
@@ -144,7 +151,10 @@ export default {
 
 <template>
 
-  <div class="w-full">
+  <winemaking-process-management></winemaking-process-management>
+
+  <div>
+
     <data-manager
         :title="title"
         v-bind:items="agingArray"

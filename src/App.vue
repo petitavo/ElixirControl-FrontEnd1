@@ -2,28 +2,25 @@
 
 import LanguageSwitcher from "./public/component/language-switcher.component.vue";
 
+
 export default {
   name: "app",
-  components: {LanguageSwitcher},
+  components: { LanguageSwitcher},
 
   title: 'Elixir Control',
 
   data() {
     return {
-      drawer: false,
+      drawer: true,
       items: [
-        { label: 'Batches', to: '/winemaking-process/batches'},
-        { label: 'Fermentation', to: '/winemaking-process/fermentation'},
-        { label: 'Aging', to: '/winemaking-process/aging'},
-        { label: 'Bottling', to: '/winemaking-process/bottling'}
+        {label: 'Home',         to: "/home",                icon: 'pi pi-home' },
+        {label: 'Inventory',    to: "/inventory",           icon: 'pi pi-receipt' },
+        {label: 'Winemaking',   to: '/winemaking-process',  icon: 'pi pi-spinner-dotted' },
+        {label: 'My Clients',   to: '/clients',             icon: 'pi pi-user' },
+        {label: 'My Orders',    to: '/Orders',              icon: 'pi pi-list-check' },
+        {label: 'My Products',  to: '/products',            icon: 'pi pi-tags' },
+        {label: 'Support',      to: '/Support',             icon: 'pi pi-wrench' },
       ]
-    }
-  },
-
-
-  methods: {
-    toggleDrawer() {
-      this.drawer = !this.drawer;
     }
   },
 
@@ -37,44 +34,58 @@ export default {
 
 <template>
 
-
   <pv-toast/>
 
-  <header>
-    <pv-toolbar class="w-full fixed top-0 left-0 pr-6 pl-6 z-1" style="background-color:#8B0000; margin-top: 0;">
 
+  <section>
+    <pv-toolbar class="w-full fixed top-0 left-0 pr-8 pl-8 pb-2.8 z-1" style="background-color:#8B0000; margin-top: 0;">
       <template #start>
-        <pv-button class="p-button-text" icon="pi pi-bars" @click="toggleDrawer"/>
         <img src="../src/assets/img/logo-elixir-control.png" width="80" alt="Logo Elixir Control"/>
       </template>
 
       <template #center>
-
       </template>
 
       <template #end>
-
-        <div class="flex-column pl-6 pr-6" >
-          <router-link v-for="item in items" :key="item.label" v-slot="{navigate, href}" :to="item.to" custom>
-            <pv-button :href="href" class="p-button-text mr-3" @click="navigate" >{{ item.label }}</pv-button>
-          </router-link>
-        </div>
-
         <div>
           <language-switcher/>
         </div>
-
       </template>
     </pv-toolbar>
+  </section>
 
-    <pv-drawer v-model:visible="drawer"/>
-  </header>
 
-  <main class="z-0" style="margin-top: 8%">
+
+  <section>
+    <pv-card class="h-screen fixed top-0 left-0 pr-8 pl-8 z-1" style="margin-top:80px;
+    background-color:#8B0000; height:40px; color:white">
+
+      <template #header>
+        <h3 class="text-white">Elixir Control</h3>
+      </template>
+
+      <template #subtitle>
+        <div class="flex flex-column">
+          <router-link v-for="item in items" :key="item.label" v-slot="{navigate, href}" :to="item.to" custom>
+            <pv-button class="md:hover:text-color-secondary p-button-text text-white m-2 justify-content-start "
+                       :href="href"
+                       @click="navigate" >
+              <i :class="item.icon" style="font-size: 1.3rem;" />
+              {{ item.label }}
+            </pv-button>
+          </router-link>
+        </div>
+      </template>
+
+      <template #footer class="">
+        <span class="w-full text-center"> © 2024 Elixir Control</span>
+      </template>
+    </pv-card>
+  </section>
+
+  <section class="z-0" style="margin-top: 8%; margin-left:350px">
     <router-view/>
-  </main>
-
-
+  </section>
 
 
 </template>

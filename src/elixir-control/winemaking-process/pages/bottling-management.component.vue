@@ -4,9 +4,11 @@ import DataManager from "../../../shared/components/data-manager.component.vue";
 import BottlingCreateAndEdit from "../components/bottling-create-and-edit.component.vue";
 import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
 
+import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
+
 export default {
   name: "bottling-management",
-  components: {BottlingCreateAndEdit, DataManager},
+  components: {WinemakingProcessManagement, BottlingCreateAndEdit, DataManager},
 
   data() {
     return {
@@ -65,13 +67,16 @@ export default {
 
     onSaveRequestedManagement(item) {
       console.log('onSaveRequestedManagement', item);
-      this.createAndEditDialogIsVisible = false;
       this.submitted = true;
-      if (this.isEdit) {
-        this.updateBottling(item);
+
+      if (item.id) {
+        this.updateBottling();
       } else {
-        this.createBottling(item);
+        this.createBottling();
       }
+
+      this.createAndEditDialogIsVisible = false;
+      this.isEdit = false;
     },
 
     //#endregion
@@ -126,7 +131,7 @@ export default {
 
 
     getAllBottling() {
-      this.bottlingApiService = new winemakingProcessApiService("/bottling");
+
       this.bottlingApiService.getAllResources().then(response => {
         this.bottlingArray = response.data.map(newBottling => new Bottling(newBottling));
       }).catch(error => {
@@ -138,6 +143,8 @@ export default {
 
   //#region Lifecycle Hooks
   created() {
+    this.bottlingApiService = new winemakingProcessApiService("/bottling");
+
     this.getAllBottling();
     console.log('Bottling Management component created');
   }
@@ -145,6 +152,8 @@ export default {
 </script>
 
 <template>
+
+  <winemaking-process-management></winemaking-process-management>
 
   <div class="w-full">
     <data-manager :title="title"
@@ -166,7 +175,7 @@ export default {
     </data-manager>
 
     <bottling-create-and-edit :visible="createAndEditDialogIsVisible"
-                              :is-edit="isEdit"
+                              :edit="isEdit"
                               :item="bottling"
                               v-on:cancel-requested-bottling="onCancelRequestedManagement"
                               v-on:save-requested-bottling="onSaveRequestedManagement($event)">

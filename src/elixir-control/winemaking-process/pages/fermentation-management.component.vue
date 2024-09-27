@@ -3,10 +3,11 @@ import {Fermentation} from "../model/fermentation.entity.js";
 import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import FermentationCreateAndEdit from "../components/fermentation-create-and-edit.component.vue";
+import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
 
 export default {
   name: "fermentation-management",
-  components: {FermentationCreateAndEdit, DataManager},
+  components: {WinemakingProcessManagement, FermentationCreateAndEdit, DataManager},
 
   data() {
     return {
@@ -64,12 +65,13 @@ export default {
     },
 
     onSaveRequestedManagement(item) {
+      console.log('onSaveRequestedManagement: ', item);
      this.submitted = true;
 
-      if (this.isEdit) {
-        this.updateFermentation(item);
+      if (item.id) {
+        this.updateFermentation();
       } else {
-        this.createFermentation(item);
+        this.createFermentation();
       }
       this.createAndEditDialogIsVisible = false;
       this.isEdit = false;
@@ -146,6 +148,8 @@ export default {
 
 <template>
 
+  <winemaking-process-management></winemaking-process-management>
+
   <div class="w-full">
     <data-manager :title="title"
                   v-bind:items="fermentationArray"
@@ -169,7 +173,7 @@ export default {
     </data-manager>
 
     <fermentation-create-and-edit
-        :is-edit="isEdit"
+        :edit="isEdit"
         :item="fermentation"
         :visible="createAndEditDialogIsVisible"
         v-on:cancel-requested-fermentation="onCancelRequestedManagement"
