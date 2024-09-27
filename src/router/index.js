@@ -10,6 +10,7 @@ import WinemakingProcessManagementComponent
     from "../elixir-control/winemaking-process/pages/winemaking-process-management.component.vue";
 import ProductManagementComponent from "../elixir-control/products-mangment/pages/product-management.component.vue";
 import InventoryManagementComponent from "../elixir-control/inventory-management/pages/inventory-management.vue";
+import OrderHistory from "../elixir-control/distributor-profile/pages/order-history.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -26,6 +27,12 @@ const router = createRouter({
             name: 'InventoryManagement',
             component: InventoryManagementComponent,
             meta: { title: 'Inventory Management' }
+        },
+        {
+            path: '/productor/orders/history',
+            name: 'OrderHistory',
+            component: OrderHistory,
+            meta: { title: 'Order History' }
         },
         {path: '/productor/products',                            name: 'Products',           component: ProductManagementComponent,          meta: { title: 'Products'}},
 

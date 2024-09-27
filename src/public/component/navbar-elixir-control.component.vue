@@ -16,7 +16,7 @@ export default {
         { label: 'title-Inventory', to: "/productor/inventory", icon: 'pi pi-receipt' },
         { label: 'title-Winemaking', to: '/productor/winemaking-process', icon: 'pi pi-spinner-dotted' },
         { label: 'title-My Clients', to: '/productor/clients', icon: 'pi pi-user' },
-        { label: 'title-My Orders', to: '/productor/Orders', icon: 'pi pi-list-check' },
+        { label: 'title-My Orders', to: '/productor/orders/history', icon: 'pi pi-list-check' },
         { label: 'title-My Products', to: '/productor/products', icon: 'pi pi-tags' },
         { label: 'title-Support', to: '/productor/Support', icon: 'pi pi-wrench' },
       ]
