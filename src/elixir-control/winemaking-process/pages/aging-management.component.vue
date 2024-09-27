@@ -128,7 +128,7 @@ export default {
     //#endregion
 
     getAllAging(){
-      this.agingApiService = new winemakingProcessApiService('/aging');
+
       this.agingApiService.getAllResources().then(response => {
         this.agingArray = response.data.map(newAging => new Aging(newAging));
         console.log("Aging data: ", this.agingArray);
@@ -142,6 +142,7 @@ export default {
 
   //#region Lifecycle Hooks
   created() {
+    this.agingApiService = new winemakingProcessApiService('/aging');
     this.getAllAging();
     console.log('Aging Management component created');
   }

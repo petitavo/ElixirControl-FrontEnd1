@@ -350,5 +350,127 @@
       "label_type": "Minimalist",
       "cork_type": "Synthetic"
     }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Cabernet Sauvignon",
+      "grape_variety": "Cabernet Sauvignon",
+      "wine_type": "Red",
+      "origin": "Napa Valley, California",
+      "alcohol_content": 14.5,
+      "price": 29.99,
+      "food_pairing": "Red meats, aged cheeses.",
+      "quantity": "60",
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    },
+    {
+      "id": 2,
+      "name": "Chardonnay",
+      "grape_variety": "Chardonnay",
+      "wine_type": "White",
+      "origin": "Loire Valley, France",
+      "alcohol_content": 13,
+      "price": 24.5,
+      "food_pairing": "Fish, poultry, salads.",
+      "quantity": 150,
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    },
+    {
+      "id": 3,
+      "name": "Rosé de Provence",
+      "grape_variety": "Grenache, Syrah",
+      "wine_type": "Rosé",
+      "origin": "Provence, France",
+      "alcohol_content": 12.5,
+      "price": 19.99,
+      "food_pairing": "Appetizers, seafood, light dishes.",
+      "quantity": "100",
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    },
+    {
+      "id": 4,
+      "name": "Prosecco",
+      "grape_variety": "Glera",
+      "wine_type": "Sparkling",
+      "origin": "Veneto, Italy",
+      "alcohol_content": 11,
+      "price": 18,
+      "food_pairing": "Appetizers, pasta dishes, fruits.",
+      "quantity": 120,
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    },
+    {
+      "id": 5,
+      "name": "Pisco Quebranta",
+      "grape_variety": "Quebranta",
+      "wine_type": "Pisco",
+      "origin": "Ica, Peru",
+      "alcohol_content": 40,
+      "price": 30,
+      "food_pairing": "Ceviche, criolla cuisine.",
+      "quantity": 80,
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    },
+    {
+      "id": 6,
+      "name": "Malbec",
+      "grape_variety": "Malbec",
+      "wine_type": "Red",
+      "origin": "Mendoza, Argentina",
+      "alcohol_content": 14,
+      "price": 25,
+      "food_pairing": "Grilled meats, strong cheeses.",
+      "quantity": 90,
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    },
+    {
+      "id": 7,
+      "name": "Sauvignon Blanc",
+      "grape_variety": "Sauvignon Blanc",
+      "wine_type": "White",
+      "origin": "Marlborough, New Zealand",
+      "alcohol_content": 12.5,
+      "price": 22,
+      "food_pairing": "Salads, seafood, Asian cuisine.",
+      "quantity": 110,
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    },
+    {
+      "id": 8,
+      "name": "Zinfandel",
+      "grape_variety": "Zinfandel",
+      "wine_type": "Red",
+      "origin": "California, USA",
+      "alcohol_content": 15,
+      "price": 27.5,
+      "food_pairing": "Barbecues, pasta with strong sauces.",
+      "quantity": 70,
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    },
+    {
+      "id": 9,
+      "name": "Vinho Verde",
+      "grape_variety": "Alvarinho",
+      "wine_type": "White",
+      "origin": "Minho, Portugal",
+      "alcohol_content": 9,
+      "price": 15,
+      "food_pairing": "Seafood, appetizers.",
+      "quantity": 130,
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    },
+    {
+      "id": 10,
+      "name": "Pisco Acholado",
+      "grape_variety": "Acholado",
+      "wine_type": "Pisco",
+      "origin": "Ica, Peru",
+      "alcohol_content": 38,
+      "price": 32,
+      "food_pairing": "Ceviche, criolla cuisine.",
+      "quantity": 60,
+      "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
+    }
   ]
 }

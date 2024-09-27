@@ -38,7 +38,9 @@ import Drawer from "primevue/drawer";
 import Tag from "primevue/tag";
 import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
-import Tabs from "primevue/tabs";
+import TabList from "primevue/tablist";
+import Tab from "primevue/tab";
+import TabPanel from "primevue/tabpanel";
 
 
 import Toast from "primevue/toast";
@@ -47,9 +49,9 @@ import Toast from "primevue/toast";
 //importado de manera local de "router/index.js" creado y ubicado en src
 import router from "./router/index.js";
 import SelectButton from "primevue/selectbutton";
-import TabList from "primevue/tablist";
-import Tab from "primevue/tab";
-import TabPanel from "primevue/tabpanel";
+import Tabs from "primevue/tabs";
+import DataView from "primevue/dataview";
+
 
 
 
@@ -101,6 +103,7 @@ app.component('pv-button', Button)
     .component('pv-tabs', Tabs)
     .component('pv-tab-list', TabList)
     .component('pv-tab', Tab)
-    .component('pv-tab-panel', TabPanel);
+    .component('pv-tab-panel', TabPanel)
+    .component('pv-data-view', DataView);
 
 app.mount('#app')

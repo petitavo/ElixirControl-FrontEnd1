@@ -82,7 +82,7 @@ export default {
     </pv-card>
   </section>
 
-  <section class="z-0" style="margin-top: 8%; margin-left:350px">
+  <section class="z-0" style="margin-top: 8%; margin-left:320px">
     <router-view/>
   </section>
 
