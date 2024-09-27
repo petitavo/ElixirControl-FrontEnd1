@@ -9,6 +9,7 @@ import PressingManagementComponent from "../elixir-control/winemaking-process/pa
 import WinemakingProcessManagementComponent
     from "../elixir-control/winemaking-process/pages/winemaking-process-management.component.vue";
 import ProductManagementComponent from "../elixir-control/products-mangment/pages/product-management.component.vue";
+import InventoryManagementComponent from "../elixir-control/inventory-management/pages/inventory-management.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,6 +21,12 @@ const router = createRouter({
         {path: '/productor/winemaking-process/clarification',    name: 'Clarification',      component: ClarificationManagementComponent,    meta: { title: 'Clarification'}},
         {path: '/productor/winemaking-process/pressing',         name: 'Pressing',           component: PressingManagementComponent,         meta: { title: 'Pressing'}},
         {path: '/productor/winemaking-process',                  name: 'Winemaking Process', component: WinemakingProcessManagementComponent,meta: { title: 'Winemaking Process'}},
+        {
+            path: '/productor/inventory',
+            name: 'InventoryManagement',
+            component: InventoryManagementComponent,
+            meta: { title: 'Inventory Management' }
+        },
         {path: '/productor/products',                            name: 'Products',           component: ProductManagementComponent,          meta: { title: 'Products'}},
 
     ]
