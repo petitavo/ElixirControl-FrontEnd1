@@ -12,13 +12,13 @@ import WinemakingProcessManagementComponent
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/winemaking-process/batches',          name: 'batches',            component: batchManagementComponent,            meta: { title: 'batches'}},
-        {path: '/winemaking-process/fermentation',     name: 'Fermentation',       component: fermentationManagementComponent,     meta: { title: 'Fermentation'}},
-        {path: '/winemaking-process/aging',            name: 'Aging',              component: agingManagementComponent,            meta: { title: 'Aging'}},
-        {path: '/winemaking-process/bottling',         name: 'Bottling',           component: BottlingManagementComponent,         meta: { title: 'Bottling'}},
-        {path: '/winemaking-process/clarification',    name: 'Clarification',      component: ClarificationManagementComponent,    meta: { title: 'Clarification'}},
-        {path: '/winemaking-process/pressing',         name: 'Pressing',           component: PressingManagementComponent,         meta: { title: 'Pressing'}},
-        {path: '/winemaking-process',                  name: 'Winemaking Process', component: WinemakingProcessManagementComponent,meta: { title: 'Winemaking Process'}},
+        {path: '/productor/winemaking-process/batches',          name: 'batches',            component: batchManagementComponent,            meta: { title: 'batches'}},
+        {path: '/productor/winemaking-process/fermentation',     name: 'Fermentation',       component: fermentationManagementComponent,     meta: { title: 'Fermentation'}},
+        {path: '/productor/winemaking-process/aging',            name: 'Aging',              component: agingManagementComponent,            meta: { title: 'Aging'}},
+        {path: '/productor/winemaking-process/bottling',         name: 'Bottling',           component: BottlingManagementComponent,         meta: { title: 'Bottling'}},
+        {path: '/productor/winemaking-process/clarification',    name: 'Clarification',      component: ClarificationManagementComponent,    meta: { title: 'Clarification'}},
+        {path: '/productor/winemaking-process/pressing',         name: 'Pressing',           component: PressingManagementComponent,         meta: { title: 'Pressing'}},
+        {path: '/productor/winemaking-process',                  name: 'Winemaking Process', component: WinemakingProcessManagementComponent,meta: { title: 'Winemaking Process'}},
 
     ]
 });

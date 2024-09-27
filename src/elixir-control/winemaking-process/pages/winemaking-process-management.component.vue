@@ -8,12 +8,12 @@ export default {
     return {
       activeTab: '/winemaking-process/batches', // Tab activo por defecto
       items: [
-        { label: 'Batches',       route: '/winemaking-process/batches',       icon: 'pi-chevron-right'  },
-        { label: 'Fermentation',  route: '/winemaking-process/fermentation',  icon: 'pi-chevron-right'  },
-        { label: 'Clarification', route: '/winemaking-process/clarification', icon: 'pi-chevron-right'  },
-        { label: 'Pressing',      route: '/winemaking-process/pressing',      icon: 'pi-chevron-right'  },
-        { label: 'Aging',         route: '/winemaking-process/aging',         icon: 'pi-chevron-right'  },
-        { label: 'Bottling',      route: '/winemaking-process/bottling',      icon: 'pi-chevron-right'  }
+        { label: 'Batches',       route: '/productor/winemaking-process/batches',       icon: 'pi-chevron-right'  },
+        { label: 'Fermentation',  route: '/productor/winemaking-process/fermentation',  icon: 'pi-chevron-right'  },
+        { label: 'Clarification', route: '/productor/winemaking-process/clarification', icon: 'pi-chevron-right'  },
+        { label: 'Pressing',      route: '/productor/winemaking-process/pressing',      icon: 'pi-chevron-right'  },
+        { label: 'Aging',         route: '/productor/winemaking-process/aging',         icon: 'pi-chevron-right'  },
+        { label: 'Bottling',      route: '/productor/winemaking-process/bottling',      icon: 'pi-chevron-right'  }
       ]
     }
   }

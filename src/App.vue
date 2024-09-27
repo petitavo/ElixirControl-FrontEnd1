@@ -1,29 +1,15 @@
 <script>
 
 import LanguageSwitcher from "./public/component/language-switcher.component.vue";
+import NavbarElixirControl from "./public/component/navbar-elixir-control.component.vue";
 
 
 export default {
   name: "app",
-  components: { LanguageSwitcher},
+  components: {NavbarElixirControl},
+
 
   title: 'Elixir Control',
-
-  data() {
-    return {
-      drawer: true,
-      items: [
-        {label: 'Home',         to: "/home",                icon: 'pi pi-home' },
-        {label: 'Inventory',    to: "/inventory",           icon: 'pi pi-receipt' },
-        {label: 'Winemaking',   to: '/winemaking-process',  icon: 'pi pi-spinner-dotted' },
-        {label: 'My Clients',   to: '/clients',             icon: 'pi pi-user' },
-        {label: 'My Orders',    to: '/Orders',              icon: 'pi pi-list-check' },
-        {label: 'My Products',  to: '/products',            icon: 'pi pi-tags' },
-        {label: 'Support',      to: '/Support',             icon: 'pi pi-wrench' },
-      ]
-    }
-  },
-
 
   created() {
     console.log('App created');
@@ -34,59 +20,7 @@ export default {
 
 <template>
 
-  <pv-toast/>
-
-
-  <section>
-    <pv-toolbar class="w-full fixed top-0 left-0 pr-8 pl-8 pb-2.8 z-1" style="background-color:#8B0000; margin-top: 0;">
-      <template #start>
-        <img src="../src/assets/img/logo-elixir-control.png" width="80" alt="Logo Elixir Control"/>
-      </template>
-
-      <template #center>
-      </template>
-
-      <template #end>
-        <div>
-          <language-switcher/>
-        </div>
-      </template>
-    </pv-toolbar>
-  </section>
-
-
-
-  <section>
-    <pv-card class="h-screen fixed top-0 left-0 pr-8 pl-8 z-1" style="margin-top:80px;
-    background-color:#8B0000; height:40px; color:white">
-
-      <template #header>
-        <h3 class="text-white">Elixir Control</h3>
-      </template>
-
-      <template #subtitle>
-        <div class="flex flex-column">
-          <router-link v-for="item in items" :key="item.label" v-slot="{navigate, href}" :to="item.to" custom>
-            <pv-button class="md:hover:text-color-secondary p-button-text text-white m-2 justify-content-start "
-                       :href="href"
-                       @click="navigate" >
-              <i :class="item.icon" style="font-size: 1.3rem;" />
-              {{ item.label }}
-            </pv-button>
-          </router-link>
-        </div>
-      </template>
-
-      <template #footer class="">
-        <span class="w-full text-center"> © 2024 Elixir Control</span>
-      </template>
-    </pv-card>
-  </section>
-
-  <section class="z-0" style="margin-top: 8%; margin-left:350px">
-    <router-view/>
-  </section>
-
+  <navbar-elixir-control></navbar-elixir-control>
 
 </template>
 
