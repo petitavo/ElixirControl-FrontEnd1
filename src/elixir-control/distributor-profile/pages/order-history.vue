@@ -1,8 +1,10 @@
 <script>
 import OrderService from '../services/order-history-process-api.service.js';
 import OrderCreateAndEdit from "../components/order-create-and-edit.vue";
+import HeaderContent from "../../../public/component/header-content.component.vue";
 export default {
   components: {
+    HeaderContent,
     OrderCreateAndEdit,
   },
   data() {
@@ -61,6 +63,10 @@ export default {
 </script>
 
 <template>
+
+  <header-content></header-content>
+
+
   <div class="order-history">
     <h1>Order History</h1>
 

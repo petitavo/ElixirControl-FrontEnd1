@@ -142,7 +142,7 @@ export default {
 
   //#region Lifecycle Hooks
   created() {
-    this.agingApiService = new winemakingProcessApiService('/aging');
+    this.agingApiService = new winemakingProcessApiService('/agings');
     this.getAllAging();
     console.log('Aging Management component created');
   }

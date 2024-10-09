@@ -1,8 +1,11 @@
 <script>
 
 
+import HeaderContent from "../../../public/component/header-content.component.vue";
+
 export default {
   name: "winemaking-process-management",
+  components: {HeaderContent},
 
   data() {
     return {
@@ -23,8 +26,10 @@ export default {
 
 <template>
 
+  <header-content></header-content>
+
   <div class="w-full">
-    <header class="fixed top-0 left-0 z-1" style="margin-top: 5%; margin-left: 400px;">
+    <header class="fixed top-0 left-0 z-1" style="margin-top:80px; ">
       <pv-tabs class="flex flex-row justify-content-center flex-nowrap">
         <pv-tab-list>
           <pv-tab v-for="tab in items" :key="tab.label" :value="tab.route">

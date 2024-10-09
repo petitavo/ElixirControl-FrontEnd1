@@ -2,13 +2,14 @@
 import {Product} from "../model/product.entity.js";
 import {ProductApiService} from "../services/product-api.service.js";
 import ProductCreateAndEdit from "../components/product-create-and-edit.component.vue";
+import HeaderContent from "../../../public/component/header-content.component.vue";
 
 
 
 
 export default {
   name: "product-management",
-  components: {ProductCreateAndEdit},
+  components: {HeaderContent, ProductCreateAndEdit},
 
   data() {
     return {
@@ -131,6 +132,8 @@ export default {
 </script>
 
 <template>
+
+  <header-content></header-content>
 
   <pv-toast/>
 

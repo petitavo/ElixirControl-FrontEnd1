@@ -2,8 +2,10 @@
 
 import InventoryCreateAndEdit from '../components/inventory-create-and-edit.vue';
 import InventoryProcessApiService from "../services/inventory-process-api.service.js";
+import HeaderContent from "../../../public/component/header-content.component.vue";
 export default {
   components: {
+    HeaderContent,
     InventoryCreateAndEdit,
   },
   data() {
@@ -76,6 +78,9 @@ export default {
 </script>
 
 <template>
+
+  <header-content></header-content>
+
   <div class="inventory-management">
     <h1>Inventory Management</h1>
 

@@ -1,4 +1,8 @@
 {
+  "title-home":  "De la uva a la botella, todo bajo control.",
+  "sub-title-home": "Elixir Control: Tu mejor aliado en el proceso de elaboración del vino",
+
+
 
   "title-Home":       "Inicio",
   "title-Inventory":  "Inventario",
@@ -6,6 +10,9 @@
   "title-My Clients": "Mis clientes",
   "title-My Orders":  "Mis pedidos",
   "title-My Products":"Mis productos",
-  "title-Support":    "Soporte"
+  "title-Support":    "Soporte",
+  "sign-in":          "Iniciar sesión",
+  "sign-up":          "Regístrate"
+
 
 }

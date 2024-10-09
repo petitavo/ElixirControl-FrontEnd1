@@ -1,10 +1,17 @@
 
 {
-  "title-Home": "Home",
+  "title-home": "From the grape to the bottle, everything under control.",
+  "sub-title-home": "ElixirControl: Your best ally in the wine production process",
+
+
+
+
   "title-Inventory": "Inventory",
   "title-Winemaking": "Winemaking",
   "title-My Clients": "My Clients",
   "title-My Orders": "My Orders",
   "title-My Products": "My Products",
-  "title-Support": "Support"
+  "title-Support": "Support",
+  "sign-in": "Sign In",
+  "sign-up": "Sign Up"
 }

@@ -11,33 +11,25 @@ import WinemakingProcessManagementComponent
 import ProductManagementComponent from "../elixir-control/products-mangment/pages/product-management.component.vue";
 import InventoryManagementComponent from "../elixir-control/inventory-management/pages/inventory-management.vue";
 import OrderHistory from "../elixir-control/distributor-profile/pages/order-history.vue";
+import HomeContentComponent from "../public/pages/home-content.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/productor/winemaking-process/batches',          name: 'batches',            component: batchManagementComponent,            meta: { title: 'batches'}},
+        {path: '/productor/winemaking-process/batches',          name: 'batches',            component: batchManagementComponent,            meta: { title: 'Batches'}},
         {path: '/productor/winemaking-process/fermentation',     name: 'Fermentation',       component: fermentationManagementComponent,     meta: { title: 'Fermentation'}},
         {path: '/productor/winemaking-process/aging',            name: 'Aging',              component: agingManagementComponent,            meta: { title: 'Aging'}},
         {path: '/productor/winemaking-process/bottling',         name: 'Bottling',           component: BottlingManagementComponent,         meta: { title: 'Bottling'}},
         {path: '/productor/winemaking-process/clarification',    name: 'Clarification',      component: ClarificationManagementComponent,    meta: { title: 'Clarification'}},
         {path: '/productor/winemaking-process/pressing',         name: 'Pressing',           component: PressingManagementComponent,         meta: { title: 'Pressing'}},
         {path: '/productor/winemaking-process',                  name: 'Winemaking Process', component: WinemakingProcessManagementComponent,meta: { title: 'Winemaking Process'}},
-        {
-            path: '/productor/inventory',
-            name: 'InventoryManagement',
-            component: InventoryManagementComponent,
-            meta: { title: 'Inventory Management' }
-        },
-        {
-            path: '/productor/orders/history',
-            name: 'OrderHistory',
-            component: OrderHistory,
-            meta: { title: 'Order History' }
-        },
+        {path: '/productor/inventory',                           name: 'InventoryManagement',component: InventoryManagementComponent,        meta: { title: 'Inventory Management' }},
+        {path: '/productor/orders/history',                      name: 'OrderHistory',       component: OrderHistory,                        meta: { title: 'Order History' }},
         {path: '/productor/products',                            name: 'Products',           component: ProductManagementComponent,          meta: { title: 'Products'}},
-
+        {path: '/home',                                         name: 'Home',                component: HomeContentComponent,                meta: { title: 'Home'}},
     ]
 });
+
 
 
 
