@@ -33,9 +33,11 @@ export default {
         console.error("Error fetching inventory:", error);
       }
     },
+
     viewDetails(id) {
       this.$router.push({ name: 'InventoryDetail', params: { id } });
     },
+
     applyFilter() {
       this.filteredInventoryList = this.inventoryList.filter(item => {
         const matchesType = this.selectedType ? item.type === this.selectedType : true;
@@ -88,6 +90,7 @@ export default {
 
   <header-content></header-content>
 
+
   <div class="inventory-management">
     <h1>Inventory Management</h1>
 
@@ -116,6 +119,7 @@ export default {
         </select>
       </div>
     </div>
+
     <div class="table-container">
       <pv-data-table
           v-model:selection="selectedItems"
@@ -135,7 +139,7 @@ export default {
         <pv-column field="type" header="Type" />
 
         <pv-column headerStyle="width: 8rem">
-          <template #body="{ data }">
+          <template #body="{data}">
             <pv-button icon="pi pi-pencil" @click="editItem(data)" />
             <pv-button icon="pi pi-trash" @click="confirmDeleteItem(data)" severity="danger" />
             <pv-button

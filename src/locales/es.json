@@ -4,15 +4,15 @@
 
 
 
-  "title-Home":       "Inicio",
-  "title-Inventory":  "Inventario",
-  "title-Winemaking": "Elaboración de vinos",
-  "title-My Clients": "Mis clientes",
-  "title-My Orders":  "Mis pedidos",
-  "title-My Products":"Mis productos",
-  "title-Support":    "Soporte",
-  "sign-in":          "Iniciar sesión",
-  "sign-up":          "Regístrate"
+  "title-home-option":        "Inicio",
+  "title-inventory-option":   "Inventario",
+  "title-winemaking-option":  "Elaboración de vinos",
+  "title-my-clients-option":  "Mis clientes",
+  "title-my-orders-option":   "Mis pedidos",
+  "title-my-products-option": "Mis productos",
+  "title-support-option":     "Soporte",
+  "sign-in":                  "Iniciar sesión",
+  "sign-up":                  "Regístrate"
 
 
 }

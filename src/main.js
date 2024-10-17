@@ -51,6 +51,7 @@ import router from "./router/index.js";
 import SelectButton from "primevue/selectbutton";
 import Tabs from "primevue/tabs";
 import DataView from "primevue/dataview";
+import Panel from "primevue/panel";
 
 
 

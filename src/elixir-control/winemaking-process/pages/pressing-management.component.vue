@@ -169,8 +169,8 @@ export default {
         <pv-column :sortable="true" field="must_volume"  header="Must Volume" style="min-width: 6rem"/>
         <pv-column :sortable="true" field="press_type"   header="Press Type" style="min-width: 6rem"/>
         <pv-column :sortable="true" field="applied_pressure" header="Applied Pressure" style="min-width: 6rem"/>
-
       </template>
+
     </data-manager>
 
     <pressing-create-and-edit
