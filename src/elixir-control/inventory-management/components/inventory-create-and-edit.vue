@@ -30,24 +30,31 @@ export default {
   },
   data() {
     return {
-      inventoryItem: { ...this.entity }, // Usar un nombre más descriptivo
+      inventoryItem: {...this.entity},
     };
+  },
+  watch: {
+    entity: {
+      handler(newValue) {
+        this.inventoryItem = {...newValue};
+      },
+      deep: true,
+    },
   },
   methods: {
     closeDialog() {
-      this.$emit('canceled'); // Emitir evento cancelado al padre
+      this.$emit('canceled');
     },
     async saveItem() {
       try {
+        console.log("Saving item:", this.inventoryItem);
         if (this.edit) {
-          // Actualizar artículo existente
-          await InventoryProcessApiService.update(this.inventoryItem.inventory_id, this.inventoryItem);
+          await InventoryProcessApiService.update(this.inventoryItem.id, this.inventoryItem);
         } else {
-          // Crear nuevo artículo
           await InventoryProcessApiService.create(this.inventoryItem);
         }
-        this.$emit('saved'); // Emitir evento guardado al padre
-        this.closeDialog(); // Cerrar el diálogo
+        this.$emit('saved');
+        this.closeDialog();
       } catch (error) {
         console.error("Error saving item:", error);
       }
@@ -58,52 +65,55 @@ export default {
 
 <template>
   <div>
-    <pv-dialog :visible="visible" @hide="closeDialog" header="Add New Inventory Item">
+    <pv-dialog :visible="visible" @hide="closeDialog" :header="edit ? 'Edit Inventory Item' : 'Add New Inventory Item'">
       <div class="form-group">
         <label for="name">Name:</label>
-        <pv-input-text id="name" v-model="inventoryItem.name" required />
+        <pv-input-text id="name" v-model="inventoryItem.name" required/>
       </div>
 
       <div class="form-group">
         <label for="quantity">Quantity:</label>
-        <pv-input-number id="quantity" v-model="inventoryItem.quantity" required />
+        <pv-input-number id="quantity" v-model="inventoryItem.quantity" required/>
       </div>
 
       <div class="form-group">
         <label for="unit">Unit:</label>
-        <pv-input-text id="unit" v-model="inventoryItem.unit" placeholder="Enter unit (e.g., Kg, Units)" required />
+        <pv-input-text id="unit" v-model="inventoryItem.unit" placeholder="Enter unit (e.g., Kg, Units)" required/>
       </div>
 
       <div class="form-group">
         <label for="supplier">Supplier:</label>
-        <pv-input-text id="supplier" v-model="inventoryItem.supplier" required />
+        <pv-input-text id="supplier" v-model="inventoryItem.supplier" required/>
       </div>
 
       <div class="form-group">
         <label for="costPerUnit">Cost Per Unit:</label>
-        <pv-input-number id="costPerUnit" v-model="inventoryItem.costPerUnit" required />
+        <pv-input-number id="costPerUnit" v-model="inventoryItem.costPerUnit" required/>
       </div>
 
       <div class="form-group">
         <label for="expiration">Expiration Date:</label>
-        <pv-calendar id="expiration" v-model="inventoryItem.expiration" dateFormat="mm/dd/yy" required />
+        <pv-calendar id="expiration" v-model="inventoryItem.expiration" dateFormat="mm/dd/yy" required/>
       </div>
 
       <div class="form-group">
         <label for="lastUpdated">Last Updated:</label>
-        <pv-input-text id="lastUpdated" v-model="inventoryItem.lastUpdated" required />
+        <pv-calendar id="lastUpdated" v-model="inventoryItem.lastUpdated" dateFormat="mm/dd/yy" required/>
       </div>
 
       <div class="form-group">
         <label for="type">Type:</label>
-        <pv-input-text id="type" v-model="inventoryItem.type" required />
+        <select class="button-type" id="type" v-model="inventoryItem.type" required>
+          <option value="">Select Type</option>
+          <option value="Raw Material">Raw Material</option>
+          <option value="Equipment">Equipment</option>
+          <option value="Consumable">Consumable</option>
+        </select>
       </div>
 
-      <!-- Add any other fields you need here -->
-
       <template #footer>
-        <pv-button label="Cancel" @click="closeDialog" />
-        <pv-button label="Save" severity="success" @click="saveItem" />
+        <pv-button label="Cancel" @click="closeDialog"/>
+        <pv-button label="Save" severity="success" @click="saveItem"/>
       </template>
     </pv-dialog>
   </div>
@@ -112,5 +122,11 @@ export default {
 <style scoped>
 .form-group {
   margin-bottom: 15px;
+}
+.button-type{
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  padding: 5px;
 }
 </style>

@@ -10,6 +10,7 @@ import WinemakingProcessManagementComponent
     from "../elixir-control/winemaking-process/pages/winemaking-process-management.component.vue";
 import ProductManagementComponent from "../elixir-control/products-mangment/pages/product-management.component.vue";
 import InventoryManagementComponent from "../elixir-control/inventory-management/pages/inventory-management.vue";
+import InventoryDetailComponent from "../elixir-control/inventory-management/pages/inventory-details.vue";
 import OrderHistory from "../elixir-control/distributor-profile/pages/order-history.vue";
 import HomeContentComponent from "../public/pages/home-content.component.vue";
 
@@ -24,6 +25,7 @@ const router = createRouter({
         {path: '/productor/winemaking-process/pressing',         name: 'Pressing',           component: PressingManagementComponent,         meta: { title: 'Pressing'}},
         {path: '/productor/winemaking-process',                  name: 'Winemaking Process', component: WinemakingProcessManagementComponent,meta: { title: 'Winemaking Process'}},
         {path: '/productor/inventory',                           name: 'InventoryManagement',component: InventoryManagementComponent,        meta: { title: 'Inventory Management' }},
+        {path: '/productor/inventory/:id',                       name: 'InventoryDetail',    component: InventoryDetailComponent,            meta: { title: 'Inventory Item Details' }},
         {path: '/productor/orders/history',                      name: 'OrderHistory',       component: OrderHistory,                        meta: { title: 'Order History' }},
         {path: '/productor/products',                            name: 'Products',           component: ProductManagementComponent,          meta: { title: 'Products'}},
         {path: '/home',                                         name: 'Home',                component: HomeContentComponent,                meta: { title: 'Home'}},

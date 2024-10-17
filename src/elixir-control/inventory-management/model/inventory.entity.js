@@ -1,6 +1,6 @@
 export class InventoryItem {
     constructor(
-        inventory_id,
+        id,
         name,
         quantity,
         unit,
@@ -10,7 +10,7 @@ export class InventoryItem {
         lastUpdated,
         type
     ) {
-        this.inventory_id = inventory_id;
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;

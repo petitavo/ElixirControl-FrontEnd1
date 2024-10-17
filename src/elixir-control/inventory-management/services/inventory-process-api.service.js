@@ -5,13 +5,13 @@ const http = axios.create({ baseURL: "https://my-json-server.typicode.com/SV51-M
 
 export class InventoryProcessApiService {
     constructor() {
-        this.resourceEndpoint = '/inventoryList'; // Asegúrate de que esto sea correcto
+        this.resourceEndpoint = '/inventoryList';
     }
 
     async getAllResources() {
-        const response = await http.get(this.resourceEndpoint); // Asegúrate de usar solo this.resourceEndpoint
+        const response = await http.get(this.resourceEndpoint);
         return response.data.map(item => new InventoryItem(
-            item.inventory_id,
+            item.id,
             item.name,
             item.quantity,
             item.unit,
@@ -23,15 +23,15 @@ export class InventoryProcessApiService {
         ));
     }
 
-    getResourceById(id) {
+    async getResourceById(id) {
         return http.get(`${this.resourceEndpoint}/${id}`);
     }
 
-    create(resource) {
+    async create(resource) {
         return http.post(this.resourceEndpoint, resource);
     }
 
-    update(id, resource) {
+    async update(id, resource) {
         return http.put(`${this.resourceEndpoint}/${id}`, resource);
     }
 
