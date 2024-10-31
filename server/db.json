@@ -472,5 +472,31 @@
       "quantity": 60,
       "image": "https://licoreriasunidas.pe/cdn/shop/products/8f269f6f715146718b76ecfbfe8328fb.webp?v=1677856601"
     }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "person_name": "Gonzalo ",
+      "dni": "75135968",
+      "email": "gonzal@gmail.com",
+      "business_name": "Distribuidora Vinos del Sur",
+      "phone": "996 935 986",
+      "address": "Calle Principal 123, Miraflores, Lima",
+      "country": "Peru",
+      "city": "Lima",
+      "ruc": "20123456788"
+    },
+    {
+      "id": 2,
+      "person_name": "Maria Rodrigue",
+      "dni": "45678912",
+      "email": "maria.r@example.com",
+      "business_name": "Café Aroma",
+      "phone": "987 654 324",
+      "address": "Av. Larco 450, Barranco, Lima",
+      "country": "Peru",
+      "city": "Lima",
+      "ruc": "20987654321"
+    }
   ]
 }
