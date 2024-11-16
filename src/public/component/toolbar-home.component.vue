@@ -8,8 +8,8 @@ export default {
   data(){
     return {
       items: [
-        { label: 'sign-in', to: "/home/sing-in", icon: 'pi pi-user' },
-        { label: 'sign-up', to: "/home/sing-up", icon: 'pi pi-user-plus' }
+        { label: 'sign-in', to: "/home/sign-in", icon: 'pi pi-user' },
+        { label: 'sign-up', to: "/home/sign-up", icon: 'pi pi-user-plus' }
       ]
   }
 
