@@ -13,6 +13,9 @@ import OrderHistory from "../elixir-control/distributor-profile/pages/order-hist
 import HomeContentComponent from "../public/pages/home-content.component.vue";
 import ClientManagementComponent from "../elixir-control/customer-management/pages/client-management.component.vue";
 import ClientDetailsComponent from "../elixir-control/customer-management/pages/client-details.component.vue";
+import SignInComponent from "../iam/pages/sign-in.component.vue";
+import SignUpComponent from "../iam/pages/sign-up.component.vue";
+import {authenticationGuard} from "../iam/services/authentication.guard.js";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -43,17 +46,23 @@ const router = createRouter({
         /*=========================== Distributor Profile Routes ===========================*/
         {path: '/vinicultor/orders/history', name: 'OrderHistory',        component: OrderHistory,                        meta: { title: 'Order History' }},
         {path: '/vinicultor/products',       name: 'Products',            component: ProductManagementComponent,          meta: { title: 'Products'}},
+
+        /*=========================== IAM ===========================*/
+
+        { path: '/home/sign-in',                 name: 'sign-in',    component: SignInComponent,             meta: { title: 'Sign In'}},
+        { path: '/home/sign-up',                 name: 'sign-up',    component: SignUpComponent,             meta: { title: 'Sign Up'}}
+
+
     ]
 });
 
 
 router.beforeEach((to, from, next) => {
+    // Set the page title
     let baseTitle = 'Elixir Control';
     document.title = `${baseTitle} | ${to.meta['title']}`;
-    next();
+    // Call the authentication guard
+    authenticationGuard(to, from, next);
 })
-
-
-
 
 export default router;
