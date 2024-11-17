@@ -1,29 +1,21 @@
 <script>
-
-import ToolbarContent from "./public/component/toolbar-content.component.vue";
-import DataManager from "./shared/components/data-manager.component.vue";
+import NavbarElixirControl from "./public/component/navbar-elixir-control.component.vue";
 
 export default {
   name: "app",
-  components: {DataManager, ToolbarContent},
-
-
-
+  components: { NavbarElixirControl },
+  title: 'Elixir Control',
   created() {
     console.log('App created');
   }
 }
-
 </script>
 
 <template>
-
-  <toolbar-content></toolbar-content>
-
-  <data-manager title="" items=""></data-manager>
+  <div style="margin-top: 8%; margin-left:320px">
+    <router-view />
+  </div>
 </template>
 
-
 <style scoped>
-
 </style>

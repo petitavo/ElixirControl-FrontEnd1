@@ -3,24 +3,37 @@ const defaultStyle = { width: '400px'};
 
 export default {
   name: "create-and-edit",
-  props: { entity: null, visible: Boolean, entityName: '', edit: Boolean, size: 'default'},
+
+  props: {
+    entity: null,
+    visible: Boolean,
+    entityName: '',
+    edit: Boolean,
+    size: 'default'
+  },
+
   methods: {
+
     onCancel() {
-      this.$emit('canceled');
+      this.$emit('canceled-shared');
     },
+
     onSave() {
-      this.$emit('saved', this.entity);
+      this.$emit('saved-shared', this.entity);
     },
+
     getHeaderTitle() {
       return `${this.edit ? 'Edit' : 'New'} ${this.entityName}`;
     },
+
     getSubmitLabel() {
       return this.edit ? 'Update' : 'Create';
     },
+
     getDialogStyle() {
       let dialogStyle = defaultStyle;
-      dialogStyle = this.size === 'standard' ? { width: '600px' } : defaultStyle;
-      dialogStyle = this.size === 'large' ? { width: '900px' } : dialogStyle;
+      dialogStyle = this.size === 'standard' ? {width: '600px'} : defaultStyle;
+      dialogStyle = this.size === 'large' ? {width: '900px'} : dialogStyle;
       return dialogStyle;
     }
   }
@@ -34,11 +47,15 @@ export default {
         <div>{{ getHeaderTitle() }}</div>
       </div>
     </template>
+
+    <!-- Quien use el componente establece el contenido -->
     <slot name="content"></slot>
+
     <template #footer>
       <div class="flex justify-content-end">
         <pv-button type="button" :label="getSubmitLabel()" class="p-button-text" icon="pi pi-check" @click="onSave"/>
-        <pv-button type="button" label="Cancel" severity="secondary" class="p-button-text" icon="pi pi-times" @click="onCancel"/>
+        <pv-button type="button" label="Cancel" severity="secondary" class="p-button-text" icon="pi pi-times"
+                   @click="onCancel"/>
       </div>
     </template>
   </pv-dialog>

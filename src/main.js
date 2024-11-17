@@ -13,7 +13,7 @@ import 'primeflex/primeflex.css';
 
 
 // PrimeIcons
-import 'primeicons/primeicons.css';
+import "primeicons/primeicons.css";
 import ConfirmationService from "primevue/confirmationservice";
 import DialogService from "primevue/dialogservice";
 import ToastService from "primevue/toastservice";
@@ -40,14 +40,13 @@ import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
 
 
+
 import Toast from "primevue/toast";
 
 
 //importado de manera local de "router/index.js" creado y ubicado en src
 import router from "./router/index.js";
 import SelectButton from "primevue/selectbutton";
-
-
 
 
 
