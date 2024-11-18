@@ -1,7 +1,8 @@
 <script>
-import OrderRequestsService from '../services/order-requests-api.service.js';
+import OrderRequestsService from "../services/order-requests-api.service.js";
 import OrderRequestsCreateAndEdit from "../components/order-requests-create-and-edit.component.vue";
 import NavbarElixirControl from "../../../public/component/navbar-elixir-control.component.vue";
+
 export default {
   components: {
     NavbarElixirControl,
@@ -26,6 +27,16 @@ export default {
       }
     },
 
+    async deleteOrder(id) {
+      try {
+        await OrderRequestsService.deleteOrderRequests(id);
+        this.fetchOrders(); // Actualiza la lista después de eliminar
+      } catch (error) {
+        console.error(`Error deleting order with ID ${id}:`, error);
+      }
+    },
+
+
     closeEditDialog() {
       this.editDialogVisible = false;
       this.selectedOrderRequests = null;
@@ -35,27 +46,26 @@ export default {
       this.selectedOrderRequests = {
         quantity: 0,
         price: 0,
-        status: '',
-        ordernumber: '',
-        orderdate: '',
-        transportcondition: '',
-        paymentmethod: '',
-        consumerphone: '',
-        producerphone: '',
-        paymentterms: '',
-        date: '',
-        deliverydate: '',
-        type: ''
+        status: "",
+        orderNumber: "",
+        orderDate: "",
+        transportCondition: "",
+        paymentMethod: "",
+        consumerPhone: "",
+        producerPhone: "",
+        paymentTerms: "",
+        date: "",
+        deliveryDate: "",
+        type: "",
       };
       this.editDialogVisible = true;
-    }
+    },
   },
 };
 </script>
 
 <template>
-
-  <NavbarElixirControl/>
+  <NavbarElixirControl />
 
   <div class="order-requests">
     <h1>Order Requests</h1>
@@ -80,19 +90,24 @@ export default {
       <pv-column field="orderNumber" header="Order Number" />
       <pv-column field="orderDate" header="Order Date" />
       <pv-column field="price" header="Price" />
+      <pv-column header="Actions">
+        <template #body="slotProps">
+          <!-- Botón de eliminar -->
+          <button @click="deleteOrder(slotProps.data.id)" class="delete-button">
+            Delete
+          </button>
+        </template>
+      </pv-column>
     </pv-data-table>
 
-    <!-- Paginador -->
-    <paginator :totalRecords="orderRequests.length" :rows="10" @page="onPageChange"></paginator>
     <!-- Botón para agregar un nuevo pedido -->
-    <button @click="openNewOrderDialog">New Order</button>
-
+    <button @click="openNewOrderDialog" class="add-order-button">New Order</button>
 
     <!-- Dialog for order creation/editing -->
     <OrderRequestsCreateAndEdit
-          v-model:visible="editDialogVisible"
-          :order="selectedOrderRequests"
-          :edit="selectedOrderRequests !== null"
+        v-model:visible="editDialogVisible"
+        :order="selectedOrderRequests"
+        :edit="selectedOrderRequests !== null"
         @canceled="closeEditDialog"
         @saved="fetchOrders"
     />
@@ -100,8 +115,7 @@ export default {
 </template>
 
 <style scoped>
-
-button {
+.add-order-button {
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
@@ -114,5 +128,16 @@ button {
   cursor: pointer;
 }
 
-
+.delete-button {
+  background-color: #f44336; /* Red */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 1px;
+  cursor: pointer;
+}
 </style>
