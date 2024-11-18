@@ -35,7 +35,9 @@ export const useAuthenticationStore = defineStore({
          * Current token
          * @returns {string} - The current token
          */
-        currentToken: () => localStorage.getItem('token')
+        currentToken: () => localStorage.getItem('token'),
+
+        currentRole: (state) => state['role']
     },
     actions: {
         /**
@@ -48,13 +50,19 @@ export const useAuthenticationStore = defineStore({
         async signIn(signInRequest, router) {
             authenticationService.signIn(signInRequest)
                 .then(response => {
-                    let signInResponse = new SignInResponse(response.data.id, response.data.username, response.data.token);
+                    let signInResponse = new SignInResponse(response.data.id, response.data.username, response.data.token,response.data.role);
                     this.signedIn = true;
                     this.userId = signInResponse.id;
                     this.username = signInResponse.username;
+                    this.role = signInResponse.role;
                     localStorage.setItem('token', signInResponse.token);
                     console.log(signInResponse);
-                    router.push({name: 'home'});
+                    //si role es igual a 1 que se se diriga a Navigator y si es igual a 2 que se diriga a OrderRequests
+                    if(signInResponse.role === 1) {
+                        router.push({name: 'Inventory-Management'});
+                    }else
+                        router.push({name: 'OrderRequests'});
+
                 })
                 .catch(error => {
                     console.log(error);

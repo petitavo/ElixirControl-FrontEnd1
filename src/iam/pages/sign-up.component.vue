@@ -11,11 +11,12 @@ export default {
       authenticationStore: useAuthenticationStore(),
       username: "",
       password: "",
+      role: ""
     };
   },
   methods: {
     onSignUp() {
-      let signUpRequest = new SignUpRequest(this.username, this.password);
+      let signUpRequest = new SignUpRequest(this.username, this.password,this.role);
       this.authenticationStore.signUp(signUpRequest, this.$router);
     }
   }
@@ -45,12 +46,19 @@ export default {
             <small v-if="!password" class="p-invalid">Password is required.</small>
           </pv-float-label>
         </div>
+        <div class="field mt-5">
+          <pv-float-label>
+            <label for="role">Role</label>
+            <pv-dropdown id="role" v-model="role" :options="['Winemaker', 'Distributor']"/>
+            <small v-if="!role" class="p-invalid">Role is required.</small>
+          </pv-float-label>
         <div class="p-field mt-5">
           <pv-button type="submit">Sign Up</pv-button>
           <router-link to="/home">
             <pv-button class="ml-2">Home</pv-button>
           </router-link>
         </div>
+      </div>
       </div>
     </form>
   </div>

@@ -37,6 +37,8 @@ import Tag from "primevue/tag";
 import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
 import Toast from "primevue/toast";
+import Dropdown from "primevue/dropdown";
+
 
 import router from "./router/index.js";
 import SelectButton from "primevue/selectbutton";
@@ -89,7 +91,8 @@ app.component('pv-button', Button)
     .component('pv-tag', Tag)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
-    .component('pv-toast', Toast);
+    .component('pv-toast', Toast)
+    .component('pv-dropdown', Dropdown);
 
 // Mount app
 app.mount('#app');
