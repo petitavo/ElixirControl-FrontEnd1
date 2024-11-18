@@ -16,6 +16,9 @@ import ClientDetailsComponent from "../elixir-control/customer-management/pages/
 import SignInComponent from "../iam/pages/sign-in.component.vue";
 import SignUpComponent from "../iam/pages/sign-up.component.vue";
 import {authenticationGuard} from "../iam/services/authentication.guard.js";
+import OrderRequestsCreated from "../elixir-control/order-requests/pages/order-requests-created.component.vue";
+import homeContentComponent from "../elixir-control/security/pages/home-content.component.vue";
+import navbarElixirControlComponent from "../public/component/navbar-elixir-control.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -48,6 +51,10 @@ const router = createRouter({
         {path: '/vinicultor/products',       name: 'Products',            component: ProductManagementComponent,          meta: { title: 'Products'}},
 
         /*=========================== IAM ===========================*/
+        { path: '/distributor/order-requests', name: 'OrderRequests', component: OrderRequestsCreated, meta: { title: 'Order Requests' } },
+        { path: '/distributor/login', name: 'Navigator', component: navbarElixirControlComponent, meta: { title: 'Navigator' } },
+        /*=========================== IAM ===========================*/
+
 
         { path: '/home/sign-in',                 name: 'sign-in',    component: SignInComponent,             meta: { title: 'Sign In'}},
         { path: '/home/sign-up',                 name: 'sign-up',    component: SignUpComponent,             meta: { title: 'Sign Up'}}

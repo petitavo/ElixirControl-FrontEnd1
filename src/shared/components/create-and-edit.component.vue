@@ -32,8 +32,8 @@ export default {
 
     getDialogStyle() {
       let dialogStyle = defaultStyle;
-      dialogStyle = this.size === 'standard' ? { width: '600px' } : defaultStyle;
-      dialogStyle = this.size === 'large' ? { width: '900px' } : dialogStyle;
+      dialogStyle = this.size === 'standard' ? {width: '600px'} : defaultStyle;
+      dialogStyle = this.size === 'large' ? {width: '900px'} : dialogStyle;
       return dialogStyle;
     }
   }
@@ -54,7 +54,8 @@ export default {
     <template #footer>
       <div class="flex justify-content-end">
         <pv-button type="button" :label="getSubmitLabel()" class="p-button-text" icon="pi pi-check" @click="onSave"/>
-        <pv-button type="button" label="Cancel" severity="secondary" class="p-button-text" icon="pi pi-times" @click="onCancel"/>
+        <pv-button type="button" label="Cancel" severity="secondary" class="p-button-text" icon="pi pi-times"
+                   @click="onCancel"/>
       </div>
     </template>
   </pv-dialog>
