@@ -57,7 +57,24 @@ export default {
       this.$emit('canceled');
     },
     async saveOrder() {
+
+
       try {
+
+        // consumerPhone tiene que ser numeros y de 9 digits, y si no cumple con eso, mostrar un alert
+        if (this.orderItem.consumerphone.length !== 9 || isNaN(this.orderItem.consumerphone)) {
+          alert("Consumer Phone must be a 9 digit number");
+          return;
+        }
+
+        // producerPhone tiene que ser numeros y de 9 digits
+        if (this.orderItem.producerphone.length !== 9 || isNaN(this.orderItem.producerphone)) {
+          alert("Producer Phone must be a 9 digit number");
+          return;
+        }
+
+
+
         // Check if it's an edit operation
         if (this.edit && this.orderItem.id) {
           await OrderRequestsProcessApiService.update(this.orderItem.id, this.orderItem);
@@ -70,6 +87,7 @@ export default {
       } catch (error) {
         console.error("Error saving order:", error);
       }
+
     },
   },
 };
@@ -95,7 +113,7 @@ export default {
       </div>
 
       <div class="form-group">
-        <label for="producerphone">Producer Phone:</label>
+        <label for="producerphone">ProducerPhone:</label>
         <pv-input-text id="producerphone" v-model="orderItem.producerphone" required />
       </div>
 

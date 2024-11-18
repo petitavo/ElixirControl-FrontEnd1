@@ -70,23 +70,23 @@ export default {
       <pv-column field="type" header="Type" />
       <pv-column field="date" header="Date" />
       <pv-column field="quantity" header="Quantity" />
-      <pv-column field="producerphone" header="Producer Phone" />
-      <pv-column field="consumerphone" header="Consumer Phone" />
-      <pv-column field="paymentmethod" header="Payment Method" />
-      <pv-column field="paymentterms" header="Payment Terms" />
-      <pv-column field="deliverydate" header="Delivery Date" />
-      <pv-column field="transportcondition" header="Transport Condition" />
+      <pv-column field="producerPhone" header="Producer Phone" />
+      <pv-column field="consumerPhone" header="Consumer Phone" />
+      <pv-column field="paymentMethod" header="Payment Method" />
+      <pv-column field="paymentTerms" header="Payment Terms" />
+      <pv-column field="deliveryDate" header="Delivery Date" />
+      <pv-column field="transportCondition" header="Transport Condition" />
       <pv-column field="status" header="Status" />
-      <pv-column field="ordernumber" header="Order Number" />
-      <pv-column field="orderdate" header="Order Date" />
+      <pv-column field="orderNumber" header="Order Number" />
+      <pv-column field="orderDate" header="Order Date" />
       <pv-column field="price" header="Price" />
-
     </pv-data-table>
 
     <!-- Paginador -->
     <paginator :totalRecords="orderRequests.length" :rows="10" @page="onPageChange"></paginator>
     <!-- Botón para agregar un nuevo pedido -->
-    <pv-button label="Add New Order" @click="openNewOrderDialog" class="mt-3" />
+    <button @click="openNewOrderDialog">New Order</button>
+
 
     <!-- Dialog for order creation/editing -->
     <OrderRequestsCreateAndEdit
@@ -100,5 +100,19 @@ export default {
 </template>
 
 <style scoped>
+
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
 
 </style>

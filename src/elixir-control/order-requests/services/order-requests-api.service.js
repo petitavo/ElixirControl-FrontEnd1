@@ -2,12 +2,12 @@ import axios from "axios";
 import { OrderRequests } from "../model/order-requests.entity.js";
 
 const http = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "http://localhost:5097/api/v1",
 });
 
 export class OrderRequestsProcessApiService {
     constructor() {
-        this.resourceEndpoint = "/OrderRequests";
+        this.resourceEndpoint = '/order-requests';
     }
 
     async getAllOrderRequests() {
@@ -17,15 +17,15 @@ export class OrderRequestsProcessApiService {
             item.quantity,
             item.price,
             item.status,
-            item.ordernumber,
-            item.orderdate,
-            item.transportcondition,
-            item.paymentmethod,
-            item.consumerphone,
-            item.producerphone,
-            item.paymentterms,
+            item.orderNumber,
+            item.orderDate,
+            item.transportCondition,
+            item.paymentMethod,
+            item.consumerPhone,
+            item.producerPhone,
+            item.paymentTerms,
             item.date,
-            item.deliverydate,
+            item.deliveryDate,
             item.type
         ));
     }
@@ -44,7 +44,7 @@ export class OrderRequestsProcessApiService {
         return http.put(`${this.resourceEndpoint}/${id}`, orderRequests);
     }
 
-    async delete(id) {
+    async deleteOrderRequests(id) {
         return await http.delete(`${this.resourceEndpoint}/${id}`);
     }
 

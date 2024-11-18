@@ -4,29 +4,29 @@ export class OrderRequests {
         quantity,
         price,
         status,
-        ordernumber,
-        orderdate,
-        transportcondition,
-        paymentmethod,
-        consumerphone,
-        producerphone,
-        paymentterms,
+        orderNumber,
+        orderDate,
+        transportCondition,
+        paymentMethod,
+        consumerPhone,
+        producerPhone,
+        paymentTerms,
         date,
-        deliverydate,
+        deliveryDate,
         type
     ) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
         this.status = status;
-        this.ordernumber = ordernumber;
-        this.orderdate = orderdate;
-        this.transportcondition = transportcondition;
-        this.paymentmethod = paymentmethod;
-        this.consumerphone = consumerphone;
-        this.paymentterms = paymentterms;
-        this.deliverydate = deliverydate;
-        this.producerphone = producerphone;
+        this.orderNumber = orderNumber;
+        this.orderDate = orderDate;
+        this.transportCondition = transportCondition;
+        this.paymentMethod = paymentMethod;
+        this.consumerPhone = consumerPhone;
+        this.paymentTerms = paymentTerms;
+        this.deliveryDate = deliveryDate;
+        this.producerPhone = producerPhone;
         this.date = date;
         this.type = type;
     }
