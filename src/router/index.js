@@ -23,7 +23,7 @@ const router = createRouter({
 
         {path: '/:pathMatch(.*)*', redirect: '/home'},
         {path: '/', name: 'Home', component: HomeContentComponent, meta: { title: 'Home'}},
-        {path: '/home', name: 'Home', component: HomeContentComponent, meta: { title: 'Home'}},
+        {path: '/home', name: 'home', component: HomeContentComponent, meta: { title: 'home'}},
 
 
         /*=========================== Winemaking Process Routes ===========================*/
