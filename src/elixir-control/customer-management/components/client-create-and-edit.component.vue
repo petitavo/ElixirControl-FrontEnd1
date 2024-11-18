@@ -47,6 +47,14 @@ export default {
     },
     async saveClient() {
       try {
+        if (this.clientItem.dni.toString().length!== 7) {
+          alert("DNI must be 7 digits");
+          return;
+        }
+        if (this.clientItem.phone.toString().length!== 9) {
+          alert("Phone must be 9 digits");
+          return;
+        }
         if (this.edit && this.clientItem.id) {
           await this.clientsService.update(this.clientItem.id, this.clientItem);
         } else {
@@ -66,8 +74,8 @@ export default {
 <template>
   <pv-dialog :visible="visible" @update:visible="closeDialog" :header="edit ? 'Edit Client' : 'Create Client'">
     <div class="form-group">
-      <label for="person_name">Name:</label>
-      <pv-input-text id="person_name" v-model="clientItem.person_name" required />
+      <label for="personName">Name:</label>
+      <pv-input-text id="personName" v-model="clientItem.personName" required />
     </div>
 
     <div class="form-group">
@@ -81,8 +89,8 @@ export default {
     </div>
 
     <div class="form-group">
-      <label for="business_name">Business Name:</label>
-      <pv-input-text id="business_name" v-model="clientItem.business_name" required />
+      <label for="businessName">Business Name:</label>
+      <pv-input-text id="businessName" v-model="clientItem.businessName" required />
     </div>
 
     <div class="form-group">

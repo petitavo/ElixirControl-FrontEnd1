@@ -7,12 +7,10 @@ import HeaderContent from "../../../public/component/header-content.component.vu
 
 export default {
   name: "client-management",
-
   components: {
     HeaderContent,
     ClientCreateAndEditComponent,
   },
-
   data() {
     return {
       clients: [],
@@ -22,8 +20,8 @@ export default {
       globalFilterValue: '',
       filters: {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        person_name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-        business_name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        personName: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        businessName: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
         phone: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
         email: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
       },
@@ -70,7 +68,7 @@ export default {
     },
 
     async deleteClient(client) {
-      if (confirm(`Are you sure you want to delete ${client.person_name}?`)) {
+      if (confirm(`Are you sure you want to delete ${client.personName}?`)) {
         try {
           await this.clientsService.delete(client.id);
           await this.fetchClients();
@@ -95,8 +93,8 @@ export default {
     initFilters() {
       this.filters = {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        person_name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-        business_name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        personName: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        businessName: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
         phone: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
         email: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
       };
@@ -114,9 +112,7 @@ export default {
 </script>
 
 <template>
-  <header-content/>
-
-
+  <header-content></header-content>
   <div class="client-management">
     <pv-card class="mb-4">
       <template #title>
@@ -143,15 +139,15 @@ export default {
               :rows-per-page-options="[5, 10, 15]"
               current-page-report-template="Showing {first} to {last} of {totalRecords} clients"
               :filters="filters"
-              :global-filter-fields="['person_name', 'business_name', 'phone', 'email']"
+              :global-filter-fields="['personName', 'businessName', 'phone', 'email']"
               :loading="loading"
           >
-            <pv-column field="person_name" header="Name" :sortable="true" :filter-field="'person_name'">
+            <pv-column field="personName" header="Name" :sortable="true" :filter-field="'personName'">
               <template #filter="{ filterModel }">
                 <pv-input-text v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by name" />
               </template>
             </pv-column>
-            <pv-column field="business_name" header="Business" :sortable="true" :filter-field="'business_name'">
+            <pv-column field="businessName" header="Business" :sortable="true" :filter-field="'businessName'">
               <template #filter="{ filterModel }">
                 <pv-input-text v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by business" />
               </template>
