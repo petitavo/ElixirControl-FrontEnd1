@@ -5,6 +5,7 @@ import DataManager from "../../../shared/components/data-manager.component.vue";
 import BatchesCreateAndEdit from "../components/batch-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
 import {ProfileApiService} from "../services/profile-api.service.js";
+import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
 
 
 export default {
@@ -13,7 +14,7 @@ export default {
 
   data() {
 
-    //const authenticationStore = useAuthenticationStore();
+    const authenticationStore = useAuthenticationStore();
 
     return {
       title: { singular: 'Batch', plural: 'Batches' },
@@ -24,15 +25,15 @@ export default {
       createAndEditDialogIsVisible: false,
       isEdit: false,
       submitted: false,
-
+      profileId: null,
 
       profileApiService: new ProfileApiService(),
 
-      //isSignedIn: authenticationStore.isSignedIn,
-      //currentUserId: authenticationStore.currentUserId,
-      //currentUsername: authenticationStore.currentUsername,
-      //currentToken: authenticationStore.currentToken,
-      //currentRole: authenticationStore.currentRole
+      isSignedIn: authenticationStore.isSignedIn,
+      currentUserId: authenticationStore.currentUserId,
+      currentUsername: authenticationStore.currentUsername,
+      currentToken: authenticationStore.currentToken,
+      currentRole: authenticationStore.currentRole
     }
   },
 
@@ -82,13 +83,15 @@ export default {
     onSaveRequested(item) {
 
       console.log('onSaveRequestedManagement', item);
-      this.submitted = true;
 
-      if (item.id) {
+      if (this.isEdit) {
         this.updateBatch();
       } else {
         this.createBatch();
       }
+
+      this.submitted = true;
+
 
       this.createAndEditDialogIsVisible = false;
       this.isEdit = false;
@@ -97,7 +100,10 @@ export default {
 
     //#region CRUD Operations
     createBatch() {
-      this.batchApiService.create(this.batch).then(response => {
+
+      console.log('Create Batch', this.profileId);
+
+      this.batchApiService.create(this.batch, this.profileId).then(response => {
         let newBatch = new Batch(response.data);
         this.batches.push(newBatch);
         this.notifySuccessfulAction('Batch created successfully');
@@ -107,6 +113,7 @@ export default {
     },
 
     updateBatch() {
+      console.log('Update Batch', this.batch.id);
       this.batchApiService.update(this.batch.id, this.batch).then(response => {
        let index = this.findIndexById(this.batch.id);
         this.batches[index] = new Batch(response.data);
@@ -156,9 +163,12 @@ export default {
     getProfileByUserId(userId) {
       this.profileApiService.getProfileById(userId).then(response => {
 
-        console.log('Profile', response.data);
+        console.log('Profile Data: ', response.data);
 
-        this.getAllResources(response.data.id);
+        this.profileId = response.data.id;
+
+        this.getAllResources(this.profileId );
+
       }).catch(error => {
         console.error("Error getting profile by user id", error);
       });
@@ -167,13 +177,12 @@ export default {
   },
 
 
-
   //#region Lifecycle Hooks
   created() {
 
     this.batchApiService = new batchApiService();
 
-    //this.getProfileByUserId(this.currentUserId);
+    this.getProfileByUserId(this.currentUserId);
 
     console.log('Batch Management component created');
   }

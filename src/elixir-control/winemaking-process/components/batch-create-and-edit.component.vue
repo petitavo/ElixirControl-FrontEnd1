@@ -48,12 +48,6 @@ export default {
     <template #content>
 
       <pv-float-label class="mt-5">
-        <label for="batch_id">Batch ID</label>
-        <pv-input-text id="batch_id" v-model="itemBatch.batchId" :class="{ 'p-invalid': submitted && !itemBatch.batchId}"/>
-      </pv-float-label>
-
-
-      <pv-float-label class="mt-5">
         <label for="vineyard_code">Vineyard code</label>
         <pv-input-text id="vineyard_code" v-model="itemBatch.vineyardCode" :class="{ 'p-invalid': submitted && !itemBatch.vineyardCode}"/>
       </pv-float-label>

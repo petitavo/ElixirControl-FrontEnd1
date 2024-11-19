@@ -11,10 +11,17 @@ export class ProfileApiService {
         return http.get(this.resourceEndpoint);
     }
 
-    //Get a Profile by user Id
-    getProfileById(userId) {
+    //Get a Profile by profileID Id
+    getProfileByProfileId(userId) {
         return http.get(`${this.resourceEndpoint}/${userId}`);
     }
+
+
+    //Get a Profile by user Id
+    getProfileById(userId) {
+        return http.get(`${this.resourceEndpoint}/user/${userId}`);
+    }
+
 
     //Create a Profile by user Id
     create(userId, resource) {

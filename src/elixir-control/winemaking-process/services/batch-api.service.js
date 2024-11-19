@@ -16,14 +16,15 @@ export class batchApiService {
         return http.get(`${this.resourceEndpoint}/profile/${profileId}`);
     }
 
+
     //Create a Batch by Profile Id
-    create(profileId, resource) {
+    create(resource, profileId) {
         return http.post(`${this.resourceEndpoint}/profile/${profileId}`, resource);
     }
 
     //Update a Batch by Profile Id and batchId
-    update(profileId, batchId, resource) {
-        return http.put(`${this.resourceEndpoint}/profile/${profileId}/${batchId}`, resource);
+    update(batchId, resource) {
+        return http.put(`${this.resourceEndpoint}/${batchId}`, resource);
     }
 
     //Delete a Batch by batchId

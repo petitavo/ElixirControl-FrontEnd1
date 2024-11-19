@@ -41,6 +41,7 @@ import Toolbar from "primevue/toolbar";
 import TabList from "primevue/tablist";
 import Tab from "primevue/tab";
 import TabPanel from "primevue/tabpanel";
+import Dropdown from "primevue/dropdown";
 
 
 import Toast from "primevue/toast";
@@ -52,7 +53,7 @@ import SelectButton from "primevue/selectbutton";
 import Tabs from "primevue/tabs";
 import DataView from "primevue/dataview";
 import Panel from "primevue/panel";
-
+import {createPinia} from "pinia";
 
 
 
@@ -68,6 +69,12 @@ app.use(i18n)
 
 // Use Router
 app.use(router);
+
+
+// Use Pinia
+const pinia = createPinia();
+app.use(pinia);
+
 
 
 // Use PrimeVue
@@ -105,6 +112,8 @@ app.component('pv-button', Button)
     .component('pv-tab-list', TabList)
     .component('pv-tab', Tab)
     .component('pv-tab-panel', TabPanel)
-    .component('pv-data-view', DataView);
+    .component('pv-data-view', DataView)
+    .component('pv-dropdown', Dropdown)
+    .component('pv-panel', Panel);
 
 app.mount('#app')
