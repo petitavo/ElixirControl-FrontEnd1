@@ -3,6 +3,11 @@ import {Clarification} from "../model/clarification.entity.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import ClarificationCreateAndEdit from "../components/clarification-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
+import {ClarificationApiService} from "../services/clarification-api.service.js";
+import {ProfileApiService} from "../services/profile-api.service.js";
+import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
+import {batchApiService} from "../services/batch-api.service.js";
+import {Batch} from "../model/batch.entity.js";
 
 
 export default {
@@ -10,6 +15,8 @@ export default {
   components: {WinemakingProcessManagement, ClarificationCreateAndEdit, DataManager},
 
   data() {
+    const authenticationStore = useAuthenticationStore();
+
     return {
       title: {singular: 'Clarification', plural: 'Clarifications'},
       clarificationArray: [],
@@ -19,6 +26,12 @@ export default {
       createAndEditDialogIsVisible: false,
       isEdit: false,
       submitted: false,
+
+      batchApiService: null,
+
+      profileApiService: new ProfileApiService(),
+
+      currentUserId: authenticationStore.currentUserId,
     }
   },
 
@@ -68,13 +81,14 @@ export default {
 
     onSaveRequested(item) {
       console.log('onSaveRequestedManagement', item);
-      this.submitted = true
 
-      if (item.id) {
+      if (this.isEdit) {
         this.updateClarification();
       } else {
         this.createClarification();
       }
+
+      this.submitted = true;
 
       this.createAndEditDialogIsVisible = false;
       this.isEdit = false;
@@ -84,33 +98,33 @@ export default {
 
     //#region Actions Methods
     createClarification() {
-      this.clarificationApiService.create(this.clarification).then(response => {
-          let newClarification = new Clarification(response.data);
-          this.clarificationArray.push(newClarification);
-          this.notifySuccessfulAction('Clarification created successfully');
-        }).catch(error => {
-          console.error("Error creating a Clarification",error);
-        });
+      this.clarificationApiService.create(this.clarification.batchId, this.clarification).then(response => {
+        let newClarification = new Clarification(response.data);
+        this.clarificationArray.push(newClarification);
+        this.notifySuccessfulAction('Clarification created successfully');
+      }).catch(error => {
+        console.error("Error creating a Clarification", error);
+      });
     },
 
     updateClarification() {
-      this.clarificationApiService.update(this.clarification.id, this.clarification).then(response => {
-          let index = this.findIndexById(this.clarification.id);
-          this.clarificationArray[index] = new Clarification(response.data);
-          this.notifySuccessfulAction('Clarification updated successfully');
-        }).catch(error => {
-          console.error("Error updating a Clarification",error);
-        });
+      this.clarificationApiService.update(this.clarification.batchId, this.clarification).then(response => {
+        let index = this.findIndexById(this.clarification.id);
+        this.clarificationArray[index] = new Clarification(response.data);
+        this.notifySuccessfulAction('Clarification updated successfully');
+      }).catch(error => {
+        console.error("Error updating a Clarification", error);
+      });
     },
 
     deleteClarification() {
-      this.clarificationApiService.delete(this.clarification.id).then(() => {
-          let index = this.findIndexById(this.clarification.id);
-          this.clarificationArray.splice(index, 1);
-          this.notifySuccessfulAction('Clarification deleted successfully');
-        }).catch(error => {
-          console.error("Error deleting a Clarification",error);
-        });
+      this.clarificationApiService.delete(this.clarification.batchId).then(() => {
+        let index = this.findIndexById(this.clarification.batchId);
+        this.clarificationArray.splice(index, 1);
+        this.notifySuccessfulAction('Clarification deleted successfully');
+      }).catch(error => {
+        console.error("Error deleting a Clarification", error);
+      });
     },
 
     deleteSelectedClarification() {
@@ -119,7 +133,7 @@ export default {
           let index = this.findIndexById(variable.id);
           this.clarificationArray.splice(index, 1);
         }).catch(error => {
-          console.error("Error deleting a Clarification",error);
+          console.error("Error deleting a Clarification", error);
         });
       });
 
@@ -127,31 +141,55 @@ export default {
     },
     //#endregion
 
-    getAllClarifications() {
+    getAllBatches(profileId) {
+      this.batchApiService = new batchApiService();
 
-      this.clarificationApiService.getAllResources().then(response => {
-        this.clarificationArray = response.data.map(newClarification => new Clarification(newClarification));
+      this.batchApiService.getAllBatches(profileId).then(response => {
+        console.log('Batches Data: ', response.data);
+        this.batches = response.data.map(batch => new Batch(batch));
 
-        console.log("Clarifications resources", this.batches);
+        //Recorrer el array de batches y obtener el id de cada uno para obtener la clarificación
+        this.batches.forEach(batch => {
+          this.clarificationApiService.getClarificationByBatch(batch.id).then(response => {
+            console.log('Clarification Data: ', response.data);
+            this.clarificationArray.push(new Clarification(response.data));
+          }).catch(error => {
+            console.error("Error getting clarification by batch id", error);
+          });
+        });
       }).catch(error => {
-        console.error("Error getting Clarifications",error);
+        console.error("Error getting all batches", error);
       });
-    }
+    },
 
+    getProfileByUserId(userId) {
+      this.profileApiService.getProfileById(userId).then(response => {
 
+        console.log('Profile Data: ', response.data);
+
+        this.profileId = response.data.id;
+
+        this.getAllBatches(this.profileId);
+
+      }).catch(error => {
+        console.error("Error getting profile by user id", error);
+      });
+
+    },
   },
 
-  created() {
-    this.clarificationApiService = new winemakingProcessApiService('/clarification');
 
-    this.getAllClarifications();
+
+  created() {
+
+    this.clarificationApiService = new ClarificationApiService();
+
+    this.getProfileByUserId(this.currentUserId);
 
     console.log('Clarification Management component created');
   }
-
-
-
 }
+
 </script>
 
 <template>

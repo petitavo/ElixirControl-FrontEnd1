@@ -29,11 +29,7 @@ export default {
 
       profileApiService: new ProfileApiService(),
 
-      isSignedIn: authenticationStore.isSignedIn,
       currentUserId: authenticationStore.currentUserId,
-      currentUsername: authenticationStore.currentUsername,
-      currentToken: authenticationStore.currentToken,
-      currentRole: authenticationStore.currentRole
     }
   },
 

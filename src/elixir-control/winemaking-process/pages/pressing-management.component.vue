@@ -3,6 +3,11 @@ import {Pressing} from "../model/pressing.entity.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import PressingCreateAndEdit from "../components/pressing-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
+import {FermentationApiService} from "../services/fermentation-api.service.js";
+import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
+import {ProfileApiService} from "../services/profile-api.service.js";
+import {batchApiService} from "../services/batch-api.service.js";
+import {Batch} from "../model/batch.entity.js";
 
 
 export default {
@@ -11,6 +16,8 @@ export default {
   components: {WinemakingProcessManagement, PressingCreateAndEdit, DataManager},
 
   data() {
+    const authenticationStore = useAuthenticationStore();
+
     return {
       title: { singular: 'Pressing', plural: 'Pressings' },
       pressingArray: [],
@@ -20,8 +27,16 @@ export default {
       createAndEditDialogIsVisible: false,
       isEdit: false,
       submitted: false,
+
+
+      batchApiService: null,
+
+      profileApiService: new ProfileApiService(),
+
+      currentUserId: authenticationStore.currentUserId,
     }
   },
+
 
   methods: {
 
@@ -68,13 +83,14 @@ export default {
 
     onSaveRequested(item) {
       console.log('onSaveRequestedManagement', item);
-      this.submitted = true;
 
-      if (item.id) {
+      if (this.isEdit) {
         this.updatePressing();
       } else {
         this.createPressing();
       }
+
+      this.submitted = true;
 
       this.createAndEditDialogIsVisible = false;
       this.isEdit = false;
@@ -85,7 +101,7 @@ export default {
     //#region CRUD Operations
 
     createPressing() {
-      this.pressingApiService.create(this.pressing).then(response => {
+      this.pressingApiService.create(this.pressing.batchId, this.pressing).then(response => {
           let newPressing = new Pressing(response.data);
           this.pressingArray.push(newPressing);
           this.notifySuccessfulAction('Pressing created successfully');
@@ -96,7 +112,7 @@ export default {
 
 
     updatePressing() {
-      this.pressingApiService.update(this.pressing.id, this.pressing).then(response => {
+      this.pressingApiService.update(this.pressing.batchId, this.pressing).then(response => {
           let index = this.findIndexById(this.pressing.id);
           this.pressingArray[index] = new Pressing(response.data);
           this.notifySuccessfulAction('Pressing updated successfully');
@@ -127,21 +143,53 @@ export default {
     },
     //#endregion
 
-    getAllPressings() {
-      this.pressingApiService.getAllResources().then(response => {
-        this.pressingArray = response.data.map(p => new Pressing(p));
 
-        console.log("Pressing resources", this.pressingArray);
-      }).catch(error => {
-        console.error('Error getting pressings', error);
+    getAllBatches(profileId) {
+
+      this.batchApiService = new batchApiService();
+
+      this.batchApiService.getAllBatches(profileId).then(response => {
+        console.log('Batches Data: ', response.data);
+        this.batches = response.data.map(batch => new Batch(batch));
+
+        //Recorrer el array de batches y obtener el id de cada uno para obtener el pressing
+        this.batches.forEach(batch => {
+          this.pressingApiService.getPressingByBatch(batch.id).then(response => {
+            console.log('Pressing Data: ', response.data);
+            this.pressingArray.push(new Pressing(response.data));
+          }).catch(error => {
+            console.error("Error getting pressing by batch id", error);
+          });
+        });
       });
-    }
+    },
 
+
+
+    getProfileByUserId(userId) {
+      this.profileApiService.getProfileById(userId).then(response => {
+
+        console.log('Profile Data: ', response.data);
+
+        this.profileId = response.data.id;
+
+        this.getAllBatches(this.profileId);
+
+      }).catch(error => {
+        console.error("Error getting profile by user id", error);
+      });
+
+    }
   },
 
+
   created() {
-    this.pressingApiService = new winemakingProcessApiService('/pressing');
-    this.getAllPressings();
+
+    this.fermentationApiService = new FermentationApiService();
+
+    this.getProfileByUserId(this.currentUserId);
+
+
     console.log('Pressing Management component created');
   }
 

@@ -7,8 +7,7 @@ export class FermentationApiService {
         this.resourceEndpoint = "/winemakingProcess";
     }
 
-    //Get a Fermentation by Batch
-    //GET /WinemakingProcess/batch/{batchId}/fermentation
+
     getFermentationByBatch(batchId) {
         return http.get(`${this.resourceEndpoint}/batch/${batchId}/fermentation`);
     }

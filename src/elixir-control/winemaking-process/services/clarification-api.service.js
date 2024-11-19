@@ -19,7 +19,7 @@ export class ClarificationApiService {
     }
 
     //Update a Clarification by Batch
-    //PUT /WinemakingProcess/{batchId}/clarification
+    //PUT/api/v1/winemakingProcess/{batchId}/clarification
     update(batchId, resource) {
         return http.put(`${this.resourceEndpoint}/${batchId}/clarification`, resource);
     }

@@ -45,7 +45,6 @@ export default {
 
       <template #content>
 
-
         <pv-float-label class="mt-5">
           <label for="batch_id">Batch ID</label>
           <pv-input-text id="batch_id" v-model="item.batchId" :class="{ 'p-invalid': submitted && !item.batchId}"/>
