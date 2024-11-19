@@ -15,6 +15,8 @@ import ClientManagementComponent from "../elixir-control/customer-management/pag
 import ClientDetailsComponent from "../elixir-control/customer-management/pages/client-details.component.vue";
 import SignInComponent from "../iam/pages/sign-in.component.vue";
 import SignUpComponent from "../iam/pages/sign-up.component.vue";
+import OrderManagement from "../elixir-control/order-management/pages/order-management.vue";
+import OrderDetails from "../elixir-control/order-management/pages/order-details.vue";
 import {authenticationGuard} from "../iam/services/authentication.guard.js";
 
 const router = createRouter({
@@ -47,6 +49,9 @@ const router = createRouter({
         {path: '/vinicultor/orders/history', name: 'OrderHistory',        component: OrderHistory,                        meta: { title: 'Order History' }},
         {path: '/vinicultor/products',       name: 'Products',            component: ProductManagementComponent,          meta: { title: 'Products'}},
 
+        /*=========================== Order Management Routes ===========================*/
+        {path: '/productor/myorders',        name: 'MyOrder',             component: OrderManagement,                     meta: { title: 'My Orders' }},
+        {path: '/productor/orderdetails/:id',       name: 'OrderDetails',            component: OrderDetails,          meta: { title: 'Order Details'}},
 
         /*=========================== IAM ===========================*/
         //{ path: '/distributor/order-requests', name: 'OrderRequests', component: OrderRequestsCreated, meta: {' +
