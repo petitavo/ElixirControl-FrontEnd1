@@ -1,9 +1,10 @@
 <script>
 import {Batch} from "../model/batch.entity.js";
-import {winemakingProcessApiService} from "../services/batch-api.service.js";
+import {batchApiService} from "../services/batch-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import BatchesCreateAndEdit from "../components/batch-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
+import {ProfileApiService} from "../services/profile-api.service.js";
 
 
 export default {
@@ -11,6 +12,9 @@ export default {
   components: {WinemakingProcessManagement, BatchesCreateAndEdit, DataManager},
 
   data() {
+
+    //const authenticationStore = useAuthenticationStore();
+
     return {
       title: { singular: 'Batch', plural: 'Batches' },
       batches: [],
@@ -20,6 +24,15 @@ export default {
       createAndEditDialogIsVisible: false,
       isEdit: false,
       submitted: false,
+
+
+      profileApiService: new ProfileApiService(),
+
+      //isSignedIn: authenticationStore.isSignedIn,
+      //currentUserId: authenticationStore.currentUserId,
+      //currentUsername: authenticationStore.currentUsername,
+      //currentToken: authenticationStore.currentToken,
+      //currentRole: authenticationStore.currentRole
     }
   },
 
@@ -126,25 +139,42 @@ export default {
     },
     //#endregion
 
-    getAllBatches() {
+    getAllResources(profileId) {
 
-      this.batchApiService.getAllResources().then(response => {
+      this.batchApiService.getAllResourcesByProfileId(profileId).then(response => {
+
         this.batches = response.data.map(batch => new Batch(batch));
 
-        console.log("Batch resources", this.batches);
+        console.log('Batches', this.batches);
+
       }).catch(error => {
-        console.error("Error getting batches",error);
+        console.error("Error getting all batches", error);
+      });
+
+    },
+
+    getProfileByUserId(userId) {
+      this.profileApiService.getProfileById(userId).then(response => {
+
+        console.log('Profile', response.data);
+
+        this.getAllResources(response.data.id);
+      }).catch(error => {
+        console.error("Error getting profile by user id", error);
       });
     }
+
   },
 
 
 
   //#region Lifecycle Hooks
   created() {
-    this.batchApiService = new winemakingProcessApiService('/batches');
 
-    this.getAllBatches();
+    this.batchApiService = new batchApiService();
+
+    //this.getProfileByUserId(this.currentUserId);
+
     console.log('Batch Management component created');
   }
   //#endregion
@@ -166,14 +196,16 @@ export default {
                   v-on:delete-selected-items-requested-manager="onDeleteSelectedItems($event)">
 
       <template #custom-columns-manager >
+
         <pv-column :sortable="true" field="id"           header="Id" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="grape_variety"      header="Grape variety" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="harvest_date"       header="Harvest date" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="grape_quantity"     header="Grape quantity" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="vineyard_origin"    header="Vineyard origin" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="current_status"     header="Status" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="process_start_date" header="Process start date" style="min-width: 14rem"/>
-        <pv-column :sortable="true" field="final_volume"       header="Final volume" style="min-width: 12rem"/>
+        <pv-column :sortable="true" field="vineyardCode" header="Vineyard Code" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="grapeVariety" header="Grape Variety" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="harvestDate"  header="Harvest Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="grapeQuantity" header="Grape Quantity" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="vineyardOrigin" header="Vineyard Origin" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="processStartDate" header="Start Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="status" header="Status" style="min-width: 6rem"/>
+
       </template>
     </data-manager>
 

@@ -1,4 +1,4 @@
-import http from "../../shared/services/http-common.js";
+import http from "../../../shared/services/http-common.js";
 
 export class batchApiService {
 
@@ -17,8 +17,8 @@ export class batchApiService {
     }
 
     //Create a Batch by Profile Id
-    create(resource) {
-        return http.post(`${this.resourceEndpoint}/profile/${profileId}`);
+    create(profileId, resource) {
+        return http.post(`${this.resourceEndpoint}/profile/${profileId}`, resource);
     }
 
     //Update a Batch by Profile Id and batchId

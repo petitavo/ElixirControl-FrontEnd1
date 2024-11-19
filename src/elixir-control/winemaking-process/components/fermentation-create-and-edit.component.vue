@@ -45,45 +45,53 @@ export default {
 
       <template #content>
 
+
+        <pv-float-label class="mt-5">
+          <label for="batch_id">Batch ID</label>
+          <pv-input-text id="batch_id" v-model="item.batchId" :class="{ 'p-invalid': submitted && !item.batchId}"/>
+        </pv-float-label>
+
         <pv-float-label class="mt-5">
           <label for="start_date">Start date</label>
-          <pv-input-text id="start_date" v-model="item.start_date" :class="{ 'p-invalid': submitted && !item.start_date}"/>
+          <pv-input-text id="start_date" v-model="item.startDate" :class="{ 'p-invalid': submitted && !item.startDate}"/>
         </pv-float-label>
 
         <pv-float-label class="mt-5">
           <label for="end_date">End date</label>
-          <pv-input-text id="end_date" v-model="item.end_date" :class="{ 'p-invalid': submitted && !item.end_date}"/>
+          <pv-input-text id="end_date" v-model="item.endDate" :class="{ 'p-invalid': submitted && !item.endDate}"/>
         </pv-float-label>
 
         <pv-float-label class="mt-5">
           <label for="average_temperature">Average temperature</label>
-          <pv-input-text id="average_temperature" v-model="item.average_temperature" :class="{ 'p-invalid': submitted && !item.average_temperature}"/>
+          <pv-input-text id="average_temperature" v-model="item.averageTemperature" :class="{ 'p-invalid': submitted && !item.averageTemperature}"/>
         </pv-float-label>
 
         <pv-float-label class="mt-5">
           <label for="initial_density">Initial density</label>
-          <pv-input-text id="initial_density" v-model="item.initial_density" :class="{ 'p-invalid': submitted && !item.initial_density}"/>
+          <pv-input-text id="initial_density" v-model="item.initialDensity" :class="{ 'p-invalid': submitted && !item.initialDensity}"/>
+        </pv-float-label>
+
+        <pv-float-label class="mt-5">
+          <label for="initial_ph">Initial pH</label>
+          <pv-input-text id="initial_ph" v-model="item.initialPh" :class="{ 'p-invalid': submitted && !item.initialPh}"/>
         </pv-float-label>
 
         <pv-float-label class="mt-5">
           <label for="final_density">Final density</label>
-          <pv-input-text id="final_density" v-model="item.final_density" :class="{ 'p-invalid': submitted && !item.final_density}"/>
+          <pv-input-text id="final_density" v-model="item.finalDensity" :class="{ 'p-invalid': submitted && !item.finalDensity}"/>
         </pv-float-label>
 
         <pv-float-label class="mt-5">
-          <label for="initial_ph">Initial ph</label>
-          <pv-input-text id="initial_ph" v-model="item.initial_ph" :class="{ 'p-invalid': submitted && !item.initial_ph}"/>
+          <label for="final_ph">Final pH</label>
+          <pv-input-text id="final_ph" v-model="item.finalPh" :class="{ 'p-invalid': submitted && !item.finalPh}"/>
         </pv-float-label>
 
         <pv-float-label class="mt-5">
-          <label for="final_ph">Final ph</label>
-          <pv-input-text id="final_ph" v-model="item.final_ph" :class="{ 'p-invalid': submitted && !item.final_ph}"/>
+          <label for="residual_sugar">Residual sugar</label>
+          <pv-input-text id="residual_sugar" v-model="item.residualSugar" :class="{ 'p-invalid': submitted && !item.residualSugar}"/>
         </pv-float-label>
 
-        <pv-float-label class="mt-5">
-          <label for="residual_sugar"> Residual sugar</label>
-          <pv-input-text id="residual_sugar" v-model="item.residual_sugar" :class="{ 'p-invalid': submitted && !item.residual_sugar}"/>
-        </pv-float-label>
+
       </template>
 
     </create-and-edit>

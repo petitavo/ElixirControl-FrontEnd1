@@ -1,6 +1,5 @@
 <script>
 import {Pressing} from "../model/pressing.entity.js";
-import {winemakingProcessApiService} from "../services/batch-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import PressingCreateAndEdit from "../components/pressing-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
@@ -163,12 +162,13 @@ export default {
 
 
       <template #custom-columns-manager>
-        <pv-column :sortable="true" field="id"           header="Id" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="batch_id"     header="Batch Id" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="pressing_date" header="Pressing Date" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="must_volume"  header="Must Volume" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="press_type"   header="Press Type" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="applied_pressure" header="Applied Pressure" style="min-width: 6rem"/>
+
+        <pv-column :sortable="true" field="batchId"      header="Batch Id" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="pressingDate" header="Pressing Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="mustVolume"   header="Must Volume" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="pressType"    header="Press Type" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="appliedPressure" header="Applied Pressure" style="min-width: 6rem"/>
+
       </template>
 
     </data-manager>

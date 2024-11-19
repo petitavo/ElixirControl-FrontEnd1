@@ -1,21 +1,15 @@
 
 export class Pressing {
 
-    //"id": 0,
-    //"batchId": 0,
-    //"pressingDate": "2024-11-19T08:23:01.051Z",
-    //"mustVolume": 0,
-    //"pressType": "string",
-    //"appliedPressure": 0
 
-    constructor({ id='', batch_id='', pressing_date='', must_volume='', press_type='', applied_pressure='' }) {
-
+    constructor({id, batchId, pressingDate, mustVolume, pressType, appliedPressure}) {
         this.id = id;
-        this.batch_id = batch_id;
-        this.pressing_date = pressing_date;
-        this.must_volume = must_volume;
-        this.press_type = press_type;
-        this.applied_pressure = applied_pressure;
-
+        this.batchId = batchId;
+        this.pressingDate = pressingDate;
+        this.mustVolume = mustVolume;
+        this.pressType = pressType;
+        this.appliedPressure = appliedPressure;
     }
+
+
 }

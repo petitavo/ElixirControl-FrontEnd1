@@ -1,6 +1,5 @@
 <script>
 import {Fermentation} from "../model/fermentation.entity.js";
-import {winemakingProcessApiService} from "../services/batch-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import FermentationCreateAndEdit from "../components/fermentation-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
@@ -159,16 +158,17 @@ export default {
                   v-on:delete-selected-items-requested-manager="onDeleteSelectedItems($event)">
 
       <template #custom-columns-manager>
-        <pv-column :sortable="true" field="id" header="Id" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="batch_id" header="Batch Id" style="min-width: 8rem"/>
-        <pv-column :sortable="true" field="start_date" header="Start date" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="end_date" header="End date" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="average_temperature" header="Average temperature" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="initial_density" header="Initial_density" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="final_density" header="Final density" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="initial_ph" header="Initial ph" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="final_ph" header="Final ph" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="residual_sugar" header="Residual sugar" style="min-width: 12rem"/>
+
+        <pv-column :sortable="true" field="batchId" header="Batch Id" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="startDate" header="Start Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="endDate" header="End Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="averageTemperature" header="Average Temperature" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="initialDensity" header="Initial Density" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="initialPh" header="Initial Ph" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="finalDensity" header="Final Density" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="finalPh" header="Final Ph" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="residualSugar" header="Residual Sugar" style="min-width: 6rem"/>
+
       </template>
     </data-manager>
 

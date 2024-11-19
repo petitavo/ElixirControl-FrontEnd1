@@ -1,6 +1,5 @@
 <script>
 import {Clarification} from "../model/clarification.entity.js";
-import {winemakingProcessApiService} from "../services/batch-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import ClarificationCreateAndEdit from "../components/clarification-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
@@ -170,13 +169,15 @@ export default {
 
 
       <template #custom-columns-manager>
-        <pv-column :sortable="true" field="id"                   header="Id" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="batch_id"             header="Batch Id" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="clarification_date"   header="Clarification Date" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="products_used"        header="Products Used" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="clarification_method" header="Clarification Method" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="filtration_date"      header="Filtration Date" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="clarity_level"        header="Clarity Level" style="min-width: 6rem"/>
+
+        <pv-column :sortable="true" field="batchId"              header="Batch Id" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="productsUsed"         header="Products Used" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="clarificationMethod"  header="Clarification Method" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="filtrationDate"       header="Filtration Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="clarityLevel"         header="Clarity Level" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="startDate"            header="Start Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="endDate"              header="End Date" style="min-width: 6rem"/>
+
       </template>
 
     </data-manager>

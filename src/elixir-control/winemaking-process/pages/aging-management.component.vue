@@ -1,9 +1,9 @@
 <script>
-import {winemakingProcessApiService} from "../services/batch-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import {Aging} from "../model/aging.entity.js";
 import AgingCreateAndEdit from "../components/aging-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
+import {AgingApiService} from "../services/aging-api.service.js";
 
 
 export default {
@@ -11,6 +11,9 @@ export default {
   components: {WinemakingProcessManagement, AgingCreateAndEdit, DataManager},
 
   data() {
+
+    //const authenticationStore = useAuthenticationStore();
+
     return {
       title: { singular: 'Aging', plural: 'Agings'},
       agingArray: [],
@@ -20,6 +23,14 @@ export default {
       createAndEditDialogIsVisible: false,
       isEdit: false,
       submitted: false,
+
+      //-> Data -> authenticationStore
+      //isSignedIn: authenticationStore.isSignedIn,
+      //currentUserId: authenticationStore.currentUserId,
+      //currentUsername: authenticationStore.currentUsername,
+      //currentToken: authenticationStore.currentToken,
+      //currentRole: authenticationStore.currentRole
+
     }
   },
 
@@ -129,7 +140,7 @@ export default {
 
     getAllAging(){
 
-      this.agingApiService.getAllResources().then(response => {
+      this.agingApiService.getAllAging().then(response => {
         this.agingArray = response.data.map(newAging => new Aging(newAging));
         console.log("Aging data: ", this.agingArray);
       }).catch(error => {
@@ -142,7 +153,7 @@ export default {
 
   //#region Lifecycle Hooks
   created() {
-    this.agingApiService = new winemakingProcessApiService('/agings');
+    this.agingApiService = new AgingApiService();
     this.getAllAging();
     console.log('Aging Management component created');
   }
@@ -165,14 +176,13 @@ export default {
         v-on:delete-selected-items-requested-manager="onDeleteSelectedItems($event)">
 
       <template #custom-columns-manager>
-        <pv-column :sortable="true" field="id" header="Id" style="min-width: 8rem"/>
-        <pv-column :sortable="true" field="batch_id" header="Batch Id" style="min-width: 8rem"/>
-        <pv-column :sortable="true" field="barrel_type" header="Barrel type" style="min-width: 8rem"/>
-        <pv-column :sortable="true" field="start_date" header="Start date" style="min-width: 8rem"/>
-        <pv-column :sortable="true" field="end_date" header="End date" style="min-width: 8rem"/>
-        <pv-column :sortable="true" field="aging_duration_months" header="Duration months" style="min-width: 8rem"/>
-        <pv-column :sortable="true" field="inspections_performed" header="Inspections performed" style="min-width:8rem"/>
-        <pv-column :sortable="true" field="inspection_result" header="Inspection result" style="min-width: 8rem"/>
+        <pv-column :sortable="true" field="batchId" header="Batch ID" style="min-width: 8rem"/>
+        <pv-column :sortable="true" field="barrelType" header="Barrel Type" style="min-width: 8rem"/>
+        <pv-column :sortable="true" field="startDate" header="Start Date" style="min-width: 8rem"/>
+        <pv-column :sortable="true" field="endDate" header="End Date" style="min-width: 8rem"/>
+        <pv-column :sortable="true" field="agingDurationMonths" header="Aging Duration Months" style="min-width: 8rem"/>
+        <pv-column :sortable="true" field="inspectionsPerformed" header="Inspections Performed" style="min-width: 8rem"/>
+        <pv-column :sortable="true" field="inspectionResult" header="Inspection Result" style="min-width: 8rem"/>
       </template>
 
     </data-manager>
