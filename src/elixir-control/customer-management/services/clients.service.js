@@ -1,4 +1,4 @@
-import http from "../../../../../ElixirControl-FrontEnd2/src/shared/services/http-common.js";
+import http from "../../../shared/services/http-common.js";
 
 export class ClientsService {
     /**
