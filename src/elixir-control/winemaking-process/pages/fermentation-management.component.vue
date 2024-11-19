@@ -103,7 +103,7 @@ export default {
         this.notifySuccessfulAction('Fermentation created successfully');
       })
           .catch(error => {
-            console.error(" Error creating fermentation data  ", error);
+            console.error(" Error creating fermentation data", error);
           });
     },
 

@@ -8,6 +8,7 @@ import {ProfileApiService} from "../services/profile-api.service.js";
 import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
 import {batchApiService} from "../services/batch-api.service.js";
 import {Batch} from "../model/batch.entity.js";
+import {Fermentation} from "../model/fermentation.entity.js";
 
 
 export default {
@@ -83,8 +84,10 @@ export default {
       console.log('onSaveRequestedManagement', item);
 
       if (this.isEdit) {
+        console.log('Updating Clarification');
         this.updateClarification();
       } else {
+        console.log('Creating Clarification');
         this.createClarification();
       }
 
@@ -102,6 +105,7 @@ export default {
         let newClarification = new Clarification(response.data);
         this.clarificationArray.push(newClarification);
         this.notifySuccessfulAction('Clarification created successfully');
+
       }).catch(error => {
         console.error("Error creating a Clarification", error);
       });
@@ -142,25 +146,29 @@ export default {
     //#endregion
 
     getAllBatches(profileId) {
+
       this.batchApiService = new batchApiService();
 
       this.batchApiService.getAllBatches(profileId).then(response => {
         console.log('Batches Data: ', response.data);
         this.batches = response.data.map(batch => new Batch(batch));
 
-        //Recorrer el array de batches y obtener el id de cada uno para obtener la clarificación
+        //Recorrer el array de batches y obtener el id de cada uno para obtener la fermentación
         this.batches.forEach(batch => {
           this.clarificationApiService.getClarificationByBatch(batch.id).then(response => {
-            console.log('Clarification Data: ', response.data);
+            console.log('Fermentation Data: ', response.data);
             this.clarificationArray.push(new Clarification(response.data));
           }).catch(error => {
-            console.error("Error getting clarification by batch id", error);
+            console.error("Error getting fermentation by batch id", error);
           });
         });
+
       }).catch(error => {
         console.error("Error getting all batches", error);
       });
+
     },
+
 
     getProfileByUserId(userId) {
       this.profileApiService.getProfileById(userId).then(response => {
@@ -174,8 +182,9 @@ export default {
       }).catch(error => {
         console.error("Error getting profile by user id", error);
       });
+    }
 
-    },
+
   },
 
 

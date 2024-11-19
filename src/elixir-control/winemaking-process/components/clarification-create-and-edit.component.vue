@@ -79,9 +79,6 @@ export default {
           <pv-input-text id="end_date" v-model="item.endDate" :class="{ 'p-invalid': submitted && !item.endDate}"/>
         </pv-float-label>
 
-
-
-
       </template>
 
     </create-and-edit>

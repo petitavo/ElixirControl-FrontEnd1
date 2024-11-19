@@ -3,11 +3,11 @@ import {Pressing} from "../model/pressing.entity.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import PressingCreateAndEdit from "../components/pressing-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
-import {FermentationApiService} from "../services/fermentation-api.service.js";
 import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
 import {ProfileApiService} from "../services/profile-api.service.js";
 import {batchApiService} from "../services/batch-api.service.js";
 import {Batch} from "../model/batch.entity.js";
+import {PressingApiService} from "../services/pressing-api.service.js";
 
 
 export default {
@@ -152,18 +152,21 @@ export default {
         console.log('Batches Data: ', response.data);
         this.batches = response.data.map(batch => new Batch(batch));
 
-        //Recorrer el array de batches y obtener el id de cada uno para obtener el pressing
+        //Recorrer el array de batches y obtener el id de cada uno para obtener la fermentación
         this.batches.forEach(batch => {
           this.pressingApiService.getPressingByBatch(batch.id).then(response => {
-            console.log('Pressing Data: ', response.data);
+            console.log('Fermentation Data: ', response.data);
             this.pressingArray.push(new Pressing(response.data));
           }).catch(error => {
-            console.error("Error getting pressing by batch id", error);
+            console.error("Error getting fermentation by batch id", error);
           });
         });
-      });
-    },
 
+      }).catch(error => {
+        console.error("Error getting all batches", error);
+      });
+
+    },
 
 
     getProfileByUserId(userId) {
@@ -178,17 +181,16 @@ export default {
       }).catch(error => {
         console.error("Error getting profile by user id", error);
       });
-
     }
+
   },
 
 
   created() {
 
-    this.fermentationApiService = new FermentationApiService();
+    this.pressingApiService = new PressingApiService();
 
     this.getProfileByUserId(this.currentUserId);
-
 
     console.log('Pressing Management component created');
   }

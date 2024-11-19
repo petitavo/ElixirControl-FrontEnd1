@@ -3,6 +3,12 @@ import DataManager from "../../../shared/components/data-manager.component.vue";
 import {Aging} from "../model/aging.entity.js";
 import AgingCreateAndEdit from "../components/aging-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
+import {PressingApiService} from "../services/pressing-api.service.js";
+import {ProfileApiService} from "../services/profile-api.service.js";
+import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
+import {batchApiService} from "../services/batch-api.service.js";
+import {Batch} from "../model/batch.entity.js";
+import {Pressing} from "../model/pressing.entity.js";
 import {AgingApiService} from "../services/aging-api.service.js";
 
 
@@ -12,7 +18,7 @@ export default {
 
   data() {
 
-    //const authenticationStore = useAuthenticationStore();
+    const authenticationStore = useAuthenticationStore();
 
     return {
       title: { singular: 'Aging', plural: 'Agings'},
@@ -24,12 +30,12 @@ export default {
       isEdit: false,
       submitted: false,
 
-      //-> Data -> authenticationStore
-      //isSignedIn: authenticationStore.isSignedIn,
-      //currentUserId: authenticationStore.currentUserId,
-      //currentUsername: authenticationStore.currentUsername,
-      //currentToken: authenticationStore.currentToken,
-      //currentRole: authenticationStore.currentRole
+
+      batchApiService: null,
+
+      profileApiService: new ProfileApiService(),
+
+      currentUserId: authenticationStore.currentUserId,
 
     }
   },
@@ -79,14 +85,14 @@ export default {
 
     onSaveRequestedManagement(item) {
       console.log('onSaveRequestedManagement', item);
-      this.submitted = true
 
-      if (item.id) {
+
+      if (this.isEdit) {
         this.updateAging();
       } else {
         this.createAging();
       }
-
+      this.submitted = true
       this.createAndEditDialogIsVisible = false;
       this.isEdit = false;
     },
@@ -97,7 +103,7 @@ export default {
     //#region Actions Methods
 
     createAging() {
-      this.agingApiService.create(this.aging).then(response => {
+      this.agingApiService.create(this.aging.batchId, this.aging).then(response => {
         let newAging = new Aging(response.data);
         this.agingArray.push(newAging);
         this.notifySuccessfulAction('Aging created successfully');
@@ -107,7 +113,7 @@ export default {
     },
 
     updateAging() {
-      this.agingApiService.update(this.aging.id, this.aging).then(response => {
+      this.agingApiService.update(this.aging.batchId, this.aging).then(response => {
         let index = this.findIndexById(this.aging.id);
         this.agingArray[index] = new Aging(response.data);
         this.notifySuccessfulAction('Aging updated successfully');
@@ -138,23 +144,54 @@ export default {
     },
     //#endregion
 
-    getAllAging(){
+    getAllBatches(profileId) {
 
-      this.agingApiService.getAllAging().then(response => {
-        this.agingArray = response.data.map(newAging => new Aging(newAging));
-        console.log("Aging data: ", this.agingArray);
+      this.batchApiService = new batchApiService();
+
+      this.batchApiService.getAllBatches(profileId).then(response => {
+        console.log('Batches Data: ', response.data);
+        this.batches = response.data.map(batch => new Batch(batch));
+
+        //Recorrer el array de batches y obtener el id de cada uno para obtener la fermentación
+        this.batches.forEach(batch => {
+          this.agingApiService.getAgingByBatch(batch.id).then(response => {
+            console.log('Fermentation Data: ', response.data);
+            this.agingArray.push(new Aging(response.data));
+          }).catch(error => {
+            console.error("Error getting fermentation by batch id", error);
+          });
+        });
+
       }).catch(error => {
-        console.error(" Error getting aging data  ", error);
+        console.error("Error getting all batches", error);
+      });
+
+    },
+
+
+    getProfileByUserId(userId) {
+      this.profileApiService.getProfileById(userId).then(response => {
+
+        console.log('Profile Data: ', response.data);
+
+        this.profileId = response.data.id;
+
+        this.getAllBatches(this.profileId);
+
+      }).catch(error => {
+        console.error("Error getting profile by user id", error);
       });
     }
-
 
   },
 
   //#region Lifecycle Hooks
   created() {
+
     this.agingApiService = new AgingApiService();
-    this.getAllAging();
+
+    this.getProfileByUserId(this.currentUserId);
+
     console.log('Aging Management component created');
   }
 

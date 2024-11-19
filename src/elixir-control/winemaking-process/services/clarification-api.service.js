@@ -6,6 +6,7 @@ export class ClarificationApiService {
         this.resourceEndpoint = "/winemakingProcess";
     }
 
+
     //Get a Clarification by Batch
     //GET /WinemakingProcess/batch/{batchId}/clarification
     getClarificationByBatch(batchId) {
