@@ -3,31 +3,37 @@ import http from "../../shared/services/http-common.js";
 export class batchApiService {
 
     constructor(_resourceEndpoint) {
-        this.resourceEndpoint = _resourceEndpoint;
+        this.resourceEndpoint = "/batch";
     }
 
-    getAllResources() {
+    //Get All Batches
+    getAllBatches() {
         return http.get(this.resourceEndpoint);
     }
 
-    getResourceById(id) {
-        return http.get(`${this.resourceEndpoint}/${id}`);
+    //Get all Batches by Profile Id
+    getAllResourcesByProfileId(profileId) {
+        return http.get(`${this.resourceEndpoint}/profile/${profileId}`);
     }
 
+    //Create a Batch by Profile Id
     create(resource) {
-        return http.post(this.resourceEndpoint, resource);
+        return http.post(`${this.resourceEndpoint}/profile/${profileId}`);
     }
 
-    update(id, resource) {
-        return http.put(`${this.resourceEndpoint}/${id}`, resource);
+    //Update a Batch by Profile Id and batchId
+    update(profileId, batchId, resource) {
+        return http.put(`${this.resourceEndpoint}/profile/${profileId}/${batchId}`, resource);
     }
 
-    delete(id) {
-        return http.delete(`${this.resourceEndpoint}/${id}`);
+    //Delete a Batch by batchId
+    delete(batchId) {
+        return http.delete(`${this.resourceEndpoint}/${batchId}`);
     }
 
-    findResourceById(id) {
-        return http.get(`${this.resourceEndpoint}?id=${id}`);
+    //Get a Batch by batchId
+    getResourceById(batchId) {
+        return http.get(`${this.resourceEndpoint}/${batchId}`);
     }
 
 }

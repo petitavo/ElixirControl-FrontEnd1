@@ -2,31 +2,35 @@ import http from "../../shared/services/http-common.js";
 
 export class ClarificationApiService {
 
-        constructor(_resourceEndpoint) {
-            this.resourceEndpoint = _resourceEndpoint;
-        }
+    constructor(_resourceEndpoint) {
+        this.resourceEndpoint = "/winemakingProcess";
+    }
 
-        getAllResources() {
-            return http.get(this.resourceEndpoint);
-        }
+    //Get a Clarification by Batch
+    //GET /WinemakingProcess/batch/{batchId}/clarification
+    getClarificationByBatch(batchId) {
+        return http.get(`${this.resourceEndpoint}/batch/${batchId}/clarification`);
+    }
 
-        getResourceById(id) {
-            return http.get(`${this.resourceEndpoint}/${id}`);
-        }
+    //Create a Clarification by Batch
+    //POST /WinemakingProcess/{batchId}/clarification
+    create(batchId, resource) {
+        return http.post(`${this.resourceEndpoint}/${batchId}/clarification`, resource);
+    }
 
-        create(resource) {
-            return http.post(this.resourceEndpoint, resource);
-        }
+    //Update a Clarification by Batch
+    //PUT /WinemakingProcess/{batchId}/clarification
+    update(batchId, resource) {
+        return http.put(`${this.resourceEndpoint}/${batchId}/clarification`, resource);
+    }
 
-        update(id, resource) {
-            return http.put(`${this.resourceEndpoint}/${id}`, resource);
-        }
+    //Delete a Clarification by Batch
+    //DELETE /WinemakingProcess/{batchId}/clarification
+    delete(batchId) {
+        return http.delete(`${this.resourceEndpoint}/${batchId}/clarification`);
+    }
 
-        delete(id) {
-            return http.delete(`${this.resourceEndpoint}/${id}`);
-        }
 
-        findResourceById(id) {
-            return http.get(`${this.resourceEndpoint}?id=${id}`);
-        }
+
+
 }

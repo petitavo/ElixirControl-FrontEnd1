@@ -1,32 +1,36 @@
 import http from "../../shared/services/http-common.js";
 
+
 export class PressingApiService {
 
-        constructor(_resourceEndpoint) {
-            this.resourceEndpoint = _resourceEndpoint;
-        }
+    constructor(_resourceEndpoint) {
+        this.resourceEndpoint = "/winemakingProcess";
+    }
 
-        getAllResources() {
-            return http.get(this.resourceEndpoint);
-        }
+    //Get a Pressing by Batch
+    //GET /WinemakingProcess/batch/{batchId}/pressing
+    getPressingByBatch(batchId) {
+        return http.get(`${this.resourceEndpoint}/batch/${batchId}/pressing`);
+    }
 
-        getResourceById(id) {
-            return http.get(`${this.resourceEndpoint}/${id}`);
-        }
+    //Create a Pressing by Batch
+    //POST /WinemakingProcess/{batchId}/pressing
+    create(batchId, resource) {
+        return http.post(`${this.resourceEndpoint}/${batchId}/pressing`, resource);
+    }
 
-        create(resource) {
-            return http.post(this.resourceEndpoint, resource);
-        }
+    //Update a Pressing by Batch
+    //PUT /WinemakingProcess/{batchId}/pressing
+    update(batchId, resource) {
+        return http.put(`${this.resourceEndpoint}/${batchId}/pressing`, resource);
+    }
 
-        update(id, resource) {
-            return http.put(`${this.resourceEndpoint}/${id}`, resource);
-        }
+    //Delete a Pressing by Batch
+    //DELETE /WinemakingProcess/{batchId}/pressing
+    delete(batchId) {
+        return http.delete(`${this.resourceEndpoint}/${batchId}/pressing`);
+    }
 
-        delete(id) {
-            return http.delete(`${this.resourceEndpoint}/${id}`);
-        }
 
-        findResourceById(id) {
-            return http.get(`${this.resourceEndpoint}?id=${id}`);
-        }
+
 }

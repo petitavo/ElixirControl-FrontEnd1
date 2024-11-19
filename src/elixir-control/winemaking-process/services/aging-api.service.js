@@ -3,31 +3,32 @@ import http from "../../shared/services/http-common.js";
 
 export class AgingApiService {
 
-        constructor(_resourceEndpoint) {
-            this.resourceEndpoint = _resourceEndpoint;
-        }
+    constructor(_resourceEndpoint) {
+        this.resourceEndpoint = "/winemakingProcess";
+    }
 
-        getAllResources() {
-            return http.get(this.resourceEndpoint);
-        }
+    //Get a Aging by Batch
+    //GET /WinemakingProcess/batch/{batchId}/aging
+    getAgingByBatch(batchId) {
+        return http.get(`${this.resourceEndpoint}/batch/${batchId}/aging`);
+    }
 
-        getResourceById(id) {
-            return http.get(`${this.resourceEndpoint}/${id}`);
-        }
+    //Create Aging by Batch
+    //POST /WinemakingProcess/{batchId}/aging
+    create(batchId, resource) {
+        return http.post(`${this.resourceEndpoint}/${batchId}/aging`, resource);
+    }
 
-        create(resource) {
-            return http.post(this.resourceEndpoint, resource);
-        }
+    //Update Aging by Batch
+    //PUT /WinemakingProcess/{batchId}/aging
+    update(batchId, resource) {
+        return http.put(`${this.resourceEndpoint}/${batchId}/aging`, resource);
+    }
 
-        update(id, resource) {
-            return http.put(`${this.resourceEndpoint}/${id}`, resource);
-        }
+    //Delete a Aging by Batch
+    //DELETE /WinemakingProcess/{batchId}/aging
+    delete(batchId) {
+        return http.delete(`${this.resourceEndpoint}/${batchId}/aging`);
+    }
 
-        delete(id) {
-            return http.delete(`${this.resourceEndpoint}/${id}`);
-        }
-
-        findResourceById(id) {
-            return http.get(`${this.resourceEndpoint}?id=${id}`);
-        }
 }
