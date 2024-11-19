@@ -1,6 +1,6 @@
 <script>
 import {Fermentation} from "../model/fermentation.entity.js";
-import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
+import {winemakingProcessApiService} from "../services/batch-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import FermentationCreateAndEdit from "../components/fermentation-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";

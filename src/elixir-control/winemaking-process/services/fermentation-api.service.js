@@ -1,8 +1,7 @@
-import axios from "axios";
+import http from "../../shared/services/http-common.js";
 
-const http = axios.create({baseURL: "http://localhost:3000"});
 
-export class winemakingProcessApiService {
+export class FermentationApiService {
 
     constructor(_resourceEndpoint) {
         this.resourceEndpoint = _resourceEndpoint;
@@ -31,5 +30,4 @@ export class winemakingProcessApiService {
     findResourceById(id) {
         return http.get(`${this.resourceEndpoint}?id=${id}`);
     }
-
 }

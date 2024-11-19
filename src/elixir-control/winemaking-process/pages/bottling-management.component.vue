@@ -2,7 +2,7 @@
 import {Bottling} from "../model/bottling.entity.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import BottlingCreateAndEdit from "../components/bottling-create-and-edit.component.vue";
-import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
+import {winemakingProcessApiService} from "../services/batch-api.service.js";
 
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
 

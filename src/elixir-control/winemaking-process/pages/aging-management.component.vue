@@ -1,5 +1,5 @@
 <script>
-import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
+import {winemakingProcessApiService} from "../services/batch-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import {Aging} from "../model/aging.entity.js";
 import AgingCreateAndEdit from "../components/aging-create-and-edit.component.vue";

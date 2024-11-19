@@ -1,8 +1,6 @@
-import axios from "axios";
+import http from "../../shared/services/http-common.js";
 
-const http = axios.create({baseURL: "https://my-json-server.typicode.com/SV51-MetaSoft-App-Web/endpoint-winemaking-process2"});
-
-export class winemakingProcessApiService2 {
+export class batchApiService {
 
     constructor(_resourceEndpoint) {
         this.resourceEndpoint = _resourceEndpoint;
