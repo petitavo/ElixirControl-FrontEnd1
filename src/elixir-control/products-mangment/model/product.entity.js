@@ -1,19 +1,17 @@
 
 export class Product {
 
-    constructor({id = '', name  = '', grape_variety  = '', wine_type  = '',
-        origin  = '', alcohol_content  = '', price  = '', food_pairing  = '',
-        quantity = 0, image = ''
-    }) {
+    constructor({ id, productName, grapeVariety, wineType, origin, alcoholContent, price, foodPairing, quantity, imageUrl }) {
         this.id = id;
-        this.name = name;
-        this.grape_variety = grape_variety;
-        this.wine_type = wine_type;
+        this.productName = productName;
+        this.grapeVariety = grapeVariety;
+        this.wineType = wineType;
         this.origin = origin;
-        this.alcohol_content = alcohol_content;
+        this.alcoholContent = alcoholContent;
         this.price = price;
-        this.food_pairing = food_pairing;
+        this.foodPairing = foodPairing;
         this.quantity = quantity;
-        this.image = image;
+        this.imageUrl = imageUrl;
     }
+
 }

@@ -3,6 +3,8 @@ import {Product} from "../model/product.entity.js";
 import {ProductApiService} from "../services/product-api.service.js";
 import ProductCreateAndEdit from "../components/product-create-and-edit.component.vue";
 import HeaderContent from "../../../public/component/header-content.component.vue";
+import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
+import {ProfileApiService} from "../../winemaking-process/services/profile-api.service.js";
 
 
 
@@ -12,6 +14,8 @@ export default {
   components: {HeaderContent, ProductCreateAndEdit},
 
   data() {
+    const authenticationStore = useAuthenticationStore();
+
     return {
       title: { singular: 'Product', plural: 'Products'},
       productArray: [],
@@ -21,7 +25,15 @@ export default {
       createAndEditDialogIsVisible: false,
       isEdit: false,
       submitted: false,
+
+
+      profileId: null,
+
+      profileApiService: new ProfileApiService(),
+
+      currentUserId: authenticationStore.currentUserId,
     }
+
   },
 
   methods: {
@@ -67,9 +79,11 @@ export default {
       console.log('onSaveRequestedManagement', item);
       this.submitted = true
 
-      if (item.id) {
+      if (this.isEdit) {
+        console.log('Updating product');
         this.updateProduct();
       } else {
+        console.log('Creating product');
         this.createProduct();
       }
       this.createAndEditDialogIsVisible = false;
@@ -80,7 +94,7 @@ export default {
     //#region Actions Methods
 
     createProduct() {
-      this.productApiService.create(this.product).then(response => {
+      this.productApiService.create(this.profileId, this.product).then(response => {
           let newProduct = new Product(response.data);
           this.productArray.push(newProduct);
           this.notifySuccessfulAction('Product created successfully');
@@ -109,23 +123,42 @@ export default {
         });
     },
 
+    getAllResources(profileId){
 
-    getAllProducts() {
-     this.productApiService.getAllResources().then(response => {
+      console.log('Profile Id: ', profileId);
+
+      this.productApiService.getAllProductsByProfileId(profileId).then(response => {
+
         this.productArray = response.data.map(newProduct => new Product(newProduct));
-        console.log('Product Data:', this.productArray);
-      })
-      .catch(error => {
-        console.error('Error getting Product Data:', error);
+
+        console.log('Products Data: ', this.productArray);
+      }).catch(error => {
+        console.error("Error getting all products", error);
       });
+
     },
+
+    getProfileByUserId(userId) {
+      this.profileApiService.getProfileById(userId).then(response => {
+
+        console.log('Profile Data: ', response.data);
+
+        this.profileId = response.data.id;
+
+        this.getAllResources(this.profileId);
+
+      }).catch(error => {
+        console.error("Error getting profile by user id", error);
+      });
+    }
 
   },
 
   created() {
-    this.productApiService = new ProductApiService('/products');
+    this.productApiService = new ProductApiService();
 
-    this.getAllProducts();
+    this.getProfileByUserId(this.currentUserId)
+
     console.log('Product Management created');
   }
 }
@@ -147,12 +180,12 @@ export default {
     <div v-for="item in productArray" :key="item.id" >
       <pv-card>
         <template #title>
-          <img :src="item.image" alt="product image" style="width: 120px;"/>
+          <img :src="item.imageUrl" alt="product image" style="width: 120px;"/>
         </template>
 
         <template #subtitle>
-          <p class="m-4"> Name: {{item.name}} </p>
-          <p> Type of wine: {{item.wine_type}}</p>
+          <p class="m-4"> Name: {{item.productName}} </p>
+          <p> Type of wine: {{item.wineType}}</p>
         </template>
 
         <template #content>
