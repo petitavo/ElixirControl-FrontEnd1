@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Order } from "../model/order.entity.js";
 
-const http = axios.create({ baseURL: "http://localhost:5097/api/v1" });
+const http = axios.create({ baseURL: "http://elixircontrol.runasp.net/api/v1" });
 
 export class OrderProcessApiService {
     constructor() {

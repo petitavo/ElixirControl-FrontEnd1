@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Order } from "../model/order-history.entity.js"; // Asegúrate de que la ruta sea correcta
 
-const http = axios.create({ baseURL: "https://my-json-server.typicode.com/SV51-MetaSoft-App-Web/endpoint-distributor-profile-order" }); // Establece la URL base para tu API
+const http = axios.create({ baseURL: "http://elixircontrol.runasp.net/api/v1" }); // Establece la URL base para tu API
 
 export class OrderProcessApiService {
     constructor() {
