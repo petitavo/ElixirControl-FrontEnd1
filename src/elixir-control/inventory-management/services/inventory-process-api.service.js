@@ -1,7 +1,7 @@
 import axios from "axios";
 import { InventoryItem } from "../model/inventory.entity.js";
 
-const http = axios.create({ baseURL: "https://my-json-server.typicode.com/SV51-MetaSoft-App-Web/endpoint-inventory-management" });
+const http = axios.create({ baseURL: "http://elixircontrol.runasp.net/api/v1" });
 
 export class InventoryProcessApiService {
     constructor() {

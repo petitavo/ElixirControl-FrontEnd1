@@ -43,23 +43,18 @@ export default {
     <template #content>
 
       <pv-float-label class="mt-5">
-        <label for="photo">URL image</label>
-        <pv-input-text id="photo" v-model="item.image" :class="{ 'p-invalid': submitted && !item.image}"/>
+        <label for="productName">Product Name</label>
+        <pv-input-text id="productName" v-model="item.productName" :class="{ 'p-invalid': submitted && !item.productName}"/>
       </pv-float-label>
 
       <pv-float-label class="mt-5">
-        <label for="name">Name Product</label>
-        <pv-input-text id="name" v-model="item.name" :class="{ 'p-invalid': submitted && !item.name}"/>
+        <label for="grapeVariety">Grape Variety</label>
+        <pv-input-text id="grapeVariety" v-model="item.grapeVariety" :class="{ 'p-invalid': submitted && !item.grapeVariety}"/>
       </pv-float-label>
 
       <pv-float-label class="mt-5">
-        <label for="grape_variety">Grape Variety</label>
-        <pv-input-text id="grape_variety" v-model="item.grape_variety" :class="{ 'p-invalid': submitted && !item.grape_variety}"/>
-      </pv-float-label>
-
-      <pv-float-label class="mt-5">
-        <label for="wine_type">Wine Type</label>
-        <pv-input-text id="wine_type" v-model="item.wine_type" :class="{ 'p-invalid': submitted && !item.wine_type}"/>
+        <label for="wineType">Wine Type</label>
+        <pv-input-text id="wineType" v-model="item.wineType" :class="{ 'p-invalid': submitted && !item.wineType}"/>
       </pv-float-label>
 
       <pv-float-label class="mt-5">
@@ -68,8 +63,8 @@ export default {
       </pv-float-label>
 
       <pv-float-label class="mt-5">
-        <label for="alcohol_content">Alcohol Content</label>
-        <pv-input-text id="alcohol_content" v-model="item.alcohol_content" :class="{ 'p-invalid': submitted && !item.alcohol_content}"/>
+        <label for="alcoholContent">Alcohol Content</label>
+        <pv-input-text id="alcoholContent" v-model="item.alcoholContent" :class="{ 'p-invalid': submitted && !item.alcoholContent}"/>
       </pv-float-label>
 
       <pv-float-label class="mt-5">
@@ -78,13 +73,18 @@ export default {
       </pv-float-label>
 
       <pv-float-label class="mt-5">
-        <label for="food_pairing">Food Pairing</label>
-        <pv-input-text id="food_pairing" v-model="item.food_pairing" :class="{ 'p-invalid': submitted && !item.food_pairing}"/>
+        <label for="foodPairing">Food Pairing</label>
+        <pv-input-text id="foodPairing" v-model="item.foodPairing" :class="{ 'p-invalid': submitted && !item.foodPairing}"/>
       </pv-float-label>
 
       <pv-float-label class="mt-5">
         <label for="quantity">Quantity</label>
         <pv-input-text id="quantity" v-model="item.quantity" :class="{ 'p-invalid': submitted && !item.quantity}"/>
+      </pv-float-label>
+
+      <pv-float-label class="mt-5">
+        <label for="imageUrl">Image URL</label>
+        <pv-input-text id="imageUrl" v-model="item.imageUrl" :class="{ 'p-invalid': submitted && !item.imageUrl}"/>
       </pv-float-label>
 
     </template>

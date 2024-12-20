@@ -1,15 +1,22 @@
 <script>
 import {Fermentation} from "../model/fermentation.entity.js";
-import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import FermentationCreateAndEdit from "../components/fermentation-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
+import {FermentationApiService} from "../services/fermentation-api.service.js";
+import {ProfileApiService} from "../services/profile-api.service.js";
+import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
+import {Batch} from "../model/batch.entity.js";
+import {batchApiService} from "../services/batch-api.service.js";
 
 export default {
   name: "fermentation-management",
   components: {WinemakingProcessManagement, FermentationCreateAndEdit, DataManager},
 
+
   data() {
+    const authenticationStore = useAuthenticationStore();
+
     return {
       title: { singular: 'Fermentation', plural: 'Fermentation' + 's'},
       fermentationArray: [],
@@ -19,10 +26,17 @@ export default {
       createAndEditDialogIsVisible: false,
       isEdit: false,
       submitted: false,
+
+      batchApiService: null,
+
+      profileApiService: new ProfileApiService(),
+
+      currentUserId: authenticationStore.currentUserId,
+
     }
   },
 
-  methods:{
+  methods: {
     //#region Utility Methods
     notifySuccessfulAction(message) {
       this.$toast.add({severity: 'success', summary: 'Success', detail: message, life: 3000});
@@ -65,14 +79,17 @@ export default {
     },
 
     onSaveRequestedManagement(item) {
-      console.log('onSaveRequestedManagement: ', item);
-     this.submitted = true;
 
-      if (item.id) {
+      console.log('onSaveRequestedManagement: ', item);
+
+      if (this.isEdit) {
         this.updateFermentation();
       } else {
         this.createFermentation();
       }
+
+      this.submitted = true;
+
       this.createAndEditDialogIsVisible = false;
       this.isEdit = false;
     },
@@ -80,65 +97,100 @@ export default {
 
     //#region Actions Methods
     createFermentation() {
-      this.fermentationApiService.create(this.fermentation).then(response => {
-          let fermentationVariable = new Fermentation(response.data);
-          this.fermentationArray.push(fermentationVariable);
-          this.notifySuccessfulAction('Fermentation created successfully');
-        })
-        .catch(error => {
-          console.error(" Error creating fermentation data  ", error);
-        });
+      this.fermentationApiService.create(this.fermentation.batchId, this.fermentation).then(response => {
+        let fermentationVariable = new Fermentation(response.data);
+        this.fermentationArray.push(fermentationVariable);
+        this.notifySuccessfulAction('Fermentation created successfully');
+      })
+          .catch(error => {
+            console.error(" Error creating fermentation data", error);
+          });
     },
 
     updateFermentation() {
-      this.fermentationApiService.update(this.fermentation.id, this.fermentation).then(response => {
-          let index = this.findIndexById(this.fermentation.id);
-          this.fermentationArray[index] = new Fermentation(response.data);
-          this.notifySuccessfulAction('Fermentation updated successfully');
-        })
-        .catch(error => {
-          console.error("Error updating fermentation data", error);
-        });
+      this.fermentationApiService.update(this.fermentation.batchId, this.fermentation).then(response => {
+        let index = this.findIndexById(this.fermentation.id);
+        this.fermentationArray[index] = new Fermentation(response.data);
+        this.notifySuccessfulAction('Fermentation updated successfully');
+      })
+          .catch(error => {
+            console.error("Error updating fermentation data", error);
+          });
     },
 
     deleteFermentation() {
       this.fermentationApiService.delete(this.fermentation.id).then(() => {
-          let index = this.findIndexById(this.fermentation.id);
-          this.fermentationArray.splice(index, 1);
-          this.notifySuccessfulAction('Fermentation deleted successfully');
-        })
-        .catch(error => {
-          console.error("Error deleting fermentation data", error);
-        });
+        let index = this.findIndexById(this.fermentation.id);
+        this.fermentationArray.splice(index, 1);
+        this.notifySuccessfulAction('Fermentation deleted successfully');
+      })
+          .catch(error => {
+            console.error("Error deleting fermentation data", error);
+          });
     },
 
     deleteSelectedFermentation() {
       this.selectedFermentation.forEach((fermentation) => {
-        this.fermentationApiService.delete(fermentation.id).then(() => {
-            this.fermentationArray= this.fermentationArray.filter((t) => t.id !== fermentation.id);
-          })
-          .catch(error => {
-            console.error("Error deleting fermentation data", error);
-          });
+        this.fermentationApiService.delete(fermentation.batchId).then(() => {
+          this.fermentationArray = this.fermentationArray.filter((t) => t.batchId !== fermentation.batchId);
+        })
+            .catch(error => {
+              console.error("Error deleting fermentation data", error);
+            });
       });
       this.notifySuccessfulAction('Fermentation deleted successfully');
     },
     //#endregion
 
-    getAllFermentation() {
-      this.fermentationApiService = new winemakingProcessApiService('/fermentation');
-      this.fermentationApiService.getAllResources().then(response => {
-          this.fermentationArray = response.data.map(newFermentation => new Fermentation(newFermentation));
-        })
-        .catch(error => {
-          console.error("Error fetching fermentation data", error);
+
+    getAllBatches(profileId) {
+
+      this.batchApiService = new batchApiService();
+
+      this.batchApiService.getAllBatches(profileId).then(response => {
+        console.log('Batches Data: ', response.data);
+        this.batches = response.data.map(batch => new Batch(batch));
+
+        //Recorrer el array de batches y obtener el id de cada uno para obtener la fermentación
+        this.batches.forEach(batch => {
+          this.fermentationApiService.getFermentationByBatch(batch.id).then(response => {
+            console.log('Fermentation Data: ', response.data);
+            this.fermentationArray.push(new Fermentation(response.data));
+          }).catch(error => {
+            console.error("Error getting fermentation by batch id", error);
+          });
         });
+
+      }).catch(error => {
+        console.error("Error getting all batches", error);
+      });
+
+    },
+
+
+    getProfileByUserId(userId) {
+      this.profileApiService.getProfileById(userId).then(response => {
+
+        console.log('Profile Data: ', response.data);
+
+        this.profileId = response.data.id;
+
+        this.getAllBatches(this.profileId);
+
+      }).catch(error => {
+        console.error("Error getting profile by user id", error);
+      });
     }
+
   },
 
   //#region Lifecycle Hooks
   created() {
-    this.getAllFermentation();
+
+    this.fermentationApiService = new FermentationApiService();
+
+    this.getProfileByUserId(this.currentUserId);
+
     console.log('Fermentation Management component created');
   }
 
@@ -159,16 +211,17 @@ export default {
                   v-on:delete-selected-items-requested-manager="onDeleteSelectedItems($event)">
 
       <template #custom-columns-manager>
-        <pv-column :sortable="true" field="id" header="Id" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="batch_id" header="Batch Id" style="min-width: 8rem"/>
-        <pv-column :sortable="true" field="start_date" header="Start date" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="end_date" header="End date" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="average_temperature" header="Average temperature" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="initial_density" header="Initial_density" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="final_density" header="Final density" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="initial_ph" header="Initial ph" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="final_ph" header="Final ph" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="residual_sugar" header="Residual sugar" style="min-width: 12rem"/>
+
+        <pv-column :sortable="true" field="batchId" header="Batch Id" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="startDate" header="Start Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="endDate" header="End Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="averageTemperature" header="Average Temperature" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="initialDensity" header="Initial Density" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="initialPh" header="Initial Ph" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="finalDensity" header="Final Density" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="finalPh" header="Final Ph" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="residualSugar" header="Residual Sugar" style="min-width: 6rem"/>
+
       </template>
     </data-manager>
 

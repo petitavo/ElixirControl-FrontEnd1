@@ -11,7 +11,7 @@ export default {
         { label: 'sign-in', to: "/home/sign-in", icon: 'pi pi-user' },
         { label: 'sign-up', to: "/home/sign-up", icon: 'pi pi-user-plus' }
       ]
-  }
+    }
 
   },
 

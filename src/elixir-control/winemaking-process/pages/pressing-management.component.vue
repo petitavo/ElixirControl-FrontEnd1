@@ -1,9 +1,13 @@
 <script>
 import {Pressing} from "../model/pressing.entity.js";
-import {winemakingProcessApiService} from "../services/winemaking-process-api.service.js";
 import DataManager from "../../../shared/components/data-manager.component.vue";
 import PressingCreateAndEdit from "../components/pressing-create-and-edit.component.vue";
 import WinemakingProcessManagement from "./winemaking-process-management.component.vue";
+import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
+import {ProfileApiService} from "../services/profile-api.service.js";
+import {batchApiService} from "../services/batch-api.service.js";
+import {Batch} from "../model/batch.entity.js";
+import {PressingApiService} from "../services/pressing-api.service.js";
 
 
 export default {
@@ -12,6 +16,8 @@ export default {
   components: {WinemakingProcessManagement, PressingCreateAndEdit, DataManager},
 
   data() {
+    const authenticationStore = useAuthenticationStore();
+
     return {
       title: { singular: 'Pressing', plural: 'Pressings' },
       pressingArray: [],
@@ -21,8 +27,16 @@ export default {
       createAndEditDialogIsVisible: false,
       isEdit: false,
       submitted: false,
+
+
+      batchApiService: null,
+
+      profileApiService: new ProfileApiService(),
+
+      currentUserId: authenticationStore.currentUserId,
     }
   },
+
 
   methods: {
 
@@ -69,13 +83,14 @@ export default {
 
     onSaveRequested(item) {
       console.log('onSaveRequestedManagement', item);
-      this.submitted = true;
 
-      if (item.id) {
+      if (this.isEdit) {
         this.updatePressing();
       } else {
         this.createPressing();
       }
+
+      this.submitted = true;
 
       this.createAndEditDialogIsVisible = false;
       this.isEdit = false;
@@ -86,7 +101,7 @@ export default {
     //#region CRUD Operations
 
     createPressing() {
-      this.pressingApiService.create(this.pressing).then(response => {
+      this.pressingApiService.create(this.pressing.batchId, this.pressing).then(response => {
           let newPressing = new Pressing(response.data);
           this.pressingArray.push(newPressing);
           this.notifySuccessfulAction('Pressing created successfully');
@@ -97,7 +112,7 @@ export default {
 
 
     updatePressing() {
-      this.pressingApiService.update(this.pressing.id, this.pressing).then(response => {
+      this.pressingApiService.update(this.pressing.batchId, this.pressing).then(response => {
           let index = this.findIndexById(this.pressing.id);
           this.pressingArray[index] = new Pressing(response.data);
           this.notifySuccessfulAction('Pressing updated successfully');
@@ -128,21 +143,55 @@ export default {
     },
     //#endregion
 
-    getAllPressings() {
-      this.pressingApiService.getAllResources().then(response => {
-        this.pressingArray = response.data.map(p => new Pressing(p));
 
-        console.log("Pressing resources", this.pressingArray);
+    getAllBatches(profileId) {
+
+      this.batchApiService = new batchApiService();
+
+      this.batchApiService.getAllBatches(profileId).then(response => {
+        console.log('Batches Data: ', response.data);
+        this.batches = response.data.map(batch => new Batch(batch));
+
+        //Recorrer el array de batches y obtener el id de cada uno para obtener la fermentación
+        this.batches.forEach(batch => {
+          this.pressingApiService.getPressingByBatch(batch.id).then(response => {
+            console.log('Fermentation Data: ', response.data);
+            this.pressingArray.push(new Pressing(response.data));
+          }).catch(error => {
+            console.error("Error getting fermentation by batch id", error);
+          });
+        });
+
       }).catch(error => {
-        console.error('Error getting pressings', error);
+        console.error("Error getting all batches", error);
+      });
+
+    },
+
+
+    getProfileByUserId(userId) {
+      this.profileApiService.getProfileById(userId).then(response => {
+
+        console.log('Profile Data: ', response.data);
+
+        this.profileId = response.data.id;
+
+        this.getAllBatches(this.profileId);
+
+      }).catch(error => {
+        console.error("Error getting profile by user id", error);
       });
     }
 
   },
 
+
   created() {
-    this.pressingApiService = new winemakingProcessApiService('/pressing');
-    this.getAllPressings();
+
+    this.pressingApiService = new PressingApiService();
+
+    this.getProfileByUserId(this.currentUserId);
+
     console.log('Pressing Management component created');
   }
 
@@ -163,12 +212,13 @@ export default {
 
 
       <template #custom-columns-manager>
-        <pv-column :sortable="true" field="id"           header="Id" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="batch_id"     header="Batch Id" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="pressing_date" header="Pressing Date" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="must_volume"  header="Must Volume" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="press_type"   header="Press Type" style="min-width: 6rem"/>
-        <pv-column :sortable="true" field="applied_pressure" header="Applied Pressure" style="min-width: 6rem"/>
+
+        <pv-column :sortable="true" field="batchId"      header="Batch Id" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="pressingDate" header="Pressing Date" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="mustVolume"   header="Must Volume" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="pressType"    header="Press Type" style="min-width: 6rem"/>
+        <pv-column :sortable="true" field="appliedPressure" header="Applied Pressure" style="min-width: 6rem"/>
+
       </template>
 
     </data-manager>

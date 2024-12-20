@@ -47,57 +47,36 @@ export default {
     <!--CreateAndEdit-->
     <template #content>
 
-      <div class="p-fluid">
-        <div class="field  mt-5">
-          <pv-float-label>
-            <label for="grape_variety">Grape variety</label>
-            <pv-input-text id="grape_variety" v-model="itemBatch.grape_variety" :class="{ 'p-invalid': submitted && !itemBatch.grape_variety}"/>
-          </pv-float-label>
-        </div>
+      <pv-float-label class="mt-5">
+        <label for="vineyard_code">Vineyard code</label>
+        <pv-input-text id="vineyard_code" v-model="itemBatch.vineyardCode" :class="{ 'p-invalid': submitted && !itemBatch.vineyardCode}"/>
+      </pv-float-label>
 
-        <div class="field mt-5">
-          <pv-float-label>
-            <label for="harvest_date">Harvest date</label>
-            <pv-input-text id="harvest_date" v-model="itemBatch.harvest_date" :class="{ 'p-invalid': submitted && !itemBatch.harvest_date}"/>
-          </pv-float-label>
-        </div>
+      <pv-float-label class="mt-5">
+        <label for="grape_variety">Grape variety</label>
+        <pv-input-text id="grape_variety" v-model="itemBatch.grapeVariety" :class="{ 'p-invalid': submitted && !itemBatch.grapeVariety}"/>
+      </pv-float-label>
 
-        <div class="field  mt-5">
-          <pv-float-label>
-            <label for="grape_quantity">Grape quantity</label>
-            <pv-input-text id="grape_quantity" v-model="itemBatch.grape_quantity" :class="{ 'p-invalid': submitted && !itemBatch.grape_quantity}"/>
-          </pv-float-label>
-        </div>
+      <pv-float-label class="mt-5">
+        <label for="harvest_date">Harvest date</label>
+        <pv-input-text id="harvest_date" v-model="itemBatch.harvestDate" :class="{ 'p-invalid': submitted && !itemBatch.harvestDate}"/>
+      </pv-float-label>
 
+      <pv-float-label class="mt-5">
+        <label for="grape_quantity">Grape quantity</label>
+        <pv-input-text id="grape_quantity" v-model="itemBatch.grapeQuantity" :class="{ 'p-invalid': submitted && !itemBatch.grapeQuantity}"/>
+      </pv-float-label>
 
-        <div class="field  mt-5">
-          <pv-float-label>
-            <label for="vineyard_origin">Vineyard origin</label>
-            <pv-input-text id="vineyard_origin" v-model="itemBatch.vineyard_origin" :class="{ 'p-invalid': submitted && !itemBatch.vineyard_origin}"/>
-          </pv-float-label>
-        </div>
+      <pv-float-label class="mt-5">
+        <label for="vineyard_origin">Vineyard origin</label>
+        <pv-input-text id="vineyard_origin" v-model="itemBatch.vineyardOrigin" :class="{ 'p-invalid': submitted && !itemBatch.vineyardOrigin}"/>
+      </pv-float-label>
 
-        <div class="field  mt-5">
-          <pv-float-label>
-            <label for="current_status">Status</label>
-            <pv-input-text id="current_status" v-model="itemBatch.current_status" :class="{ 'p-invalid': submitted && !itemBatch.current_status}"/>
-          </pv-float-label>
-        </div>
+      <pv-float-label class="mt-5">
+        <label for="process_start_date">Start date</label>
+        <pv-input-text id="process_start_date" v-model="itemBatch.processStartDate" :class="{ 'p-invalid': submitted && !itemBatch.processStartDate}"/>
+      </pv-float-label>
 
-        <div class="field  mt-5">
-          <pv-float-label>
-            <label for="process_start_date">Start date</label>
-            <pv-input-text id="process_start_date" v-model="itemBatch.process_start_date" :class="{ 'p-invalid': submitted && !itemBatch.process_start_date}"/>
-          </pv-float-label>
-        </div>
-
-        <div class="field  mt-5">
-          <pv-float-label>
-            <label for="final_volume">Final volume</label>
-            <pv-input-text id="final_volume" v-model="itemBatch.final_volume" :class="{ 'p-invalid': submitted && !itemBatch.final_volume}"/>
-          </pv-float-label>
-        </div>
-      </div>
     </template>
 
   </create-and-edit>

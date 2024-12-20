@@ -48,7 +48,10 @@ const router = createRouter({
 
         /*=========================== Distributor Profile Routes ===========================*/
         {path: '/vinicultor/orders/history', name: 'OrderHistory',        component: OrderHistory,                        meta: { title: 'Order History' }},
+
         {path: '/vinicultor/products',       name: 'Products',            component: ProductManagementComponent,          meta: { title: 'Products'}},
+        {path: '/productor/myorders',        name: 'MyOrder',             component: OrderManagement,                     meta: { title: 'My Orders' }},
+        {path: '/productor/orderdetails/:id',       name: 'OrderDetails',            component: OrderDetails,          meta: { title: 'Order Details'}},
 
         /*=========================== IAM ===========================*/
         { path: '/distributor/order-requests', name: 'OrderRequests', component: OrderRequestsCreated, meta: { title: 'Order Requests' } },
@@ -65,7 +68,6 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-    // Set the page title
     let baseTitle = 'Elixir Control';
     document.title = `${baseTitle} | ${to.meta['title']}`;
     // Call the authentication guard

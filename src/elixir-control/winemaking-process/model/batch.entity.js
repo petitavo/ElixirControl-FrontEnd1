@@ -1,17 +1,25 @@
 
 export class Batch {
 
-    constructor({ id='', grape_variety='', harvest_date='',
-                    grape_quantity='', vineyard_origin='', current_status='',
-                    process_start_date='', final_volume=''
-    }) {
+    //"id": 0,
+    //"profileId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    //"vineyardCode": "string",
+    //"grapeVariety": "string",
+    //"harvestDate": "string",
+    //"grapeQuantity": 0,
+    //"vineyardOrigin": "string",
+    //"processStartDate": "string",
+    //"status": "string"
+
+    constructor({ id='', profileId='', vineyardCode='', grapeVariety='', harvestDate='', grapeQuantity=0, vineyardOrigin='', processStartDate='', status='' }) {
         this.id = id;
-        this.grape_variety = grape_variety;
-        this.harvest_date = harvest_date;
-        this.grape_quantity = grape_quantity;
-        this.vineyard_origin = vineyard_origin;
-        this.current_status = current_status;
-        this.process_start_date = process_start_date;
-        this.final_volume = final_volume;
+        this.profileId = profileId;
+        this.vineyardCode = vineyardCode;
+        this.grapeVariety = grapeVariety;
+        this.harvestDate = harvestDate;
+        this.grapeQuantity = grapeQuantity;
+        this.vineyardOrigin = vineyardOrigin;
+        this.processStartDate = processStartDate;
+        this.status = status;
     }
 }
