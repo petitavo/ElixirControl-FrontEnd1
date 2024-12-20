@@ -57,7 +57,6 @@ export const useAuthenticationStore = defineStore({
                     this.role = signInResponse.role;
                     localStorage.setItem('token', signInResponse.token);
                     console.log(signInResponse);
-                    //si role es igual a 1 que se se diriga a Navigator y si es igual a 2 que se diriga a OrderRequests
                     if(signInResponse.role === 1) {
                         router.push({name: 'Inventory-Management'});
                     }else
