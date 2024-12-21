@@ -2,10 +2,10 @@
 import { ClientsService } from '../services/clients.service.js';
 import { Clients } from '../model/clients.entity.js';
 import ClientCreateAndEditComponent from "../components/client-create-and-edit.component.vue";
-import { FilterMatchMode } from "@primevue/core";
-import HeaderContent from "../../../public/component/header-content.component.vue";
-import { ProfileApiService} from "../../winemaking-process/services/profile-api.service.js";
-import { useAuthenticationStore } from "../../../iam/services/authentication.store.js";
+import { FilterMatchMode } from "primevue/api";
+import HeaderContent from "../../../shared/components/header-content.component.vue";
+import { ProfileApiService } from "../../profile/services/profile-api.service.js";
+import { useAuthenticationStore } from "../../../iam/stores/authentication.store.js";
 
 export default {
   name: "client-management",
@@ -76,7 +76,7 @@ export default {
 
     async onClientSaved(updatedClient) {
       try {
-        await this.clientsService.update(updatedClient.id, updatedClient, this.profileId);
+        await this.clientsService.update(updatedClient.id, updatedClient);
         await this.fetchClients();
         this.closeEditDialog();
       } catch (error) {
@@ -97,7 +97,7 @@ export default {
     async deleteClient(client) {
       if (confirm(`Are you sure you want to delete ${client.personName}?`)) {
         try {
-          await this.clientsService.delete(client.id, this.profileId);
+          await this.clientsService.delete(client.id);
           await this.fetchClients();
         } catch (error) {
           console.error("Error deleting client:", error);

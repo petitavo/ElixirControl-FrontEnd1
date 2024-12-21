@@ -1,14 +1,16 @@
 import http from "../../../shared/services/http-common.js";
 
 export class ClientsService {
-    resourceEndpoint = '/clients';
+    constructor() {
+        this.resourceEndpoint = '/clients';
+    }
 
     getAllByProfileId(profileId) {
         return http.get(`${this.resourceEndpoint}/profile/${profileId}`);
     }
 
-    createByProfileId(profileId, data) {
-        return http.post(`${this.resourceEndpoint}/profile/${profileId}`, data);
+    create(resource, profileId) {
+        return http.post(`${this.resourceEndpoint}/profile/${profileId}`, resource);
     }
 
     getById(id) {
@@ -19,11 +21,8 @@ export class ClientsService {
         return http.put(`${this.resourceEndpoint}/${id}`, data);
     }
 
-    create(resource, profileId) {
-        return http.post(`${this.resourceEndpoint}/profile/${profileId}`, resource);
-    }
-
     delete(id) {
         return http.delete(`${this.resourceEndpoint}/${id}`);
     }
 }
+
