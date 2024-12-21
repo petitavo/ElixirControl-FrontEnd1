@@ -89,8 +89,6 @@ export default {
 <template>
 
   <header-content></header-content>
-
-
   <div class="inventory-management">
     <h1>Inventory Management</h1>
 

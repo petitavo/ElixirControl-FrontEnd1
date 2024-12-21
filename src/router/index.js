@@ -17,7 +17,6 @@ import SignInComponent from "../iam/pages/sign-in.component.vue";
 import SignUpComponent from "../iam/pages/sign-up.component.vue";
 import {authenticationGuard} from "../iam/services/authentication.guard.js";
 import OrderRequestsCreated from "../elixir-control/order-requests/pages/order-requests-created.component.vue";
-import homeContentComponent from "../elixir-control/security/pages/home-content.component.vue";
 import navbarElixirControlComponent from "../public/component/navbar-elixir-control.component.vue";
 import OrderManagement from "../elixir-control/order-management/pages/order-management.vue";
 import OrderDetails from "../elixir-control/order-management/pages/order-details.vue";

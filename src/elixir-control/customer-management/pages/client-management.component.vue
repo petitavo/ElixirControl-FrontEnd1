@@ -5,10 +5,11 @@ import DataManager from "../../../shared/components/data-manager.component.vue";
 import ClientCreateAndEditComponent from "../components/client-create-and-edit.component.vue";
 import {ProfileApiService} from "../../winemaking-process/services/profile-api.service.js";
 import {useAuthenticationStore} from "../../../iam/services/authentication.store.js";
+import HeaderContent from "../../../public/component/header-content.component.vue";
 
 export default {
   name: "client-management",
-  components: {ClientCreateAndEditComponent, DataManager},
+  components: {HeaderContent, ClientCreateAndEditComponent, DataManager},
 
   data() {
     const authenticationStore = useAuthenticationStore();
@@ -157,7 +158,9 @@ export default {
 </script>
 
 <template>
+  <header-content></header-content>
   <div>
+
     <data-manager :title="title"
                   v-bind:items="clients"
                   v-on:new-item-requested-manager="onNewItem"
