@@ -19,8 +19,8 @@ export class ClientsService {
         return http.put(`${this.resourceEndpoint}/${id}`, data);
     }
 
-    create(data) {
-        return http.post(this.resourceEndpoint, data);
+    create(resource, profileId) {
+        return http.post(`${this.resourceEndpoint}/profile/${profileId}`, resource);
     }
 
     delete(id) {
