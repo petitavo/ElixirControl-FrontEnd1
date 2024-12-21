@@ -2,27 +2,36 @@ import http from "../../../shared/services/http-common.js";
 
 export class ClientsService {
     constructor() {
-        this.resourceEndpoint = '/clients';
+        this.resourceEndpoint = "/clients";
     }
 
-    getAllByProfileId(profileId) {
+    //Get All Clients
+    getAllClients() {
+        return http.get(this.resourceEndpoint);
+    }
+
+    //Get all Clients by Profile Id
+    getAllResourcesByProfileId(profileId) {
         return http.get(`${this.resourceEndpoint}/profile/${profileId}`);
     }
 
+    //Create a Client by Profile Id
     create(resource, profileId) {
         return http.post(`${this.resourceEndpoint}/profile/${profileId}`, resource);
     }
 
-    getById(id) {
-        return http.get(`${this.resourceEndpoint}/${id}`);
+    //Update a Client by Profile Id and clientId
+    update(clientId, resource) {
+        return http.put(`${this.resourceEndpoint}/${clientId}`, resource);
     }
 
-    update(id, data) {
-        return http.put(`${this.resourceEndpoint}/${id}`, data);
+    //Delete a Client by clientId
+    delete(clientId) {
+        return http.delete(`${this.resourceEndpoint}/${clientId}`);
     }
 
-    delete(id) {
-        return http.delete(`${this.resourceEndpoint}/${id}`);
+    //Get a Client by clientId
+    getResourceById(clientId) {
+        return http.get(`${this.resourceEndpoint}/${clientId}`);
     }
 }
-

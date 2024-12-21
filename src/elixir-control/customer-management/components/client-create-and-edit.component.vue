@@ -1,132 +1,91 @@
 <script>
-import { ClientsService } from "../services/clients.service.js";
-import { Clients } from "../model/clients.entity.js";
+import CreateAndEdit from "../../../shared/components/create-and-edit.component.vue";
 
 export default {
-  name: 'ClientCreateAndEdit',
+  name: "clients-create-and-edit",
+
+  components: {CreateAndEdit},
+
   props: {
-    visible: {
-      type: Boolean,
-      required: true,
-    },
-    client: {
-      type: Object,
-      default: () => new Clients({}),
-    },
-    edit: {
-      type: Boolean,
-      required: true,
-    },
+    itemClient: null,
+    visible: Boolean
   },
+
   data() {
     return {
-      clientItem: new Clients({}),
-      clientsService: new ClientsService(),
-    };
-  },
-  watch: {
-    client: {
-      immediate: true,
-      handler(newVal) {
-        this.clientItem = new Clients(newVal || {});
-      }
-    },
-    visible: {
-      immediate: true,
-      handler(newVal) {
-        if (newVal) {
-          this.clientItem = new Clients(this.client || {});
-        }
-      }
+      submitted: false
     }
   },
+
   methods: {
-    closeDialog() {
-      this.$emit('update:visible', false);
-      this.$emit('canceled');
+    onCancelRequested() {
+      this.$emit('cancel-requested-clients');
     },
-    async saveClient() {
-      try {
-        if (this.clientItem.dni.toString().length!== 7) {
-          alert("DNI must be 7 digits");
-          return;
-        }
-        if (this.clientItem.phone.toString().length!== 9) {
-          alert("Phone must be 9 digits");
-          return;
-        }
-        if (this.edit && this.clientItem.id) {
-          await this.clientsService.update(this.clientItem.id, this.clientItem);
-        } else {
-          const response = await this.clientsService.create(this.clientItem);
-          this.$emit('client-created', response.data);
-        }
-        this.$emit('saved');
-        this.closeDialog();
-      } catch (error) {
-        console.error("Error saving client:", error);
-      }
-    },
+
+    onSaveRequested() {
+      this.submitted = true;
+      this.$emit('save-requested-clients', this.itemClient);
+    }
   },
-};
+
+  created() {
+    console.log('Clients Create and Edit Dialog component created');
+  }
+}
 </script>
 
 <template>
-  <pv-dialog :visible="visible" @update:visible="closeDialog" :header="edit ? 'Edit Client' : 'Create Client'">
-    <div class="form-group">
-      <label for="personName">Name:</label>
-      <pv-input-text id="personName" v-model="clientItem.personName" required />
-    </div>
+  <create-and-edit :entity="itemClient" :visible="visible" entity-name="Client"
+                   @canceled-shared="onCancelRequested" @saved-shared="onSaveRequested">
+    <template #content>
 
-    <div class="form-group">
-      <label for="dni">DNI:</label>
-      <pv-input-text id="dni" v-model="clientItem.dni" required />
-    </div>
+      <pv-float-label class="mt-5">
+        <label for="person_name">Person Name</label>
+        <pv-input-text id="person_name" v-model="itemClient.personName" :class="{ 'p-invalid': submitted && !itemClient.personName}"/>
+      </pv-float-label>
 
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <pv-input-text id="email" v-model="clientItem.email" required />
-    </div>
+      <pv-float-label class="mt-5">
+        <label for="dni">DNI</label>
+        <pv-input-text id="dni" v-model="itemClient.dni" :class="{ 'p-invalid': submitted && !itemClient.dni}"/>
+      </pv-float-label>
 
-    <div class="form-group">
-      <label for="businessName">Business Name:</label>
-      <pv-input-text id="businessName" v-model="clientItem.businessName" required />
-    </div>
+      <pv-float-label class="mt-5">
+        <label for="email">Email</label>
+        <pv-input-text id="email" v-model="itemClient.email" :class="{ 'p-invalid': submitted && !itemClient.email}"/>
+      </pv-float-label>
 
-    <div class="form-group">
-      <label for="phone">Phone:</label>
-      <pv-input-text id="phone" v-model="clientItem.phone" required />
-    </div>
+      <pv-float-label class="mt-5">
+        <label for="business_name">Business Name</label>
+        <pv-input-text id="business_name" v-model="itemClient.businessName" :class="{ 'p-invalid': submitted && !itemClient.businessName}"/>
+      </pv-float-label>
 
-    <div class="form-group">
-      <label for="address">Address:</label>
-      <pv-input-text id="address" v-model="clientItem.address" />
-    </div>
+      <pv-float-label class="mt-5">
+        <label for="phone">Phone</label>
+        <pv-input-text id="phone" v-model="itemClient.phone" :class="{ 'p-invalid': submitted && !itemClient.phone}"/>
+      </pv-float-label>
 
-    <div class="form-group">
-      <label for="country">Country:</label>
-      <pv-input-text id="country" v-model="clientItem.country" />
-    </div>
+      <pv-float-label class="mt-5">
+        <label for="address">Address</label>
+        <pv-input-text id="address" v-model="itemClient.address" :class="{ 'p-invalid': submitted && !itemClient.address}"/>
+      </pv-float-label>
 
-    <div class="form-group">
-      <label for="city">City:</label>
-      <pv-input-text id="city" v-model="clientItem.city" />
-    </div>
+      <pv-float-label class="mt-5">
+        <label for="country">Country</label>
+        <pv-input-text id="country" v-model="itemClient.country" :class="{ 'p-invalid': submitted && !itemClient.country}"/>
+      </pv-float-label>
 
-    <div class="form-group">
-      <label for="ruc">RUC:</label>
-      <pv-input-text id="ruc" v-model="clientItem.ruc" />
-    </div>
+      <pv-float-label class="mt-5">
+        <label for="city">City</label>
+        <pv-input-text id="city" v-model="itemClient.city" :class="{ 'p-invalid': submitted && !itemClient.city}"/>
+      </pv-float-label>
 
-    <template #footer>
-      <pv-button label="Cancel" @click="closeDialog" />
-      <pv-button label="Save" severity="success" @click="saveClient" />
+      <pv-float-label class="mt-5">
+        <label for="ruc">RUC</label>
+        <pv-input-text id="ruc" v-model="itemClient.ruc" :class="{ 'p-invalid': submitted && !itemClient.ruc}"/>
+      </pv-float-label>
     </template>
-  </pv-dialog>
+  </create-and-edit>
 </template>
 
 <style scoped>
-.form-group {
-  margin-bottom: 1rem;
-}
 </style>
