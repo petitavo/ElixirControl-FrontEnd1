@@ -6,10 +6,7 @@ import BottlingManagementComponent from "../elixir-control/winemaking-process/pa
 import ClarificationManagementComponent from "../elixir-control/winemaking-process/pages/clarification-management.component.vue";
 import PressingManagementComponent from "../elixir-control/winemaking-process/pages/pressing-management.component.vue";
 import WinemakingProcessManagementComponent from "../elixir-control/winemaking-process/pages/winemaking-process-management.component.vue";
-import ProductManagementComponent from "../elixir-control/products-mangment/pages/product-management.component.vue";
-import InventoryManagementComponent from "../elixir-control/inventory-management/pages/inventory-management.vue";
-import InventoryDetailComponent from "../elixir-control/inventory-management/pages/inventory-details.vue";
-import OrderHistory from "../elixir-control/distributor-profile/pages/order-history.vue";
+
 import HomeContentComponent from "../public/pages/home-content.component.vue";
 import ClientManagementComponent from "../elixir-control/customer-management/pages/client-management.component.vue";
 import ClientDetailsComponent from "../elixir-control/customer-management/pages/client-details.component.vue";
@@ -18,8 +15,7 @@ import SignUpComponent from "../iam/pages/sign-up.component.vue";
 import {authenticationGuard} from "../iam/services/authentication.guard.js";
 import OrderRequestsCreated from "../elixir-control/order-requests/pages/order-requests-created.component.vue";
 import navbarElixirControlComponent from "../public/component/navbar-elixir-control.component.vue";
-import OrderManagement from "../elixir-control/order-management/pages/order-management.vue";
-import OrderDetails from "../elixir-control/order-management/pages/order-details.vue";
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -39,20 +35,11 @@ const router = createRouter({
         {path: '/vinicultor/winemaking-process/pressing',      name: 'Pressing',            component: PressingManagementComponent,         meta: { title: 'Pressing'}},
         {path: '/vinicultor/winemaking-process',               name: 'Winemaking-Process',  component: WinemakingProcessManagementComponent,meta: { title: 'Winemaking Process'}},
 
-        /*=========================== Inventory Management Routes ===========================*/
-        {path: '/vinicultor/inventory',                        name: 'Inventory-Management',component: InventoryManagementComponent,        meta: { title: 'Inventory Management' }},
-        {path: '/vinicultor/inventory/:id',                    name: 'InventoryDetail',     component: InventoryDetailComponent,            meta: { title: 'Inventory Item Details' }},
 
         /*=========================== Customer Management Routes ===========================*/
         {path:'/vinicultor/clients',             name: 'Clients', component: ClientManagementComponent, meta: { title: 'Clients'}},
         {path:'/vinicultor/clients/details/:id', name: 'ClientDetails', component: ClientDetailsComponent, meta: { title: 'Client Details'}, props: true},
 
-        /*=========================== Distributor Profile Routes ===========================*/
-        {path: '/vinicultor/orders/history', name: 'OrderHistory',        component: OrderHistory,                        meta: { title: 'Order History' }},
-
-        {path: '/vinicultor/products',       name: 'Products',            component: ProductManagementComponent,          meta: { title: 'Products'}},
-        {path: '/productor/myorders',        name: 'MyOrder',             component: OrderManagement,                     meta: { title: 'My Orders' }},
-        {path: '/productor/orderdetails/:id',       name: 'OrderDetails',            component: OrderDetails,          meta: { title: 'Order Details'}},
 
         /*=========================== IAM ===========================*/
         { path: '/distributor/order-requests', name: 'OrderRequests', component: OrderRequestsCreated, meta: { title: 'Order Requests' } },
