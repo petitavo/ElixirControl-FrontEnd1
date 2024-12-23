@@ -58,7 +58,7 @@ export const useAuthenticationStore = defineStore({
                     localStorage.setItem('token', signInResponse.token);
                     console.log(signInResponse);
                     if(signInResponse.role === 0) {
-                        router.push({name: 'Inventory-Management'});
+                        router.push({name: 'Batches'});
                     }else
                         router.push({name: 'OrderRequests'});
 
